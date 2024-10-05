@@ -1,0 +1,68 @@
+<script>
+  import {Trash} from '@phosphor-icons/react'
+</script>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <title>Py-UI</title>
+</head>
+<body>
+  <header>
+    <img src="#" alt="Logo" title="Py-UI">
+  </header>
+  <main>
+
+    <div class="login">
+
+      <div class="title">
+        <i class="ph-fill ph-user"></i>
+        <h1>Login</h1>
+      </div>
+      <div class="form" id="form">
+
+        <div class="credencial">
+          <p>Usuário</p>
+          <div class="inputContent">
+            <i class="ph ph-at"></i>
+            <input 
+              type="text" 
+              id="user" 
+              placeholder="Usuário"
+            >
+          </div>
+          
+        </div> 
+
+        <div class="credencial">
+          <p>Senha</p>
+          <div class="inputContent">
+            <i class="ph ph-fingerprint-simple"></i>
+            <input 
+              type="text"
+              name="pwd" 
+              id="psw"
+              placeholder="Senha"
+            >
+          </div>
+        </div>
+
+        <div class="credencial">
+          <button
+            type="submit"
+            id="sendCredential"
+            name="sendCredential"
+            >
+            Fazer login
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </main>
+</body>
+</html>
