@@ -77,10 +77,11 @@ main{
     }
 
     & input{
-      width: fit-content;
-      height: 29px;
+      width: 100%;
+      height: 100%;
+      font-size: 24px;
 
-      color: var(--slate-700);
+      color: var(--slate-600);
       background-color: transparent;
 
       border: none;
@@ -93,22 +94,34 @@ main{
       align-content: center;
       
     }
+
+    & input:focus{
+      outline: none;
+    }
+  }
+  .inputContent:has(input:focus) {
+    outline: 3px solid var(--blue-500);
+  }
+
+
+  button{
+    width: 100%;
+    height: 76px;
+    padding-inline: 16px;
+    padding-block: 6px;
+    font-size: 24px;
+    font-weight: bold;             
+
+    background-color: var(--blue-600);
+    color: var(--offwhite);
+
+    border: none;
+    border-radius: 4px;
   }
 }
-button{
-  width: 100%;   
-  height: 76px;
-  padding-inline: 16px;
-  padding-block: 6px;
-  font-size: 24px;
-  font-weight: bold;             
 
-  background-color: var(--blue-500);
-  color: var(--offwhite);
-
-  border: none;
-  border-radius: 4px;
-}
 button:hover{
-  background-color: var(--blue-600);
+  background-color: var(--blue-700);
+  animation: cubic-bezier(0.075, 0.82, 0.165, 1);
+  animation-duration: 0.5s;
 }

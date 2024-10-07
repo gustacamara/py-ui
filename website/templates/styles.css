@@ -1,6 +1,7 @@
 :root{
   --blue-500: #3B82F6;
   --blue-600: #2563EB;
+  --blue-700: #1d4ed8;
 
   --red-500: #ef4444;
   --red-hover-600: #dc2626;
@@ -34,7 +35,7 @@ header{
 
   background-color: var(--slate-800);
 
-  &img {
+  & img {
     height: 36.13px;
     width: 163px;
   }
