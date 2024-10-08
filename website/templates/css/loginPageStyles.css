@@ -1,15 +1,19 @@
 main{
   display: flex;
-  height: max-content  ;
+  justify-content: center;
+  background-color: #0F172A;
+}
+
+.backgroundRadiu{
+  display: flex;
   justify-content: center;
   align-items: center;
   height: calc(100vh - 72px) ;
-  background: radial-gradient( #334F90 0%, #172441 33%, #131D35 56%, #0F172A 79% );
-  
+  background: radial-gradient( #334F90 0%, #172441 33%, #131D35 43%, #0F172A 79% );
 }
+
 .login{
   display: flex;
-  max-width: calc(1/3 max-width);
   gap: 48px;
   flex-direction: column;
   
@@ -18,6 +22,7 @@ main{
   background-color: var(--slate-700);
   border-radius: 8px;
 }
+
 .form{
   display: flex;
   flex-direction: column;
@@ -99,6 +104,7 @@ main{
       outline: none;
     }
   }
+  
   .inputContent:has(input:focus) {
     outline: 3px solid var(--blue-500);
   }
