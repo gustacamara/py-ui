@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <title>Home Page</title>
+</head>
+<body>
+  <header>
+    <img src="img/logo.svg" alt="Logo" title="Py-UI">
+  </header>
+
+  <main>
+    <div class="trainSideBar">
+      <div class="composition">
+
+        <div class="compositionTitle" id="0">
+          <h1>Nome da composição</h1>
+          <div class="trainFilter">
+            <i class="ph ph-caret-up"></i>
+            <i class="ph ph-sliders-horizontal"></i>
+          </div>
+        </div>
+
+        <div class="compositionContainer">
+          <div class="wagon">
+            <div class="compositionHeader">
+              <i class="ph-fill ph-train-regional"></i>
+              <h1>id:333</h1>
+              <div>
+                <!-- if content ! hidden "+" : "-"-->
+                <i class="ph ph-plus"></i>
+              </div>
+            </div>
+
+            <div class="compositionContent">
+              <img src="#" alt="wagon Image">
+              <div class="description">
+                <h3>Desciçao:</h3>                
+                <p>Vagão para o transporte de liquidos inflamaveis</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="locomotive">
+            <div class="compositionHeader">
+              <i class="ph-fill ph-train"></i>
+              <h1>id:333</h1>
+              <div>
+                <!-- if content ! hidden "+" : "-"-->
+                <i class="ph ph-plus"></i>
+              </div>
+            </div>
+
+            <div class="compositionContent">
+              <img src="#" alt="locomotive Image">
+              <div class="description">
+                <h3>Capacidade:</h3>                
+                <p>Em descida: 35 vagões</p>
+                <p>Em nivel: 30 vagões</p>
+                <p>Em subida: 20 vagões</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="railRoadModel">
+      <div class="railModelContainer">
+        <h1>Nome da Maquete</h1>
+        <img src="#" alt="Maquete do Roberto">
+      </div>
+    </div>
+
+    <div class="toolsSidebar">
+      <div class="addLocomotiveManeger">
+        <h1>ID</h1>
+        <input 
+          type="number" 
+          name="locomotiveId" 
+          id="locomotiveId" 
+          placeholder="Insira o id da locomotiva"
+        >
+        <button id="confirmLocomotiveId">
+          Ok
+        </button>
+      </div>
+
+      <div class="locomotiveTools">
+        <div class="toolsHeader">
+          <h1>Locomotiva - "id"</h1>
+          <i class="ph ph-minus"></i>
+        </div>
+
+        <div class="toolsListContent">
+          <div class="direction toolsOption">
+            <div class="toolsTitle">
+              <div>
+                <i class="ph-fill ph-speedometer"></i>
+                <h3>Direção</h3>
+              </div>
+
+              <!-- switch -->
+              <label class="textSwitch">
+                <input type="checkbox" checked id="directionSwitch">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="toolsContent">
+              <div class="sliderControl">
+                <div class="sliderHeader">
+                  <p>Velocidade:</p>
+                  <input 
+                    type="number" 
+                    name="velocity" 
+                    id="velocityNumberInput"
+                  >
+                </div>
+                <input 
+                  type="range" 
+                  min="0" max="126"
+                  value="0" 
+                  class="slider" 
+                  id="velocitySliderInput"
+                >
+              </div>
+              <div class="sliderControl">
+                <div class="sliderHeader">
+                  <p>Aceleração:</p>
+                  <input 
+                    type="number" 
+                    name="acceleration" 
+                    id="accelerationInput"
+                  >
+                </div>
+                <input 
+                  type="range"
+                  min="0" max="9"
+                  value="0"
+                  class="slider"
+                  id="accelerationSliderInput"
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="hooter toolsOption">
+            <div class="toolsTitle">
+              <div>
+                <i class="ph-fill ph-speaker-high"></i>
+                <h3>Buzinas</h3>
+              </div>
+
+              <!-- switch -->
+              <label class="textSwitch">
+                <input type="checkbox" id="hooterMainSwitch">
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="hooterContent">
+              <div class="handleSwitch">
+                <p>Buzina</p>
+                <label class="noTextSwitch">
+                  <input type="checkbox" id="buzzerHooter">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="handleSwitch">
+                <p>Sino</p>
+                <label class="noTextSwitch">
+                  <input type="checkbox" id="bellHooter">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="handleSwitch">
+                <p>Locomotiva</p>
+                <label class="noTextSwitch">
+                  <input type="checkbox" id="locomotiveHooter">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="light toolsOption">
+            <div class="toolsTitle">
+              <div>
+                <i class="ph-fill ph-lightbulb"></i>
+                <h3>Luzes</h3>
+              </div>
+
+              <!-- switch -->
+              <label class="textSwitch">
+                <input type="checkbox" id="lightMainSwitch">
+                <span class="slider"></span>
+              </label>
+            </div>
+            
+            <div class="lightContent">
+              <div class="handleSwitch">
+                <p>Farol Principal</p>
+                <label class="noTextSwitch">
+                  <input type="checkbox" id="frontLight">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="handleSwitch">
+                <p>Farol baixo</p>
+                <label class="noTextSwitch">
+                  <input type="checkbox" id="lowLight">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="handleSwitch">
+                <p>Cabine</p>
+                <label class="noTextSwitch">
+                  <input type="checkbox" id="cabinLight">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <button id="emergency" class="emergency" title="Botão de emergência">
+            Parar
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
