@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="./css/homePageStyles.css">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <title>Home Page</title>
@@ -11,6 +12,10 @@
 <body>
   <header>
     <img src="img/logo.svg" alt="Logo" title="Py-UI">
+    <div class="headerTools">
+      <i class="ph-fill ph-user"></i>
+      <i class="ph-bold ph-list"></i>
+    </div>
   </header>
 
   <main>
@@ -18,7 +23,7 @@
       <div class="composition">
 
         <div class="compositionTitle" id="0">
-          <h1>Nome da composição</h1>
+          <h1>Super Comp</h1>
           <div class="trainFilter">
             <i class="ph ph-caret-up"></i>
             <i class="ph ph-sliders-horizontal"></i>
@@ -28,35 +33,41 @@
         <div class="compositionContainer">
           <div class="wagon">
             <div class="compositionHeader">
-              <i class="ph-fill ph-train-regional"></i>
-              <h1>id:333</h1>
-              <div>
+              <div class="titleId">
+                <i class="ph-fill ph-train-regional"></i>
+                <h1>CSX</h1>
+              </div>
+              <div class="showCompositionContent">
                 <!-- if content ! hidden "+" : "-"-->
-                <i class="ph ph-plus"></i>
+                <i class="ph ph-minus"></i>
+                <!-- <i class="ph ph-plus"></i> -->
               </div>
             </div>
 
-            <div class="compositionContent">
-              <img src="#" alt="wagon Image">
+            <img src="./img/csxWagon.jpg" alt="wagon Image" >
+
+            <div class="compositionContent" style="display: block;">
               <div class="description">
                 <h3>Desciçao:</h3>                
-                <p>Vagão para o transporte de liquidos inflamaveis</p>
+                <p>Vagão para o transporte de minerios</p>
               </div>
             </div>
           </div>
 
           <div class="locomotive">
             <div class="compositionHeader">
-              <i class="ph-fill ph-train"></i>
-              <h1>id:333</h1>
-              <div>
+              <div class="titleId">
+                <i class="ph-fill ph-train"></i>
+                <h1>333</h1>
+              </div>
+              <div class="showCompositionContent">
                 <!-- if content ! hidden "+" : "-"-->
-                <i class="ph ph-plus"></i>
+                <!-- <i class="ph ph-plus"></i> -->
+                <i class="ph ph-minus"></i>
               </div>
             </div>
-
+            <img src="./img/rumoLocomotive333.png" alt="locomotive Image">
             <div class="compositionContent">
-              <img src="#" alt="locomotive Image">
               <div class="description">
                 <h3>Capacidade:</h3>                
                 <p>Em descida: 35 vagões</p>
@@ -73,7 +84,7 @@
     <div class="railRoadModel">
       <div class="railModelContainer">
         <h1>Nome da Maquete</h1>
-        <img src="#" alt="Maquete do Roberto">
+        <img src="./img/Maquete do roberto.png" alt="Maquete do Roberto">
       </div>
     </div>
 
@@ -100,14 +111,18 @@
         <div class="toolsListContent">
           <div class="direction toolsOption">
             <div class="toolsTitle">
-              <div>
+              <div class="toolName">
                 <i class="ph-fill ph-speedometer"></i>
                 <h3>Direção</h3>
               </div>
 
               <!-- switch -->
               <label class="textSwitch">
-                <input type="checkbox" checked id="directionSwitch">
+                <!-- <input type="checkbox" checked id="directionSwitch"> -->
+                 <select name="on-off" id="directionUsage">
+                  <option value="on">Ligado</option>
+                  <option value="off">Desligado</option>
+                 </select>
                 <span class="slider"></span>
               </label>
             </div>
@@ -151,14 +166,18 @@
 
           <div class="hooter toolsOption">
             <div class="toolsTitle">
-              <div>
+              <div class="toolName">
                 <i class="ph-fill ph-speaker-high"></i>
                 <h3>Buzinas</h3>
               </div>
 
               <!-- switch -->
               <label class="textSwitch">
-                <input type="checkbox" id="hooterMainSwitch">
+                <!-- <input type="checkbox" id="hooterMainSwitch"> -->
+                <select name="on-off" id="hooterUsage">
+                  <option value="on">Ligado</option>
+                  <option value="off">Desligado</option>
+                 </select>
                 <span class="slider"></span>
               </label>
             </div>
@@ -191,14 +210,18 @@
 
           <div class="light toolsOption">
             <div class="toolsTitle">
-              <div>
+              <div class="toolName">
                 <i class="ph-fill ph-lightbulb"></i>
                 <h3>Luzes</h3>
               </div>
 
               <!-- switch -->
               <label class="textSwitch">
-                <input type="checkbox" id="lightMainSwitch">
+                <!-- <input type="checkbox" id="lightMainSwitch"> -->
+                <select name="on-off" id="lightUsage">
+                  <option value="on">Ligado</option>
+                  <option value="off">Desligado</option>
+                 </select>
                 <span class="slider"></span>
               </label>
             </div>
