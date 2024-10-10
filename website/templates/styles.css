@@ -4,9 +4,11 @@
   --blue-700: #1d4ed8;
 
   --red-500: #ef4444;
-  --red-hover-600: #dc2626;
+  --red-600: #dc2626;
 
   --offwhite: #D9D9D9;
+  --offwhite-10:#D9D9D91A;
+  --offwhite-15: #D9D9D926;
 
   --slate-400: #94a3b8; 
   --slate-600: #475569;
@@ -23,20 +25,42 @@ body{
   margin: 0px;
   background-color: var(--slate-900);
   font-family: "Inter", sans-serif;
+  color: var(--offwhite);
 }
 
 header{
   display: flex;
   align-items: center;
-  height: 56px;
   width: auto;
   padding-inline: 16px;
   padding-block: 8px;
 
   background-color: var(--slate-800);
+  border-bottom: 1px solid var(--offwhite-10);
 
   & img {
     height: 36.13px;
     width: 163px;
   }
+}
+input{
+  cursor: pointer;
+}
+
+button{
+  cursor: pointer;
+}
+
+input:focus{
+  outline: 1px solid var(--blue-600);
+  border-radius: 4px;
+}
+
+button:focus{
+  outline: 1px solid var(--blue-600);
+  border-radius: 4px;
+}
+
+input[type=number]{
+  text-align: center;
 }
