@@ -92,19 +92,31 @@ header{
 }
 
 h1{
+<<<<<<< HEAD:website/templates/css/homePageStyles.css
   font-size: 18px;
+=======
+  font-size: 16px;
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376:website/static/stylesheets/homePageStyles.css
   font: bold;        
   margin: 0px;
 }
 
 h3{
+<<<<<<< HEAD:website/templates/css/homePageStyles.css
   font-size: 16px;
+=======
+  font-size: 12px;
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376:website/static/stylesheets/homePageStyles.css
   font:bold;
   margin: 0px;
 }
 
 p{
+<<<<<<< HEAD:website/templates/css/homePageStyles.css
   font-size: 14px;
+=======
+  font-size: 10px;
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376:website/static/stylesheets/homePageStyles.css
   margin: 0px;
 }
 
@@ -316,6 +328,7 @@ input[type=range]:focus{
 
 #emergency:focus{
   outline: 1px solid var(--red-500);
+<<<<<<< HEAD:website/templates/css/homePageStyles.css
 }
 
 .iconButton{
@@ -329,4 +342,6 @@ input[type=range]:focus{
 .iconButton:hover{
   background-color: var(--offwhite-10);
   border-radius: 4px;
+=======
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376:website/static/stylesheets/homePageStyles.css
 }

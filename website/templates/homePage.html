@@ -4,13 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
+<<<<<<< HEAD
   <link rel="stylesheet" href="./css/homePageStyles.css">
+=======
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/homePageStyles.css') }}">
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <title>Home Page</title>
 </head>
 <body>
   <header>
+<<<<<<< HEAD
     <img src="img/logo.svg" alt="Logo" title="Py-UI">
     <div class="headerTools">
       <div class="dropdown">
@@ -26,6 +32,12 @@
         </div>
       </div>
       <!-- <i class="ph-bold ph-list"></i> -->
+=======
+    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
+    <div class="headerTools">
+      <i class="ph-fill ph-user"></i>
+      <i class="ph-bold ph-list"></i>
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376
     </div>
   </header>
 
@@ -36,12 +48,17 @@
         <div class="compositionTitle" id="0">
           <h1>Super Comp</h1>
           <div class="trainFilter">
+<<<<<<< HEAD
             <button class="iconButton">
               <i class="ph ph-caret-up"></i>
             </button>
             
             
             <!-- <i class="ph ph-sliders-horizontal"></i> -->
+=======
+            <i class="ph ph-caret-up"></i>
+            <i class="ph ph-sliders-horizontal"></i>
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376
           </div>
         </div>
 
@@ -54,14 +71,22 @@
               </div>
               <div class="showCompositionContent">
                 <!-- if content ! hidden "+" : "-"-->
+<<<<<<< HEAD
                  <button class="iconButton">
                    <i class="ph ph-minus"></i>
                  </button>
+=======
+                <i class="ph ph-minus"></i>
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376
                 <!-- <i class="ph ph-plus"></i> -->
               </div>
             </div>
 
+<<<<<<< HEAD
             <img src="./img/csxWagon.jpg" alt="wagon Image" >
+=======
+            <img src="{{ url_for('static', filename='img/csxWagon.jpg') }}" alt="wagon Image">
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376
 
             <div class="compositionContent" style="display: block;">
               <div class="description">
@@ -80,12 +105,19 @@
               <div class="showCompositionContent">
                 <!-- if content ! hidden "+" : "-"-->
                 <!-- <i class="ph ph-plus"></i> -->
+<<<<<<< HEAD
                 <button class="iconButton">
                   <i class="ph ph-minus"></i>
                 </button>
               </div>
             </div>
             <img src="./img/rumoLocomotive333.png" alt="locomotive Image">
+=======
+                <i class="ph ph-minus"></i>
+              </div>
+            </div>
+            <img src="{{ url_for('static', filename='img/rumoLocomotive333.png') }}" alt="locomotive Image">
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376
             <div class="compositionContent">
               <div class="description">
                 <h3>Capacidade:</h3>                
@@ -103,7 +135,11 @@
     <div class="railRoadModel">
       <div class="railModelContainer">
         <h1>Nome da Maquete</h1>
+<<<<<<< HEAD
         <img src="./img/Maquete do roberto.png" alt="Maquete do Roberto">
+=======
+        <img src="{{ url_for('static', filename='img/Maquete do roberto.png') }}" alt="Maquete do Roberto">
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376
       </div>
     </div>
 
@@ -124,9 +160,13 @@
       <div class="locomotiveTools">
         <div class="toolsHeader">
           <h1>Locomotiva - "id"</h1>
+<<<<<<< HEAD
           <button class="iconButton">
             <i class="ph ph-minus"></i>
           </button>
+=======
+          <i class="ph ph-minus"></i>
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376
         </div>
 
         <div class="toolsListContent">
@@ -141,8 +181,13 @@
               <label class="textSwitch">
                 <!-- <input type="checkbox" checked id="directionSwitch"> -->
                  <select name="on-off" id="directionUsage">
+<<<<<<< HEAD
                   <option value="front">Frente</option>
                   <option value="back">Trás</option>
+=======
+                  <option value="on">Ligado</option>
+                  <option value="off">Desligado</option>
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376
                  </select>
                 <span class="slider"></span>
               </label>
@@ -165,7 +210,11 @@
                   id="velocitySliderInput"
                 >
               </div>
+<<<<<<< HEAD
               <div class="sliderControl" style="display: none;">
+=======
+              <div class="sliderControl">
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376
                 <div class="sliderHeader">
                   <p>Aceleração:</p>
                   <input 
@@ -185,7 +234,11 @@
             </div>
           </div>
 
+<<<<<<< HEAD
           <div class="hooter toolsOption" style="display: none;">
+=======
+          <div class="hooter toolsOption">
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376
             <div class="toolsTitle">
               <div class="toolName">
                 <i class="ph-fill ph-speaker-high"></i>
@@ -239,10 +292,17 @@
               <!-- switch -->
               <label class="textSwitch">
                 <!-- <input type="checkbox" id="lightMainSwitch"> -->
+<<<<<<< HEAD
                 <select name="on-off" id="lightUsage" style="display: none;">
                   <option value="on">Ligado</option>
                   <option value="off">Desligado</option>
                 </select>
+=======
+                <select name="on-off" id="lightUsage">
+                  <option value="on">Ligado</option>
+                  <option value="off">Desligado</option>
+                 </select>
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376
                 <span class="slider"></span>
               </label>
             </div>
@@ -264,7 +324,11 @@
                 </label>
               </div>
 
+<<<<<<< HEAD
               <div class="handleSwitch" style="display: none;">
+=======
+              <div class="handleSwitch">
+>>>>>>> 417378976a508b8201f052c039dd00e5a4ff1376
                 <p>Cabine</p>
                 <label class="noTextSwitch">
                   <input type="checkbox" id="cabinLight">
