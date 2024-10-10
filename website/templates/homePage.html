@@ -4,14 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="./css/homePageStyles.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/homePageStyles.css') }}">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <title>Home Page</title>
 </head>
 <body>
   <header>
-    <img src="img/logo.svg" alt="Logo" title="Py-UI">
+    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
     <div class="headerTools">
       <i class="ph-fill ph-user"></i>
       <i class="ph-bold ph-list"></i>
@@ -44,7 +45,7 @@
               </div>
             </div>
 
-            <img src="./img/csxWagon.jpg" alt="wagon Image" >
+            <img src="{{ url_for('static', filename='img/csxWagon.jpg') }}" alt="wagon Image">
 
             <div class="compositionContent" style="display: block;">
               <div class="description">
@@ -66,7 +67,7 @@
                 <i class="ph ph-minus"></i>
               </div>
             </div>
-            <img src="./img/rumoLocomotive333.png" alt="locomotive Image">
+            <img src="{{ url_for('static', filename='img/rumoLocomotive333.png') }}" alt="locomotive Image">
             <div class="compositionContent">
               <div class="description">
                 <h3>Capacidade:</h3>                
@@ -84,7 +85,7 @@
     <div class="railRoadModel">
       <div class="railModelContainer">
         <h1>Nome da Maquete</h1>
-        <img src="./img/Maquete do roberto.png" alt="Maquete do Roberto">
+        <img src="{{ url_for('static', filename='img/Maquete do roberto.png') }}" alt="Maquete do Roberto">
       </div>
     </div>
 
