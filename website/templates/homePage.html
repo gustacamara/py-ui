@@ -4,18 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/homePageStyles.css') }}">
+  <link rel="stylesheet" href="./css/homePageStyles.css">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <title>Home Page</title>
 </head>
 <body>
   <header>
-    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
+    <img src="img/logo.svg" alt="Logo" title="Py-UI">
     <div class="headerTools">
-      <i class="ph-fill ph-user"></i>
-      <i class="ph-bold ph-list"></i>
+      <div class="dropdown">
+        <button class="iconButton">
+          <i class="ph-fill ph-user"></i>
+        </button>
+        <div name="headerDropdown" id="headerDropdown">
+          <a href="#">Adicionar usuário</a>
+          <a href="#">Remover usuário</a>
+          <a href="#">Adicionar locomotiva</a>
+          <a href="#">Adicionar sensores</a>
+          <a href="#">Adicionar sensores</a>
+        </div>
+      </div>
+      <!-- <i class="ph-bold ph-list"></i> -->
     </div>
   </header>
 
@@ -26,8 +36,10 @@
         <div class="compositionTitle" id="0">
           <h1>Super Comp</h1>
           <div class="trainFilter">
-            <i class="ph ph-caret-up"></i>
-            <i class="ph ph-sliders-horizontal"></i>
+            <button class="iconButton">
+              <i class="ph ph-caret-up"></i>
+            </button>
+            <!-- <i class="ph ph-sliders-horizontal"></i> -->
           </div>
         </div>
 
@@ -40,12 +52,14 @@
               </div>
               <div class="showCompositionContent">
                 <!-- if content ! hidden "+" : "-"-->
-                <i class="ph ph-minus"></i>
+                 <button class="iconButton">
+                   <i class="ph ph-minus"></i>
+                 </button>
                 <!-- <i class="ph ph-plus"></i> -->
               </div>
             </div>
 
-            <img src="{{ url_for('static', filename='img/csxWagon.jpg') }}" alt="wagon Image">
+            <img src="./img/csxWagon.jpg" alt="wagon Image" >
 
             <div class="compositionContent" style="display: block;">
               <div class="description">
@@ -64,10 +78,12 @@
               <div class="showCompositionContent">
                 <!-- if content ! hidden "+" : "-"-->
                 <!-- <i class="ph ph-plus"></i> -->
-                <i class="ph ph-minus"></i>
+                <button class="iconButton">
+                  <i class="ph ph-minus"></i>
+                </button>
               </div>
             </div>
-            <img src="{{ url_for('static', filename='img/rumoLocomotive333.png') }}" alt="locomotive Image">
+            <img src="./img/rumoLocomotive333.png" alt="locomotive Image">
             <div class="compositionContent">
               <div class="description">
                 <h3>Capacidade:</h3>                
@@ -85,7 +101,7 @@
     <div class="railRoadModel">
       <div class="railModelContainer">
         <h1>Nome da Maquete</h1>
-        <img src="{{ url_for('static', filename='img/Maquete do roberto.png') }}" alt="Maquete do Roberto">
+        <img src="./img/Maquete do roberto.png" alt="Maquete do Roberto">
       </div>
     </div>
 
@@ -106,7 +122,9 @@
       <div class="locomotiveTools">
         <div class="toolsHeader">
           <h1>Locomotiva - "id"</h1>
-          <i class="ph ph-minus"></i>
+          <button class="iconButton">
+            <i class="ph ph-minus"></i>
+          </button>
         </div>
 
         <div class="toolsListContent">
@@ -121,8 +139,8 @@
               <label class="textSwitch">
                 <!-- <input type="checkbox" checked id="directionSwitch"> -->
                  <select name="on-off" id="directionUsage">
-                  <option value="on">Ligado</option>
-                  <option value="off">Desligado</option>
+                  <option value="front">Frente</option>
+                  <option value="back">Trás</option>
                  </select>
                 <span class="slider"></span>
               </label>
@@ -145,7 +163,7 @@
                   id="velocitySliderInput"
                 >
               </div>
-              <div class="sliderControl">
+              <div class="sliderControl" style="display: none;">
                 <div class="sliderHeader">
                   <p>Aceleração:</p>
                   <input 
@@ -165,7 +183,7 @@
             </div>
           </div>
 
-          <div class="hooter toolsOption">
+          <div class="hooter toolsOption" style="display: none;">
             <div class="toolsTitle">
               <div class="toolName">
                 <i class="ph-fill ph-speaker-high"></i>
@@ -219,10 +237,10 @@
               <!-- switch -->
               <label class="textSwitch">
                 <!-- <input type="checkbox" id="lightMainSwitch"> -->
-                <select name="on-off" id="lightUsage">
+                <select name="on-off" id="lightUsage" style="display: none;">
                   <option value="on">Ligado</option>
                   <option value="off">Desligado</option>
-                 </select>
+                </select>
                 <span class="slider"></span>
               </label>
             </div>
@@ -244,7 +262,7 @@
                 </label>
               </div>
 
-              <div class="handleSwitch">
+              <div class="handleSwitch" style="display: none;">
                 <p>Cabine</p>
                 <label class="noTextSwitch">
                   <input type="checkbox" id="cabinLight">
