@@ -25,14 +25,15 @@
           <h1>Registrar usuário</h1>
         </div>
 
-        <div class="form" id="form">
+        <form class="form" id="form" method="POST" action="{{ url_for('try_register_user') }}">
           <div class="credencial">
             <p>Nome do usuário</p>
             <div class="inputContent">
               <i class="ph ph-at"></i>
               <input 
-                type="text" 
-                id="newUser"
+                type="text"
+                name="username" 
+                id="username"
                 placeholder="Usuário"
               >
             </div>
@@ -44,8 +45,8 @@
               <i class="ph ph-fingerprint-simple"></i>
               <input 
                 type="text"
-                name="pwd" 
-                id="newUserPsw" 
+                name="password" 
+                id="password" 
                 placeholder="Senha"
               >
             </div>
@@ -60,7 +61,7 @@
               Registrar
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </main>

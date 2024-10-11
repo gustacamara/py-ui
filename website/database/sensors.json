@@ -1,0 +1,12 @@
+{
+    "sensors": [
+        {
+            "name": "Entry 1",
+            "value": "Value 1"
+        },
+        {
+            "name": "Entry 2",
+            "value": "Value 2"
+        }
+    ]
+}
