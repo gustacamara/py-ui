@@ -32,7 +32,7 @@ body{
 header{
   display: flex;
   padding-left:20px;
-  padding-right: 200px;
+  padding-right: 100px;
   background-color: var(--slate-800);
   border-bottom: 1px solid var(--offwhite-10);
 
