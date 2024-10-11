@@ -10,7 +10,7 @@ app.static_folder = 'static'
 current_user = ""
 admin_mode = False
 
-
+# Handle login
 @app.route('/', methods=['POST', 'GET'])
 def login_page(error=False):
     return render_template("login_page.html", error=error)
@@ -41,9 +41,38 @@ def try_authenticate():
 def home_page():
     return render_template("home_page.html")
 
+
+
+# Handle Crud for users
+
+@app.route('/try-register-user', methods=['POST', 'GET'])
+def try_register_user():
+    if request.method == 'POST':
+        print(">>>>>>>>>>>>>>>form: ", request.form)
+        username = request.form['username']
+        password = request.form['password']
+        data = jsonutil.import_json(app.root_path + '/database/credentials.json')
+
+        if username.strip(' ') == "":
+            print("Usuário inválido!") # Change to a popup later!
+            return redirect(app.url_for('register_user'))
+
+        for user in data['users']:
+            if user['username'] == username:
+                print("Usuário já cadastrado!") # Change to a popup later!
+                return redirect(app.url_for('register_user'))
+
+        data['users'].append({'username': username, 'password': password})
+        jsonutil.export_json(app.root_path + '/database/credentials.json', data)
+        return redirect(app.url_for('home_page')) # Later redirect to list of users
+    else:
+        print("Método inválido:", request.method)
+        return redirect(app.url_for('register_user')) # ERRO!
+
 @app.route('/register-user')
 def register_user():
     return render_template("register_user.html")
+
 
 @app.route('/register-locomotive')
 def register_locomotive():
