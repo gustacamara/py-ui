@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/credentialForm.css') }}">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <title>Novo usuário</title>
+</head>
+
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
+  </header>
+  <main>
+    <div class="backgroundRadius">
+
+      <div class="container">
+
+        <div class="title">
+          <i class="ph-fill ph-train"></i>
+          <h1>Remover locomotiva</h1>
+        </div>
+
+        <div class="form" id="form">
+          <div class="credencial">
+            <p>Id da locomotiva</p>
+            <div class="inputContent">
+              <select name="removeLocomotive" id="locomotiveList">
+                <option value="locomotiveId"> 666777</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="credencial">
+            <button type="submit" id="deleteLocomotive" name="deleteLocomotive">
+              Deletar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
