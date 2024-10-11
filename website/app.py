@@ -63,7 +63,7 @@ def try_register_user():
 
         data['users'].append({'username': username, 'password': password})
         jsonutil.export_json(app.root_path + '/database/credentials.json', data)
-        return redirect(app.url_for('home_page')) # Later redirect to list of users
+        return redirect(app.url_for('home_page')) # Redirect to list of users later
     else:
         print("Método inválido:", request.method)
         return redirect(app.url_for('register_user')) # ERRO!
@@ -95,7 +95,7 @@ def try_register_locomotive():
             
         data['cabs'].append({'id': locomotive_id, 'manufacturer': manufacturer, 'model': model})
         jsonutil.export_json(app.root_path + '/database/cabs.json', data)
-        return redirect(app.url_for('home_page')) # Later redirect to list of locomotives
+        return redirect(app.url_for('home_page')) # Redirect to list of locomotives later
     else:
         print("Método inválido:", request.method)
         return redirect(app.url_for('register_locomotive')) # ERRO!
