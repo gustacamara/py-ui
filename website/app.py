@@ -41,8 +41,6 @@ def try_authenticate():
 def home_page():
     return render_template("home_page.html")
 
-
-
 # Handle Crud for users
 
 @app.route('/try-register-user', methods=['POST', 'GET'])
@@ -107,6 +105,8 @@ def register_locomotive():
 @app.route('/remove-locomotive')
 def remove_locomotive():
     return render_template("remove_locomotive.html")
+
+# Handle Crud for sensors
 
 @app.route('/register-sensor')
 def register_sensor():
