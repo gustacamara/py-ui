@@ -18,11 +18,12 @@
           <i class="ph-fill ph-user"></i>
         </button>
         <div name="headerDropdown" id="headerDropdown">
-          <a href="#">Adicionar usuário</a>
-          <a href="#">Remover usuário</a>
-          <a href="#">Adicionar locomotiva</a>
-          <a href="#">Adicionar sensores</a>
-          <a href="#">Adicionar sensores</a>
+          <a href="{{ url_for('register_user') }}">Adicionar usuário</a>
+          <a href="{{ url_for('remove_user') }}">Remover usuário</a>
+          <a href="{{ url_for('register_locomotive') }}">Adicionar locomotiva</a>
+          <a href="{{ url_for('remove_locomotive') }}">Remover locomotiva</a>
+          <a href="{{ url_for('register_sensor') }}">Adicionar sensores</a>
+          <a href="{{ url_for('remove_sensor') }}">Remover sensores</a>
         </div>
       </div>
       <!-- <i class="ph-bold ph-list"></i> -->
