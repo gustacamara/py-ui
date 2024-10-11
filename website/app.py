@@ -13,7 +13,7 @@ admin_mode = False
 
 @app.route('/', methods=['POST', 'GET'])
 def login_page(error=False):
-    return render_template("loginPage.html", error=error)
+    return render_template("login_page.html", error=error)
 
 @app.route('/try_authenticate', methods=['POST'])
 def try_authenticate():
@@ -39,30 +39,30 @@ def try_authenticate():
 
 @app.route('/homePage')
 def home_page():
-    return render_template("homePage.html")
+    return render_template("home_page.html")
 
 @app.route('/registerUser')
 def register_user():
-    return render_template("registerUser.html")
+    return render_template("register_user.html")
 
 @app.route('/registerLocomotive')
 def register_locomotive():
-    return render_template("registerLocomotive.html")
+    return render_template("register_locomotive.html")
 
 @app.route('/registerSensor')
 def register_sensor():
-    return render_template("registerSensor.html")
+    return render_template("register_sensor.html")
 
 @app.route('/removeUser')
 def remove_user():
-    return render_template("removeUser.html")
+    return render_template("remove_user.html")
 
 @app.route('/removeSensor')
 def remove_sensor():
-    return render_template("removeSensor.html")
+    return render_template("remove_sensor.html")
 
 @app.route('/removeLocomotive')
 def remove_locomotive():
-    return render_template("removeLocomotive.html")
+    return render_template("remove_locomotive.html")
 
 app.run(debug=True)
