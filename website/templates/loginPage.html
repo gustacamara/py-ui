@@ -22,7 +22,11 @@
           <i class="ph-fill ph-user"></i>
           <h1>Login</h1>
         </div>
-
+        {% if error %}
+          <div> <!-- Coloque o super HTML da brilhante mensagem de erro aqui -->
+            <p> Login Inválido :(</p>
+          </div>
+        {% endif %}
         <form class="form" id="form" method="post" action="{{ url_for('try_authenticate') }}">
           <div class="credencial">
             <p>Usuário</p>

@@ -12,8 +12,8 @@ admin_mode = False
 
 
 @app.route('/', methods=['POST', 'GET'])
-def login_page():
-    return render_template("loginPage.html")
+def login_page(error=False):
+    return render_template("loginPage.html", error=error)
 
 @app.route('/try_authenticate', methods=['POST'])
 def try_authenticate():
@@ -33,7 +33,7 @@ def try_authenticate():
             return redirect(app.url_for('home_page'))
         index += 1
     print("Login inválido! tente novamente.")
-    return login_page()
+    return login_page(error=True)
 
 
 
