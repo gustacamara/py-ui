@@ -1,14 +1,26 @@
-from flask import Flask, render_template # pip install flask
+import sys
+from flask import Flask, render_template, request # pip install flask
 import jinja2 # pip install jinja2
+import jsonutil
 
 app = Flask(__name__)
 app.static_folder = 'static'
 
-@app.route('/')
-def index():
+
+@app.route('/', methods=['POST', 'GET'])
+def login_page():
     return render_template("loginPage.html")
 
-@app.route('/home')
+@app.route('/try_authenticate', methods=['POST'])
+def try_authenticate():
+    user = request.form['user']
+    pwd = request.form['pwd']
+    print(f"user: {user}, password: {pwd}", file=sys.stderr)
+    return "Success"
+
+
+
+@app.route('/homePage')
 def home_page():
     return render_template("homePage.html")
 
