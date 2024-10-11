@@ -1,33 +1,47 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/home_page_styles.css') }}">
   <script src="{{ url_for('static', filename='javascript/dcc.js') }}"></script>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <title>Home Page</title>
 </head>
+
 <body>
   <header>
-    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
-    <div class="headerTools">
-      <div class="dropdown">
-        <button class="iconButton">
-          <i class="ph-fill ph-user"></i>
-        </button>
-        <div name="headerDropdown" id="headerDropdown">
-          <a href="{{ url_for('register_user') }}">Adicionar usuário</a>
-          <a href="{{ url_for('remove_user') }}">Remover usuário</a>
-          <a href="{{ url_for('register_locomotive') }}">Adicionar locomotiva</a>
-          <a href="{{ url_for('remove_locomotive') }}">Remover locomotiva</a>
-          <a href="{{ url_for('register_sensor') }}">Adicionar sensores</a>
-          <a href="{{ url_for('remove_sensor') }}">Remover sensores</a>
-        </div>
+    <ul>
+      <div class="navbar-items">
+        <li>
+          <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
+        </li>
+        <li>Py - UI</li>
       </div>
-      <!-- <i class="ph-bold ph-list"></i> -->
+      <li>
+        <div class="navbar-items">
+        <i class="ph-fill ph-user">
+        </i>
+        <a href="#">Admin</a>
+        </div>
+        <ul class="dropdown">
+          <li><a href="{{ url_for('register_user') }}">Adicionar usuário</a></li>
+          <li><a href="{{ url_for('remove_user') }}">Remover usuário</a></li>
+          <li><a href="{{ url_for('remove_user') }}">Listar usuários</a></li>
+          <li><a href="{{ url_for('register_locomotive') }}">Adicionar locomotiva</a></li>
+          <li><a href="{{ url_for('remove_locomotive') }}">Remover locomotiva</a></li>
+          <li><a href="{{ url_for('remove_locomotive') }}">Listar locomotivas</a></li>
+          <li><a href="{{ url_for('register_sensor') }}">Adicionar sensores</a></li>
+          <li><a href="{{ url_for('remove_sensor') }}">Remover sensores</a></li>
+          <li><a href="{{ url_for('remove_sensor') }}">Listar sensores</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- <i class="ph-bold ph-list"></i> -->
     </div>
   </header>
 
@@ -54,18 +68,18 @@
               </div>
               <div class="showCompositionContent">
                 <!-- if content ! hidden "+" : "-"-->
-                 <button class="iconButton">
-                   <i class="ph ph-minus"></i>
-                 </button>
+                <button class="iconButton">
+                  <i class="ph ph-minus"></i>
+                </button>
                 <!-- <i class="ph ph-plus"></i> -->
               </div>
             </div>
 
-            <img src="{{ url_for('static', filename='img/csxWagon.jpg') }}" alt="wagon Image" >
+            <img src="{{ url_for('static', filename='img/csxWagon.jpg') }}" alt="wagon Image">
 
             <div class="compositionContent" style="display: block;">
               <div class="description">
-                <h3>Desciçao:</h3>                
+                <h3>Desciçao:</h3>
                 <p>Vagão para o transporte de minerios</p>
               </div>
             </div>
@@ -88,7 +102,7 @@
             <img src="{{ url_for('static', filename='./img/rumoLocomotive333.png') }}" alt="locomotive Image">
             <div class="compositionContent">
               <div class="description">
-                <h3>Capacidade:</h3>                
+                <h3>Capacidade:</h3>
                 <p>Em descida: 35 vagões</p>
                 <p>Em nivel: 30 vagões</p>
                 <p>Em subida: 20 vagões</p>
@@ -110,12 +124,7 @@
     <div class="toolsSidebar">
       <div class="addLocomotiveManeger">
         <h1>ID</h1>
-        <input 
-          type="number" 
-          name="locomotiveId" 
-          id="locomotiveId" 
-          placeholder="Insira o id da locomotiva"
-        >
+        <input type="number" name="locomotiveId" id="locomotiveId" placeholder="Insira o id da locomotiva">
         <button id="confirmLocomotiveId">
           Ok
         </button>
@@ -140,10 +149,10 @@
               <!-- switch -->
               <label class="textSwitch">
                 <!-- <input type="checkbox" checked id="directionSwitch"> -->
-                 <select name="on-off" id="directionUsage">
+                <select name="on-off" id="directionUsage">
                   <option value="front">Frente</option>
                   <option value="back">Trás</option>
-                 </select>
+                </select>
                 <span class="slider"></span>
               </label>
             </div>
@@ -151,36 +160,16 @@
               <div class="sliderControl">
                 <div class="sliderHeader">
                   <p>Velocidade:</p>
-                  <input 
-                    type="number" 
-                    name="velocity" 
-                    id="velocityNumberInput"
-                  >
+                  <input type="number" name="velocity" id="velocityNumberInput">
                 </div>
-                <input 
-                  type="range" 
-                  min="0" max="126"
-                  value="0" 
-                  class="slider" 
-                  id="velocitySliderInput"
-                >
+                <input type="range" min="0" max="126" value="0" class="slider" id="velocitySliderInput">
               </div>
               <div class="sliderControl" style="display: none;">
                 <div class="sliderHeader">
                   <p>Aceleração:</p>
-                  <input 
-                    type="number" 
-                    name="acceleration" 
-                    id="accelerationInput"
-                  >
+                  <input type="number" name="acceleration" id="accelerationInput">
                 </div>
-                <input 
-                  type="range"
-                  min="0" max="9"
-                  value="0"
-                  class="slider"
-                  id="accelerationSliderInput"
-                >
+                <input type="range" min="0" max="9" value="0" class="slider" id="accelerationSliderInput">
               </div>
             </div>
           </div>
@@ -198,7 +187,7 @@
                 <select name="on-off" id="hooterUsage">
                   <option value="on">Ligado</option>
                   <option value="off">Desligado</option>
-                 </select>
+                </select>
                 <span class="slider"></span>
               </label>
             </div>
@@ -246,7 +235,7 @@
                 <span class="slider"></span>
               </label>
             </div>
-            
+
             <div class="lightContent">
               <div class="handleSwitch">
                 <p>Farol Principal</p>
@@ -282,4 +271,5 @@
     </div>
   </main>
 </body>
+
 </html>
