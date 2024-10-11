@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/credentialForm.css') }}">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+  <title>Novo sensor</title>
+</head>
+
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
+  </header>
+  <main>
+    <div class="backgroundRadius">
+
+      <div class="container">
+
+        <div class="title">
+          <i class="ph ph-broadcast"></i>
+          <h1>Registrar sensor</h1>
+        </div>
+
+        <div class="form" id="form">
+          <div class="credencial">
+            <p>Nome do sensor</p>
+            <div class="inputContent">
+              <i class="ph ph-aperture"></i>
+              <input 
+                type="text" 
+                name="sensorName" 
+                id="sensorName" 
+                placeholder="Sensor"
+              >
+            </div>
+          </div>
+
+          <div class="credencial">
+            <p>Valor do sensor</p>
+            <div class="inputContent">
+              <i class="ph ph-hash-straight"></i>
+              <input 
+                type="text" 
+                name="sensorValue" 
+                id="sensorValue" 
+                placeholder="Valor"
+              >
+            </div>
+          </div>
+
+          <div class="credencial">
+            <button 
+              type="submit" 
+              id="sendNewUser" 
+              name="sendNewUser"
+            >
+              Cadastrar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+
+</html>
