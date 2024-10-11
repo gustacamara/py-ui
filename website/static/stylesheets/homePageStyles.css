@@ -91,6 +91,11 @@ header{
   padding-block: 6px;
 }
 
+a{
+  color: var(--blue-600);
+  /* text-decoration: none; */
+}
+
 h1{
   font-size: 18px;
   font: bold;        
