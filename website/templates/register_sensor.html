@@ -25,15 +25,15 @@
           <h1>Registrar sensor</h1>
         </div>
 
-        <div class="form" id="form">
+        <form class="form" id="form" method="POST" action="{{ url_for('try_register_sensor') }}">
           <div class="credencial">
             <p>Nome do sensor</p>
             <div class="inputContent">
               <i class="ph ph-aperture"></i>
               <input 
                 type="text" 
-                name="sensorName" 
-                id="sensorName" 
+                name="name"
+                id="name"
                 placeholder="Sensor"
               >
             </div>
@@ -45,8 +45,8 @@
               <i class="ph ph-hash-straight"></i>
               <input 
                 type="text" 
-                name="sensorValue" 
-                id="sensorValue" 
+                name="value"
+                id="value"
                 placeholder="Valor"
               >
             </div>
@@ -61,7 +61,7 @@
               Cadastrar
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </main>

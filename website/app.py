@@ -108,6 +108,22 @@ def remove_locomotive():
 
 # Handle Crud for sensors
 
+@app.route('/try-register-sensor', methods=['POST', 'GET'])
+def try_register_sensor():
+    if request.method == 'POST':
+        name = request.form['name']
+        value = request.form['value']
+        data = jsonutil.import_json(app.root_path + '/database/sensors.json')
+
+        for sensor in data['sensors']:
+            if sensor['name'] == name:
+                print("Sensor já cadastrado!")
+                return redirect(app.url_for('register_sensor')) # Change to a popup later!
+        
+        data['sensors'].append({'name': name, 'value': value})
+        jsonutil.export_json(app.root_path + '/database/sensors.json', data)
+        return redirect(app.url_for('home_page')) # Redirect to list of sensors later
+
 @app.route('/register-sensor')
 def register_sensor():
     return render_template("register_sensor.html")
