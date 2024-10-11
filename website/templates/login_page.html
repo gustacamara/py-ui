@@ -15,18 +15,18 @@
   </header>
   <main>
     <div class="backgroundRadius">
-      
       <div class="container">
-
         <div class="title">
           <i class="ph-fill ph-user"></i>
           <h1>Login</h1>
         </div>
         {% if error %}
-          <div> <!-- Coloque o super HTML da brilhante mensagem de erro aqui -->
-            <p> Login Inválido :(</p>
-          </div>
+        <div class="invalidUser">
+          <h2>Login Inválido</h2>
+          <p>Verifique se o usuário e a senha estão corretos</p>
+        </div>
         {% endif %}
+        
         <form class="form" id="form" method="post" action="{{ url_for('try_authenticate') }}">
           <div class="credencial">
             <p>Usuário</p>
@@ -53,7 +53,7 @@
               >
             </div>
           </div>
-        
+
           <div class="credencial">
             <button
               type="submit"
