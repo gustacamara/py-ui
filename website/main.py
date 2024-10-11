@@ -24,4 +24,16 @@ def register_locomotive():
 def register_sensor():
     return render_template("registerSensor.html")
 
+@app.route('/removeUser')
+def remove_user():
+    return render_template("removeUser.html")
+
+@app.route('/removeSensor')
+def remove_sensor():
+    return render_template("removeSensor.html")
+
+@app.route('/removeLocomotive')
+def remove_locomotive():
+    return render_template("removeLocomotive.html")
+
 app.run(debug=True)
