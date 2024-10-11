@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const cab = document.getElementById("locomotiveId")
-    const speed = document.getElementById("velocitySliderInput")
-    const direction = document.getElementById("directionUsage")
-    const lights = document.getElementById("frontLight")
-    const cabButton = document.getElementById("confirmLocomotiveId") 
+    const cab = document.getElementById("cab-id")
+    const speed = document.getElementById("speed-slider-input")
+    const direction = document.getElementById("direction-usage")
+    const lights = document.getElementById("front-light")
+    const cabButton = document.getElementById("confirm-cab-id") 
     //const honkButton = document.getElementById("honkButton") //Não achei o botão de buzina
 
     function sendData() {

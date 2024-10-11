@@ -52,7 +52,7 @@
         <div class="composition-title" id="0">
           <h1>Super Comp</h1>
           <div class="train-filter">
-            <button class="iconButton">
+            <button class="icon-button">
               <i class="ph ph-caret-up"></i>
             </button>
             <!-- <i class="ph ph-sliders-horizontal"></i> -->
@@ -123,27 +123,27 @@
       </div>
     </div>
 
-    <div class="tools-sidebar">
-      <div class="add-locomotive-manager">
+    <div class="control-sidebar">
+      <div class="cab-id">
         <h1>ID</h1>
-        <input type="number" name="locomotive-id" id="locomotive-id" placeholder="Insira o id da locomotiva">
-        <button id="confirm-locomotive-id">
+        <input type="number" name="cab-id" id="cab-id" placeholder="Insira o id da locomotiva">
+        <button id="confirm-cab-id">
           Ok
         </button>
       </div>
 
-      <div class="locomotive-tools">
-        <div class="tools-header">
+      <div class="cab-control">
+        <div class="control-header">
           <h1>Locomotiva - "id"</h1>
           <button class="icon-button">
             <i class="ph ph-minus"></i>
           </button>
         </div>
 
-        <div class="tools-list-content">
-          <div class="direction tools-option">
-            <div class="tools-title">
-              <div class="tool-name">
+        <div class="control-list-content">
+          <div class="direction control-option">
+            <div class="control-title">
+              <div class="control-name">
                 <i class="ph-fill ph-speedometer"></i>
                 <h3>Direção</h3>
               </div>
@@ -158,13 +158,13 @@
                 <span class="slider"></span>
               </label>
             </div>
-            <div class="tools-content">
+            <div class="control-content">
               <div class="slider-control">
                 <div class="slider-header">
                   <p>Velocidade:</p>
-                  <input type="number" name="velocity" id="velocity-number-input">
+                  <input type="number" name="speed" id="speed-number-input">
                 </div>
-                <input type="range" min="0" max="126" value="0" class="slider" id="velocity-slider-input">
+                <input type="range" min="0" max="126" value="0" class="slider" id="speed-slider-input">
               </div>
               <div class="slider-control" style="display: none;">
                 <div class="slider-header">
@@ -176,9 +176,9 @@
             </div>
           </div>
 
-          <div class="hooter tools-option" style="display: none;">
-            <div class="tools-title">
-              <div class="tool-name">
+          <div class="hooter control-option" style="display: none;">
+            <div class="control-title">
+              <div class="control-name">
                 <i class="ph-fill ph-speaker-high"></i>
                 <h3>Buzinas</h3>
               </div>
@@ -186,7 +186,7 @@
               <!-- switch -->
               <label class="text-switch">
                 <!-- <input type="checkbox" id="hooterMainSwitch"> -->
-                <select name="on-off" id="hooterUsage">
+                <select name="on-off" id="hooter-usage">
                   <option value="on">Ligado</option>
                   <option value="off">Desligado</option>
                 </select>
@@ -220,9 +220,9 @@
             </div>
           </div>
 
-          <div class="light tools-option">
-            <div class="tools-title">
-              <div class="tool-name">
+          <div class="light control-option">
+            <div class="control-title">
+              <div class="control-name">
                 <i class="ph-fill ph-lightbulb"></i>
                 <h3>Luzes</h3>
               </div>
@@ -240,7 +240,7 @@
 
             <div class="light-content">
               <div class="handle-switch">
-                <p>Farol Principal</p>
+                <p>Farol principal</p>
                 <label class="no-text-switch">
                   <input type="checkbox" id="front-light">
                   <span class="slider"></span>
@@ -248,7 +248,7 @@
               </div>
 
               <div class="handle-switch">
-                <p>Farol baixo</p>
+                <p>Farol secundário</p>
                 <label class="no-text-switch">
                   <input type="checkbox" id="low-light">
                   <span class="slider"></span>

@@ -161,12 +161,11 @@ i{
 
 }
 
-/* tools side bar */
+/* control sidebar */
 
-.tools-sidebar{
+.control-sidebar{
   display: flex;
   flex-direction: column;
-
   background-color: var(--slate-800);
   border:1px solid var(--offwhite-10);
   border-right: 0px;
@@ -176,7 +175,7 @@ i{
 
 /* arrows none */
 
-.add-locomotive-manager{
+.cab-id {
   display: flex;
   flex-direction: row;
   padding-inline: 8px;
@@ -213,22 +212,21 @@ i{
 
 }
 
-.locomotive-tools{
+.cab-control{
   display: flex;
   flex-direction: column;
-
   gap: 12px;
   padding-inline: 8px;
   padding-block: 16px;
 }
 
-.tools-header{
+.control-header{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.tools-list-content{
+.control-list-content{
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -265,7 +263,7 @@ i{
   }
 }
 
-.tools-option{
+.control-option{
   display: flex;
   flex-direction: column;
   padding-inline: 8px;
@@ -281,7 +279,7 @@ input[type=range]:focus{
 
 }
 
-.tools-title{
+.control-title{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -290,7 +288,7 @@ input[type=range]:focus{
     font-size: 16px;
   }
 }
-.tool-name{
+.control-name{
   display: flex;
   flex-direction: row;
   align-items: center;
