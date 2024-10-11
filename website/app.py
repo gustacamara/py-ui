@@ -48,7 +48,6 @@ def home_page():
 @app.route('/try-register-user', methods=['POST', 'GET'])
 def try_register_user():
     if request.method == 'POST':
-        print(">>>>>>>>>>>>>>>form: ", request.form)
         username = request.form['username']
         password = request.form['password']
         data = jsonutil.import_json(app.root_path + '/database/credentials.json')
@@ -73,25 +72,48 @@ def try_register_user():
 def register_user():
     return render_template("register_user.html")
 
+@app.route('/remove-user')
+def remove_user():
+    return render_template("remove_user.html")
+
+# Handle Crud for locomotives
+
+@app.route('/try-register-locomotive', methods=['POST', 'GET'])
+def try_register_locomotive():
+    if request.method == 'POST':
+        #print(">>>>>>>>>>>>>>>form: ", request.form)
+        locomotive_id = request.form['locomotive_id']
+        manufacturer = request.form['manufacturer']
+        model = request.form['model']
+
+        data = jsonutil.import_json(app.root_path + '/database/cabs.json')
+
+        for cab in data['cabs']:
+            if['id'] == locomotive_id:
+                print("Locomotiva já cadastrada!") # Change to a popup later!
+                return redirect(app.url_for('register_locomotive'))
+            
+        data['cabs'].append({'id': locomotive_id, 'manufacturer': manufacturer, 'model': model})
+        jsonutil.export_json(app.root_path + '/database/cabs.json', data)
+        return redirect(app.url_for('home_page')) # Later redirect to list of locomotives
+    else:
+        print("Método inválido:", request.method)
+        return redirect(app.url_for('register_locomotive')) # ERRO!
 
 @app.route('/register-locomotive')
 def register_locomotive():
     return render_template("register_locomotive.html")
 
+@app.route('/remove-locomotive')
+def remove_locomotive():
+    return render_template("remove_locomotive.html")
+
 @app.route('/register-sensor')
 def register_sensor():
     return render_template("register_sensor.html")
 
-@app.route('/remove-user')
-def remove_user():
-    return render_template("remove_user.html")
-
 @app.route('/remove-sensor')
 def remove_sensor():
     return render_template("remove_sensor.html")
-
-@app.route('/remove-locomotive')
-def remove_locomotive():
-    return render_template("remove_locomotive.html")
 
 app.run(debug=True)

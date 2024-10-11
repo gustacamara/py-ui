@@ -24,28 +24,28 @@
           <i class="ph-fill ph-train"></i>
           <h1>Registrar Locomotiva</h1>
         </div>
-        
-        <div class="credencial">
-          <p>Id da locomotiva</p>
-          <div class="inputContent">
-            <i class="ph ph-fingerprint-simple"></i>
-            <input 
-              type="number" 
-              name="locomotiveId" 
-              id="locomotiveId" 
-              placeholder="Id"
-            >
-          </div>
-        </div>
+        <form class="form" id="form" method="POST" action="{{ url_for('try_register_locomotive') }}">
+          <div class="credencial">
+            <p>Id da locomotiva</p>
+            <div class="inputContent">
+              <i class="ph ph-fingerprint-simple"></i>
+              <input 
+                type="number" 
+                name="locomotive_id" 
+                id="locomotive_id" 
+                placeholder="Id"
+              >
+            </div>
+          </div>  
 
-        <div class="form" id="form">
           <div class="credencial">
             <p>Nome do fabricante</p>
             <div class="inputContent">
               <i class="ph ph-hammer"></i>
               <input 
                 type="text" 
-                id="newUser" 
+                id="manufacturer" 
+                name="manufacturer"
                 placeholder="Fabricante"
               >
             </div>
@@ -57,8 +57,8 @@
               <i class="ph ph-identification-badge"></i>
               <input 
                 type="text" 
-                name="locomotiveModel" 
-                id="locomotiveModel" 
+                name="model" 
+                id="model" 
                 placeholder="Modelo"
               >
             </div>
@@ -74,7 +74,7 @@
               Cadastrar
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </main>

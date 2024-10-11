@@ -1,14 +1,19 @@
-[
-    {
-        "id": 111,
-        "manufacturer": "Frateschi",
-        "capacity": "100 tons",
-        "model": "u20"
-    },
-    {
-        "id": 222,
-        "manufacturer": "Frateschi",
-        "capacity": "120 tons",
-        "model": "u20"
-    }
-]
+{
+    "cabs": [
+        {
+            "id": 111,
+            "manufacturer": "Frateschi",
+            "model": "u20"
+        },
+        {
+            "id": 222,
+            "manufacturer": "Frateschi",
+            "model": "u20"
+        },
+        {
+            "id": "333",
+            "manufacturer": "Frateschi",
+            "model": "g12"
+        }
+    ]
+}
