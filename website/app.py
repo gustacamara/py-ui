@@ -35,7 +35,7 @@ def try_authenticate():
     print("Login inválido! tente novamente.")
     return login_page(error=True)
 
-
+# Homepage
 
 @app.route('/homepage')
 def home_page():
@@ -87,7 +87,7 @@ def try_register_locomotive():
         data = jsonutil.import_json(app.root_path + '/database/cabs.json')
 
         for cab in data['cabs']:
-            if['id'] == locomotive_id:
+            if cab['id'] == locomotive_id:
                 print("Locomotiva já cadastrada!") # Change to a popup later!
                 return redirect(app.url_for('register_locomotive'))
             
