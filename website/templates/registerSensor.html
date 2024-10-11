@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,55 +8,57 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/credentialForm.css') }}">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-  <title>Login</title>
+  <title>Novo sensor</title>
 </head>
+
 <body>
   <header>
     <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
   </header>
   <main>
     <div class="backgroundRadius">
-      
+
       <div class="container">
 
         <div class="title">
-          <i class="ph-fill ph-user"></i>
-          <h1>Login</h1>
+          <i class="ph ph-broadcast"></i>
+          <h1>Registrar sensor</h1>
         </div>
 
         <div class="form" id="form">
           <div class="credencial">
-            <p>Usuário</p>
+            <p>Nome do sensor</p>
             <div class="inputContent">
-              <i class="ph ph-at"></i>
+              <i class="ph ph-aperture"></i>
               <input 
                 type="text" 
-                id="user" 
-                placeholder="Usuário"
-              >
-            </div>
-          </div> 
-
-          <div class="credencial">
-            <p>Senha</p>
-            <div class="inputContent">
-              <i class="ph ph-fingerprint-simple"></i>
-              <input 
-                type="text"
-                name="pwd" 
-                id="psw"
-                placeholder="Senha"
+                name="sensorName" 
+                id="sensorName" 
+                placeholder="Sensor"
               >
             </div>
           </div>
 
           <div class="credencial">
-            <button
-              type="submit"
-              id="sendCredential"
-              name="sendCredential"
+            <p>Valor do sensor</p>
+            <div class="inputContent">
+              <i class="ph ph-hash-straight"></i>
+              <input 
+                type="text" 
+                name="sensorValue" 
+                id="sensorValue" 
+                placeholder="Valor"
               >
-              Fazer login
+            </div>
+          </div>
+
+          <div class="credencial">
+            <button 
+              type="submit" 
+              id="sendNewUser" 
+              name="sendNewUser"
+            >
+              Cadastrar
             </button>
           </div>
         </div>
@@ -63,4 +66,5 @@
     </div>
   </main>
 </body>
+
 </html>

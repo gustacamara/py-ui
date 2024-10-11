@@ -91,6 +91,11 @@ header{
   padding-block: 6px;
 }
 
+a{
+  color: var(--blue-600);
+  /* text-decoration: none; */
+}
+
 h1{
   font-size: 18px;
   font: bold;        
@@ -170,10 +175,6 @@ i{
 }
 
 /* arrows none */
-input[type=number] { 
-  -moz-appearance: textfield;
-  appearance: textfield;
-}
 
 .addLocomotiveManeger{
   display: flex;
@@ -329,4 +330,17 @@ input[type=range]:focus{
 .iconButton:hover{
   background-color: var(--offwhite-10);
   border-radius: 4px;
+}
+input:focus {
+  outline: 1px solid var(--blue-600);
+  border-radius: 4px;
+}
+
+button:focus {
+  outline: 1px solid var(--blue-600);
+  border-radius: 4px;
+}
+
+input[type=number] {
+  text-align: center;
 }

@@ -51,16 +51,7 @@ button{
   cursor: pointer;
 }
 
-input:focus{
-  outline: 1px solid var(--blue-600);
-  border-radius: 4px;
-}
-
-button:focus{
-  outline: 1px solid var(--blue-600);
-  border-radius: 4px;
-}
-
-input[type=number]{
-  text-align: center;
+input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
 }
