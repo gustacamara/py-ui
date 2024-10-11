@@ -37,31 +37,31 @@ def try_authenticate():
 
 
 
-@app.route('/homePage')
+@app.route('/homepage')
 def home_page():
     return render_template("home_page.html")
 
-@app.route('/registerUser')
+@app.route('/register-user')
 def register_user():
     return render_template("register_user.html")
 
-@app.route('/registerLocomotive')
+@app.route('/register-locomotive')
 def register_locomotive():
     return render_template("register_locomotive.html")
 
-@app.route('/registerSensor')
+@app.route('/register-sensor')
 def register_sensor():
     return render_template("register_sensor.html")
 
-@app.route('/removeUser')
+@app.route('/remove-user')
 def remove_user():
     return render_template("remove_user.html")
 
-@app.route('/removeSensor')
+@app.route('/remove-sensor')
 def remove_sensor():
     return render_template("remove_sensor.html")
 
-@app.route('/removeLocomotive')
+@app.route('/remove-locomotive')
 def remove_locomotive():
     return render_template("remove_locomotive.html")
 
