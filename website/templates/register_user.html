@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/credentialForm.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/credential_form.css') }}">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-  <title>Novo sensor</title>
+  <title>Novo usuário</title>
 </head>
 
 <body>
@@ -21,33 +21,32 @@
       <div class="container">
 
         <div class="title">
-          <i class="ph ph-broadcast"></i>
-          <h1>Registrar sensor</h1>
+          <i class="ph-fill ph-user"></i>
+          <h1>Registrar usuário</h1>
         </div>
 
         <div class="form" id="form">
           <div class="credencial">
-            <p>Nome do sensor</p>
+            <p>Nome do usuário</p>
             <div class="inputContent">
-              <i class="ph ph-aperture"></i>
+              <i class="ph ph-at"></i>
               <input 
                 type="text" 
-                name="sensorName" 
-                id="sensorName" 
-                placeholder="Sensor"
+                id="newUser"
+                placeholder="Usuário"
               >
             </div>
           </div>
 
           <div class="credencial">
-            <p>Valor do sensor</p>
+            <p>Senha do usuário</p>
             <div class="inputContent">
-              <i class="ph ph-hash-straight"></i>
+              <i class="ph ph-fingerprint-simple"></i>
               <input 
-                type="text" 
-                name="sensorValue" 
-                id="sensorValue" 
-                placeholder="Valor"
+                type="text"
+                name="pwd" 
+                id="newUserPsw" 
+                placeholder="Senha"
               >
             </div>
           </div>
@@ -58,7 +57,7 @@
               id="sendNewUser" 
               name="sendNewUser"
             >
-              Cadastrar
+              Registrar
             </button>
           </div>
         </div>

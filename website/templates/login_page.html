@@ -1,69 +1,71 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/credentialForm.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/credential_form.css') }}">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-  <title>Novo usuário</title>
+  <title>Login</title>
 </head>
-
 <body>
   <header>
     <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
   </header>
   <main>
     <div class="backgroundRadius">
-
+      
       <div class="container">
 
         <div class="title">
           <i class="ph-fill ph-user"></i>
-          <h1>Registrar usuário</h1>
+          <h1>Login</h1>
         </div>
-
-        <div class="form" id="form">
+        {% if error %}
+          <div> <!-- Coloque o super HTML da brilhante mensagem de erro aqui -->
+            <p> Login Inválido :(</p>
+          </div>
+        {% endif %}
+        <form class="form" id="form" method="post" action="{{ url_for('try_authenticate') }}">
           <div class="credencial">
-            <p>Nome do usuário</p>
+            <p>Usuário</p>
             <div class="inputContent">
               <i class="ph ph-at"></i>
               <input 
                 type="text" 
-                id="newUser"
+                id="username" 
+                name="username"  
                 placeholder="Usuário"
               >
             </div>
-          </div>
-
+          </div> 
+        
           <div class="credencial">
-            <p>Senha do usuário</p>
+            <p>Senha</p>
             <div class="inputContent">
               <i class="ph ph-fingerprint-simple"></i>
               <input 
-                type="text"
-                name="pwd" 
-                id="newUserPsw" 
+                type="password"  
+                name="password" 
+                id="password"
                 placeholder="Senha"
               >
             </div>
           </div>
-
+        
           <div class="credencial">
-            <button 
-              type="submit" 
-              id="sendNewUser" 
-              name="sendNewUser"
-            >
-              Registrar
+            <button
+              type="submit"
+              id="sendCredential"
+              name="sendCredential"
+              >
+              Fazer login
             </button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </main>
 </body>
-
 </html>
