@@ -23,19 +23,25 @@
         <div class="dropdown-container">
           <div class="navbar-items">
             <i class="ph-fill ph-user"></i>
-            <a href="#">Admin</a>
+            <a href="#">{{current_user}}</a>
           </div>
           <ul class="dropdown">
-            <li><a href="{{ url_for('register_user') }}">Cadastrar usuário</a></li>
-            <li><a href="{{ url_for('remove_user') }}">Deletar usuário</a></li>
-            <li><a href="{{ url_for('remove_user') }}">Listar usuários</a></li>
-            <li><a href="{{ url_for('register_cab') }}">Cadastrar locomotiva</a></li>
-            <li><a href="{{ url_for('remove_cab') }}">Deletar locomotiva</a></li>
-            <li><a href="{{ url_for('remove_cab') }}">Listar locomotivas</a></li>
+            {% if admin_mode %}
+              <li><a href="{{ url_for('register_user') }}">Cadastrar usuário</a></li>
+              <li><a href="{{ url_for('remove_user') }}">Deletar usuário</a></li>
+            {% endif %}
+            <!--<li><a href="{{ url_for('remove_user') }}">Listar usuários</a></li>-->
+            {% if admin_mode %}
+              <li><a href="{{ url_for('register_cab') }}">Cadastrar locomotiva</a></li>
+              <li><a href="{{ url_for('remove_cab') }}">Deletar locomotiva</a></li>
+            {% endif %}
+            <!--<li><li><a href="{{ url_for('remove_cab') }}">Listar locomotivas</a></li>-->
+            {% if admin_mode %}
             <li><a href="{{ url_for('register_sensor') }}">Cadastrar sensores</a></li>
             <li><a href="{{ url_for('remove_sensor') }}">Deletar sensores</a></li>
-            <li><a href="{{ url_for('remove_sensor') }}">Listar sensores</a></li>
-            <li><a href="{{ url_for('remove_sensor') }}">Sair</a></li>
+            {% endif %}
+            <!--<li><a href="{{ url_for('remove_sensor') }}">Listar sensores</a></li>-->
+            <li><a href="{{ url_for('login_page') }}">Sair</a></li>
           </ul>
         </div>
       </li>

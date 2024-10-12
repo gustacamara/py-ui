@@ -24,12 +24,10 @@ def try_authenticate():
     index = 0
     for user in data['users']:
         if user['username'] == username and user['password'] == password:
-            if index == 0:
-                global admin_mode
-                admin_mode = True
-
             global current_user
+            global admin_mode
             current_user = user
+            admin_mode = current_user['username'] == data['users'][0]['username']
             return redirect(app.url_for('home_page'))
         index += 1
     print("Login inválido! tente novamente.")
@@ -39,7 +37,7 @@ def try_authenticate():
 
 @app.route('/homepage')
 def home_page():
-    return render_template("home_page.html")
+    return render_template("home_page.html", current_user = current_user['username'],admin_mode=admin_mode)
 
 # Handle Crud for users
 
