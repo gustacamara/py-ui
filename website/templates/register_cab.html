@@ -10,6 +10,13 @@
       <i class="ph-fill ph-train"></i>
       <h1>Cadastrar locomotiva</h1>
     </div>
+    <!-- if error -->
+    <div class="invalidUser">
+      <h2>Erro ao cadastrar</h2>
+      <p>Verifique se todos os campos estão preenchidos corretamente.</p>
+    </div>
+    <!-- endif-->
+
     <form class="form" id="form" method="POST" action="{{ url_for('try_register_cab') }}">
       <div class="credencial">
         <p>Id da locomotiva</p>
