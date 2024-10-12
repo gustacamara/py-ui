@@ -31,21 +31,74 @@ main{
 }
 header{
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
 
+  & i {
+    font-size: 32px;
+  }
   & img{
     height: 32px;
   }
 }
-.header-tools{
+
+.dropdown-container{
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  align-items: center;
+}
+
+.navbar-items{
   display: flex;
   flex-direction: row;
-  gap: 24px;
-
-  & i{
+  justify-content: space-between;
+  width: fit-content;
+  & a{
     font-size: 32px;
   }
+}
+
+.navbar-items:has(a:hover) {
+  background: var(--offwhite-10);
+  border-radius: 4px;
+}
+
+ul{
+  width: 100%;
+  padding: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+ul li {
+  display: inline-block;
+  position: relative;
+  & a {
+    display: block;
+    color: #FFF;
+    text-decoration: none;
+    text-align: center;
+    }
+}
+
+ul.dropdown {
+  width: 150px;
+  position: absolute;
+  display: none;
+
+  background: #22438C;
+
+  border-radius: 3px;
+  padding: 10px;
+  margin-top: 36px;
+  & li {
+    display: block;
+  }
+}
+
+ul li:hover ul.dropdown {
+  display: block;
 }
 
 .train-sidebar{
@@ -117,7 +170,7 @@ header{
 }
 
 
-.wagon, .locomotive{
+.wagon, .cab{
   display: flex;
   flex-direction: column;
   gap: 6px;
