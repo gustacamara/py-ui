@@ -1,97 +1,114 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/home_page_styles.css') }}">
   <script src="{{ url_for('static', filename='javascript/dcc.js') }}"></script>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <title>Home Page</title>
 </head>
+
 <body>
   <header>
-    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
-    <div class="headerTools">
-      <div class="dropdown">
-        <button class="iconButton">
-          <i class="ph-fill ph-user"></i>
-        </button>
-        <div name="headerDropdown" id="headerDropdown">
-          <a href="{{ url_for('register_user') }}">Adicionar usuário</a>
-          <a href="{{ url_for('remove_user') }}">Remover usuário</a>
-          <a href="{{ url_for('register_locomotive') }}">Adicionar locomotiva</a>
-          <a href="{{ url_for('remove_locomotive') }}">Remover locomotiva</a>
-          <a href="{{ url_for('register_sensor') }}">Adicionar sensores</a>
-          <a href="{{ url_for('remove_sensor') }}">Remover sensores</a>
-        </div>
+    <ul>
+      <div class="navbar-items">
+        <li>
+          <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
+        </li>
+        <li>Py - UI</li>
       </div>
-      <!-- <i class="ph-bold ph-list"></i> -->
+      <li>
+        <div class="navbar-items">
+        <i class="ph-fill ph-user">
+        </i>
+        <a href="#">Admin</a>
+        </div>
+        <ul class="dropdown">
+          <li><a href="{{ url_for('register_user') }}">Cadastrar usuário</a></li>
+          <li><a href="{{ url_for('remove_user') }}">Deletar usuário</a></li>
+          <li><a href="{{ url_for('remove_user') }}">Listar usuários</a></li>
+          <li><a href="{{ url_for('register_cab') }}">Cadastrar locomotiva</a></li>
+          <li><a href="{{ url_for('remove_cab') }}">Deletar locomotiva</a></li>
+          <li><a href="{{ url_for('remove_cab') }}">Listar locomotivas</a></li>
+          <li><a href="{{ url_for('register_sensor') }}">Cadastrar sensores</a></li>
+          <li><a href="{{ url_for('remove_sensor') }}">Deletar sensores</a></li>
+          <li><a href="{{ url_for('remove_sensor') }}">Listar sensores</a></li>
+          <li><a href="{{ url_for('remove_sensor') }}">Sair</a></li>
+        </ul>
+      </li>
+    </ul>
+
+    <!-- <i class="ph-bold ph-list"></i> -->
     </div>
   </header>
 
   <main>
-    <div class="trainSideBar">
+    <div class="train-sidebar">
       <div class="composition">
 
-        <div class="compositionTitle" id="0">
+        <div class="composition-title" id="0">
           <h1>Super Comp</h1>
-          <div class="trainFilter">
-            <button class="iconButton">
+          <div class="train-filter">
+            <button class="icon-button">
               <i class="ph ph-caret-up"></i>
             </button>
             <!-- <i class="ph ph-sliders-horizontal"></i> -->
           </div>
         </div>
 
-        <div class="compositionContainer">
+        <div class="composition-container">
           <div class="wagon">
-            <div class="compositionHeader">
-              <div class="titleId">
+            <div class="composition-header">
+              <div class="title-id">
                 <i class="ph-fill ph-train-regional"></i>
                 <h1>CSX</h1>
               </div>
-              <div class="showCompositionContent">
+              <div class="show-composition-content">
                 <!-- if content ! hidden "+" : "-"-->
-                 <button class="iconButton">
-                   <i class="ph ph-minus"></i>
-                 </button>
+                <button class="icon-button">
+                  <i class="ph ph-minus"></i>
+                </button>
                 <!-- <i class="ph ph-plus"></i> -->
               </div>
             </div>
 
-            <img src="{{ url_for('static', filename='img/csxWagon.jpg') }}" alt="wagon Image" >
+            <img src="{{ url_for('static', filename='img/csxWagon.jpg') }}" alt="wagon Image">
 
-            <div class="compositionContent" style="display: block;">
+            <div class="composition-content" style="display: block;">
               <div class="description">
-                <h3>Desciçao:</h3>                
-                <p>Vagão para o transporte de minerios</p>
+                <h3>Descrição:</h3>
+                <p>Transporte de minérios</p>
               </div>
             </div>
           </div>
 
-          <div class="locomotive">
-            <div class="compositionHeader">
-              <div class="titleId">
+          <div class="cab">
+            <div class="composition-header">
+              <div class="title-id">
                 <i class="ph-fill ph-train"></i>
                 <h1>333</h1>
               </div>
-              <div class="showCompositionContent">
+              <div class="show-composition-content">
                 <!-- if content ! hidden "+" : "-"-->
                 <!-- <i class="ph ph-plus"></i> -->
-                <button class="iconButton">
+                <button class="icon-button">
                   <i class="ph ph-minus"></i>
                 </button>
               </div>
             </div>
-            <img src="{{ url_for('static', filename='./img/rumoLocomotive333.png') }}" alt="locomotive Image">
-            <div class="compositionContent">
+            <img src="{{ url_for('static', filename='./img/rumoLocomotive333.png') }}" alt="cab picture">
+            <div class="composition-content">
               <div class="description">
-                <h3>Capacidade:</h3>                
+                <h3>Capacidade:</h3>
                 <p>Em descida: 35 vagões</p>
-                <p>Em nivel: 30 vagões</p>
+                <p>Em nível: 30 vagões</p>
                 <p>Em subida: 20 vagões</p>
+                <h3>Fabricante: Frateschi</h3>
+                <h3>Modelo: U20</h3>
               </div>
             </div>
           </div>
@@ -100,174 +117,149 @@
       </div>
     </div>
 
-    <div class="railRoadModel">
-      <div class="railModelContainer">
-        <h1>Nome da Maquete</h1>
+    <div class="rail-road-model">
+      <div class="rail-model-container">
+        <h1>Maquete do Roberto</h1>
         <img src="{{ url_for('static', filename='./img/Maquete do roberto.png') }}" alt="Maquete do Roberto">
       </div>
     </div>
 
-    <div class="toolsSidebar">
-      <div class="addLocomotiveManeger">
+    <div class="control-sidebar">
+      <div class="cab-id">
         <h1>ID</h1>
-        <input 
-          type="number" 
-          name="locomotiveId" 
-          id="locomotiveId" 
-          placeholder="Insira o id da locomotiva"
-        >
-        <button id="confirmLocomotiveId">
+        <input type="number" name="cab-id" id="cab-id" placeholder="Insira o id da locomotiva">
+        <button id="confirm-cab-id">
           Ok
         </button>
       </div>
 
-      <div class="locomotiveTools">
-        <div class="toolsHeader">
+      <div class="cab-control">
+        <div class="control-header">
           <h1>Locomotiva - "id"</h1>
-          <button class="iconButton">
+          <button class="icon-button">
             <i class="ph ph-minus"></i>
           </button>
         </div>
 
-        <div class="toolsListContent">
-          <div class="direction toolsOption">
-            <div class="toolsTitle">
-              <div class="toolName">
+        <div class="control-list-content">
+          <div class="direction control-option">
+            <div class="control-title">
+              <div class="control-name">
                 <i class="ph-fill ph-speedometer"></i>
                 <h3>Direção</h3>
               </div>
 
               <!-- switch -->
-              <label class="textSwitch">
+              <label class="text-switch">
                 <!-- <input type="checkbox" checked id="directionSwitch"> -->
-                 <select name="on-off" id="directionUsage">
+                <select name="on-off" id="direction-usage">
                   <option value="front">Frente</option>
                   <option value="back">Trás</option>
-                 </select>
+                </select>
                 <span class="slider"></span>
               </label>
             </div>
-            <div class="toolsContent">
-              <div class="sliderControl">
-                <div class="sliderHeader">
+            <div class="control-content">
+              <div class="slider-control">
+                <div class="slider-header">
                   <p>Velocidade:</p>
-                  <input 
-                    type="number" 
-                    name="velocity" 
-                    id="velocityNumberInput"
-                  >
+                  <input type="number" name="speed" id="speed-number-input">
                 </div>
-                <input 
-                  type="range" 
-                  min="0" max="126"
-                  value="0" 
-                  class="slider" 
-                  id="velocitySliderInput"
-                >
+                <input type="range" min="0" max="126" value="0" class="slider" id="speed-slider-input">
               </div>
-              <div class="sliderControl" style="display: none;">
-                <div class="sliderHeader">
+              <div class="slider-control" style="display: none;">
+                <div class="slider-header">
                   <p>Aceleração:</p>
-                  <input 
-                    type="number" 
-                    name="acceleration" 
-                    id="accelerationInput"
-                  >
+                  <input type="number" name="acceleration" id="acceleration-input">
                 </div>
-                <input 
-                  type="range"
-                  min="0" max="9"
-                  value="0"
-                  class="slider"
-                  id="accelerationSliderInput"
-                >
+                <input type="range" min="0" max="9" value="0" class="slider" id="acceleration-slider-input">
               </div>
             </div>
           </div>
 
-          <div class="hooter toolsOption" style="display: none;">
-            <div class="toolsTitle">
-              <div class="toolName">
+          <div class="hooter control-option" style="display: none;">
+            <div class="control-title">
+              <div class="control-name">
                 <i class="ph-fill ph-speaker-high"></i>
                 <h3>Buzinas</h3>
               </div>
 
               <!-- switch -->
-              <label class="textSwitch">
+              <label class="text-switch">
                 <!-- <input type="checkbox" id="hooterMainSwitch"> -->
-                <select name="on-off" id="hooterUsage">
-                  <option value="on">Ligado</option>
-                  <option value="off">Desligado</option>
-                 </select>
-                <span class="slider"></span>
-              </label>
-            </div>
-            <div class="hooterContent">
-              <div class="handleSwitch">
-                <p>Buzina</p>
-                <label class="noTextSwitch">
-                  <input type="checkbox" id="buzzerHooter">
-                  <span class="slider"></span>
-                </label>
-              </div>
-
-              <div class="handleSwitch">
-                <p>Sino</p>
-                <label class="noTextSwitch">
-                  <input type="checkbox" id="bellHooter">
-                  <span class="slider"></span>
-                </label>
-              </div>
-
-              <div class="handleSwitch">
-                <p>Locomotiva</p>
-                <label class="noTextSwitch">
-                  <input type="checkbox" id="locomotiveHooter">
-                  <span class="slider"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
-          <div class="light toolsOption">
-            <div class="toolsTitle">
-              <div class="toolName">
-                <i class="ph-fill ph-lightbulb"></i>
-                <h3>Luzes</h3>
-              </div>
-
-              <!-- switch -->
-              <label class="textSwitch">
-                <!-- <input type="checkbox" id="lightMainSwitch"> -->
-                <select name="on-off" id="lightUsage" style="display: none;">
+                <select name="on-off" id="hooter-usage">
                   <option value="on">Ligado</option>
                   <option value="off">Desligado</option>
                 </select>
                 <span class="slider"></span>
               </label>
             </div>
-            
-            <div class="lightContent">
-              <div class="handleSwitch">
-                <p>Farol Principal</p>
-                <label class="noTextSwitch">
-                  <input type="checkbox" id="frontLight">
+            <div class="hooter-content">
+              <div class="handle-switch">
+                <p>Buzina</p>
+                <label class="no-text-switch">
+                  <input type="checkbox" id="buzzer-hooter">
                   <span class="slider"></span>
                 </label>
               </div>
 
-              <div class="handleSwitch">
-                <p>Farol baixo</p>
-                <label class="noTextSwitch">
-                  <input type="checkbox" id="lowLight">
+              <div class="handle-switch">
+                <p>Sino</p>
+                <label class="no-text-switch">
+                  <input type="checkbox" id="bell-Hooter">
                   <span class="slider"></span>
                 </label>
               </div>
 
-              <div class="handleSwitch" style="display: none;">
+              <div class="handle-switch">
+                <p>Locomotiva</p>
+                <label class="no-text-switch">
+                  <input type="checkbox" id="cab-hooter">
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="light control-option">
+            <div class="control-title">
+              <div class="control-name">
+                <i class="ph-fill ph-lightbulb"></i>
+                <h3>Luzes</h3>
+              </div>
+
+              <!-- switch -->
+              <label class="text-switch">
+                <!-- <input type="checkbox" id="lightMainSwitch"> -->
+                <select name="on-off" id="light-usage" style="display: none;">
+                  <option value="on">Ligado</option>
+                  <option value="off">Desligado</option>
+                </select>
+                <span class="slider"></span>
+              </label>
+            </div>
+
+            <div class="light-content">
+              <div class="handle-switch">
+                <p>Farol principal</p>
+                <label class="no-text-switch">
+                  <input type="checkbox" id="front-light">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="handle-switch">
+                <p>Farol secundário</p>
+                <label class="no-text-switch">
+                  <input type="checkbox" id="low-light">
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="handle-switch" style="display: none;">
                 <p>Cabine</p>
-                <label class="noTextSwitch">
-                  <input type="checkbox" id="cabinLight">
+                <label class="no-text-switch">
+                  <input type="checkbox" id="cabin-light">
                   <span class="slider"></span>
                 </label>
               </div>
@@ -282,4 +274,5 @@
     </div>
   </main>
 </body>
+
 </html>

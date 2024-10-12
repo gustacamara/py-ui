@@ -31,11 +31,8 @@ body{
 
 header{
   display: flex;
-  align-items: center;
-  width: auto;
-  padding-inline: 16px;
-  padding-block: 8px;
-
+  padding-left:20px;
+  padding-right: 100px;
   background-color: var(--slate-800);
   border-bottom: 1px solid var(--offwhite-10);
 
@@ -44,6 +41,7 @@ header{
     width: 163px;
   }
 }
+
 input{
   cursor: pointer;
 }
@@ -56,3 +54,52 @@ input[type=number] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
+
+ul {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+}
+
+ul li {
+  display: inline-block;
+  position: relative;
+}
+
+ul li a {
+  display: block;
+  color: #FFF;
+  text-decoration: none;
+  text-align: center;
+}
+
+ul li ul.dropdown li {
+  display: block;
+}
+
+ul li ul.dropdown {
+  width: 150px;
+  background: #22438C;
+  position: absolute;
+  z-index: 999;
+  display: none;
+  padding: 10px;  
+}
+
+ul li a:hover {
+  background: #112C66;
+}
+
+ul li:hover ul.dropdown {
+  display: block;
+}
+
+.navbar-items {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+

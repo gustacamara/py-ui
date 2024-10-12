@@ -13,7 +13,7 @@ header{
     height: 32px;
   }
 }
-.headerTools{
+.header-tools{
   display: flex;
   flex-direction: row;
   gap: 24px;
@@ -23,7 +23,7 @@ header{
   }
 }
 
-.trainSideBar{
+.train-sidebar{
   display: flex;
   flex-direction: column;
   justify-content: stretch;
@@ -46,13 +46,13 @@ header{
   padding-block: 16px;
 }
 
-.compositionTitle{
+.composition-title{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.compositionContainer{
+.composition-container{
   background-color: var(--slate-600);
   border-radius: 4px;
   gap: 6px;
@@ -63,7 +63,7 @@ header{
 }
 
 
-.trainFilter{
+.train-filter{
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
@@ -71,19 +71,19 @@ header{
 
 }
 
-.compositionHeader{
+.composition-header{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 
 }
 
-.showCompositionContent{
+.show-composition-content{
   display: flex;
   align-items: center;
 }
 
-.titleId{
+.title-id{
   display: flex;
   flex-direction: row;
   gap: 8px;
@@ -137,7 +137,7 @@ i{
 
 /* Railmodel content */
 
-.railRoadModel{
+.rail-road-model{
   display: flex;
   width: 100%;
   align-items: center;
@@ -149,7 +149,7 @@ i{
   }
 }
 
-.railModelContainer{
+.rail-model-container{
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -161,12 +161,11 @@ i{
 
 }
 
-/* tools side bar */
+/* control sidebar */
 
-.toolsSidebar{
+.control-sidebar{
   display: flex;
   flex-direction: column;
-
   background-color: var(--slate-800);
   border:1px solid var(--offwhite-10);
   border-right: 0px;
@@ -176,7 +175,7 @@ i{
 
 /* arrows none */
 
-.addLocomotiveManeger{
+.cab-id {
   display: flex;
   flex-direction: row;
   padding-inline: 8px;
@@ -213,22 +212,21 @@ i{
 
 }
 
-.locomotiveTools{
+.cab-control{
   display: flex;
   flex-direction: column;
-
   gap: 12px;
   padding-inline: 8px;
   padding-block: 16px;
 }
 
-.toolsHeader{
+.control-header{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.toolsListContent{
+.control-list-content{
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -238,13 +236,13 @@ i{
   border-radius: 4px;
 }
 
-.toolsContent{
+.tools-content{
   display: flex;
   flex-direction: column;
   gap: 8px;
 }
 
-.sliderControl{ 
+.slider-control{ 
 
   & input[type=number]{
     width: 42px;
@@ -258,14 +256,14 @@ i{
     width: 100%;
   }
 
-  & .sliderHeader{
+  & .slider-header{
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
 }
 
-.toolsOption{
+.control-option{
   display: flex;
   flex-direction: column;
   padding-inline: 8px;
@@ -281,7 +279,7 @@ input[type=range]:focus{
 
 }
 
-.toolsTitle{
+.control-title{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -290,14 +288,14 @@ input[type=range]:focus{
     font-size: 16px;
   }
 }
-.toolName{
+.control-name{
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 8px;
 }
 
-.handleSwitch{
+.handle-switch{
   display: flex;
   justify-content: space-between;
 }
@@ -319,15 +317,15 @@ input[type=range]:focus{
   outline: 1px solid var(--red-500);
 }
 
-.iconButton{
+.icon-button{
   background-color: transparent;
   border: 0px;
   color: var(--offwhite);
 }
-.iconButton:focus{
+.icon-button:focus{
   outline: 0px;
 }
-.iconButton:hover{
+.icon-button:hover{
   background-color: var(--offwhite-10);
   border-radius: 4px;
 }
