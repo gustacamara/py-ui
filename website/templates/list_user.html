@@ -5,45 +5,30 @@
 {% endblock %}
 
 {% block credential %}
-
   <div class="container">
     <div class="title">
       <i class="ph-fill ph-user"></i>
       <h1>Lista de usuários</h1>
     </div>
-      <div class="credencial">
-        <div class="list-itens">
+    <div class="credencial">
+      <div class="list-itens">
 
+      <!-- for i in users  -->
+        <article>
+          <p>Gustavo super user</p>
+          <button class="trash-icon" id=""><!--  colocar id-->
+            <i class="ph ph-trash"></i>
+          </button>
+        </article>
+        <!--  fim do bloco-->
 
-          <article>
-            <p>Gustavo super user</p>
-            <button class="trash-icon">
-              <i class="ph ph-trash"></i>
-            </button>
-          </article>
-
-          <article>
-            <p>Gustavo super user</p>
-            <button class="trash-icon">
-              <i class="ph ph-trash"></i>
-            </button>
-          </article>
-          
-          <article>
-            <p>Gustavo super user</p>
-            <button class="trash-icon">
-              <i class="ph ph-trash"></i>
-            </button>
-          </article>
-
-
-        </div>
       </div>
-      <div class="credencial">
-        <button type="submit" id="sendNewUser" name="sendNewUser">
-          Cadastrar usuários
-        </button>
-      </div>
+    </div>
+    <div class="credencial">
+      <button type="submit" id=""> <!--  colocar id-->
+        Cadastrar usuários
+      </button>
+    </div>
   </div>
   <a href="{{ url_for('home_page') }}">Voltar a página inicial</a>
 {% endblock %}
