@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/credential_form.css') }}">
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
-  <title>Add. Locomotiva</title>
+  <title>Cadastrar locomotiva</title>
 </head>
 
 <body>
@@ -22,24 +22,24 @@
 
         <div class="title">
           <i class="ph-fill ph-train"></i>
-          <h1>Registrar Locomotiva</h1>
+          <h1>Cadastrar locomotiva</h1>
         </div>
-        <form class="form" id="form" method="POST" action="{{ url_for('try_register_locomotive') }}">
+        <form class="form" id="form" method="POST" action="{{ url_for('try_register_cab') }}">
           <div class="credencial">
             <p>Id da locomotiva</p>
             <div class="inputContent">
               <i class="ph ph-fingerprint-simple"></i>
               <input 
                 type="number" 
-                name="locomotive_id" 
-                id="locomotive_id" 
+                name="cab_id" 
+                id="cab_id" 
                 placeholder="Id"
               >
             </div>
           </div>  
 
           <div class="credencial">
-            <p>Nome do fabricante</p>
+            <p>Fabricante</p>
             <div class="inputContent">
               <i class="ph ph-hammer"></i>
               <input 
@@ -52,7 +52,7 @@
           </div>
 
           <div class="credencial">
-            <p>Modelo da locomotiva</p>
+            <p>Modelo</p>
             <div class="inputContent">
               <i class="ph ph-identification-badge"></i>
               <input 

@@ -76,35 +76,35 @@ def remove_user():
 
 # Handle Crud for locomotives
 
-@app.route('/try-register-locomotive', methods=['POST', 'GET'])
-def try_register_locomotive():
+@app.route('/try-register-cab', methods=['POST', 'GET'])
+def try_register_cab():
     if request.method == 'POST':
         #print(">>>>>>>>>>>>>>>form: ", request.form)
-        locomotive_id = int(request.form['locomotive_id'])
+        cab_id = int(request.form['cab_id'])
         manufacturer = request.form['manufacturer']
         model = request.form['model']
 
         data = jsonutil.import_json(app.root_path + '/database/cabs.json')
 
         for cab in data['cabs']:
-            if int(cab['id']) == locomotive_id:
+            if int(cab['id']) == cab_id:
                 print("Locomotiva já cadastrada!") # Change to a popup later!
-                return redirect(app.url_for('register_locomotive'))
+                return redirect(app.url_for('register_cab'))
             
-        data['cabs'].append({'id': locomotive_id, 'manufacturer': manufacturer, 'model': model})
+        data['cabs'].append({'id': cab_id, 'manufacturer': manufacturer, 'model': model})
         jsonutil.export_json(app.root_path + '/database/cabs.json', data)
         return redirect(app.url_for('home_page')) # Redirect to list of locomotives later
     else:
         print("Método inválido:", request.method)
-        return redirect(app.url_for('register_locomotive')) # ERRO!
+        return redirect(app.url_for('register_cab')) # ERRO!
 
-@app.route('/register-locomotive')
-def register_locomotive():
-    return render_template("register_locomotive.html")
+@app.route('/register-cab')
+def register_cab():
+    return render_template("register_cab.html")
 
-@app.route('/remove-locomotive')
-def remove_locomotive():
-    return render_template("remove_locomotive.html")
+@app.route('/remove-cab')
+def remove_cab():
+    return render_template("remove_cab.html")
 
 # Handle Crud for sensors
 
