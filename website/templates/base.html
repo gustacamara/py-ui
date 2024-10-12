@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/credential_form.css') }}">
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  {% block title %}
+  {% endblock %}
+</head>
+
+<body>
+  <header>
+    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
+  </header>
+  <main>
+    <div class="backgroundRadius">
+      {% block credential %}
+      {% endblock %}
+    </div>
+  </main>
+</body>
+
+</html>

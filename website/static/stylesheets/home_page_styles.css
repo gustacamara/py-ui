@@ -4,8 +4,7 @@ a {
 
 h1 {
   font-size: 18px;
-  font: bold;
-  margin: 0px;
+  padding: 0px;
 }
 
 h3 {
@@ -35,6 +34,7 @@ header{
 
   & i {
     font-size: 32px;
+    margin: 0px;
   }
   & img{
     height: 32px;
@@ -69,6 +69,7 @@ ul{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0px;
 }
 
 ul li {
