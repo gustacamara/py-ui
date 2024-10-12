@@ -180,4 +180,8 @@ def remove_sensor():
         return login_check
     return render_template("remove_sensor.html")
 
+@app.route('/list-user')
+def list_user():
+  return render_template("list_user.html")
+
 app.run(debug=True)
