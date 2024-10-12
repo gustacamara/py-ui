@@ -32,7 +32,7 @@ body{
 header{
   display: flex;
   padding-left:20px;
-  padding-right: 100px;
+  padding-right: 90px;
   background-color: var(--slate-800);
   border-bottom: 1px solid var(--offwhite-10);
 
@@ -55,51 +55,13 @@ input[type=number] {
   appearance: textfield;
 }
 
-ul {
-  width: 100%;
-  list-style: none;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-}
-
-ul li {
-  display: inline-block;
-  position: relative;
-}
-
-ul li a {
-  display: block;
-  color: #FFF;
-  text-decoration: none;
-  text-align: center;
-}
-
-ul li ul.dropdown li {
-  display: block;
-}
-
-ul li ul.dropdown {
-  width: 150px;
-  background: #22438C;
-  position: absolute;
-  z-index: 999;
-  display: none;
-  padding: 10px;  
-}
-
-ul li a:hover {
-  background: #112C66;
-}
-
-ul li:hover ul.dropdown {
-  display: block;
-}
-
 .navbar-items {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
+a:hover {
+  opacity: 0.85;
+  text-decoration: none;
+}
