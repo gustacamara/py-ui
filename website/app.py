@@ -184,4 +184,12 @@ def remove_sensor():
 def list_user():
   return render_template("list_user.html")
 
+@app.route('/list-cab')
+def list_cab():
+  return render_template("list_cab.html")
+
+@app.route('/list-sensor')
+def list_sensor():
+  return render_template("list_sensor.html")
+
 app.run(debug=True)
