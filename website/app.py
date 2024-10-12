@@ -6,12 +6,15 @@ import jsonutil
 app = Flask(__name__)
 app.static_folder = 'static'
 
+# Settings
+debug_mode = False # Enable this to be able to view pages all pages without logging in
+
 # Data
 current_user = ""
 admin_mode = False
 
 def check_for_login():
-    if current_user == "":
+    if not debug_mode and current_user == "":
         print("You must be logged!")
         return redirect(app.url_for('login_page', error=True))
     else:
