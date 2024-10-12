@@ -1,3 +1,28 @@
+a {
+  color: var(--blue-600);
+}
+
+h1 {
+  font-size: 18px;
+  font: bold;
+  margin: 0px;
+}
+
+h3 {
+  font-size: 16px;
+  font: bold;
+  margin: 0px;
+}
+
+p {
+  font-size: 14px;
+  margin: 0px;
+}
+
+i {
+  font-size: 16px;
+}
+
 main{
   display: flex;
   flex-direction: row;
@@ -91,31 +116,6 @@ header{
   padding-block: 6px;
 }
 
-a{
-  color: var(--blue-600);
-  /* text-decoration: none; */
-}
-
-h1{
-  font-size: 18px;
-  font: bold;        
-  margin: 0px;
-}
-
-h3{
-  font-size: 16px;
-  font:bold;
-  margin: 0px;
-}
-
-p{
-  font-size: 14px;
-  margin: 0px;
-}
-
-i{
-  font-size: 16px;
-}
 
 .wagon, .locomotive{
   display: flex;

@@ -103,3 +103,7 @@ ul li:hover ul.dropdown {
   gap: 10px;
 }
 
+a:hover {
+  opacity: 0.85;
+  text-decoration: none;
+}
