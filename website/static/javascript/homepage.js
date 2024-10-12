@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-
     const cab = document.getElementById("cab-id")
-    const speed = document.getElementById("speed-slider-input")
+    const speedScrollbar = document.getElementById("speed-slider-input")
     const direction = document.getElementById("direction-usage")
     const lights = document.getElementById("front-light")
     const cabButton = document.getElementById("confirm-cab-id") 
@@ -10,7 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function sendData() {
       const data = {
         'cab': parseInt(cab.value),
-        'speed': parseInt(speed.value),
+        'speedScrollbar': parseInt(speedScrollbar.value),
         'direction': direction.value,
         'lights': lights.checked
       }
@@ -26,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     }
   
-    speed.addEventListener("input", (event) => {
+    speedScrollbar.addEventListener("input", (event) => {
       sendData()
     })
   

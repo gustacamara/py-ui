@@ -6,9 +6,19 @@ import jsonutil
 app = Flask(__name__)
 app.static_folder = 'static'
 
+# Settings
+debug_mode = False # Enable this to be able to view pages all pages without logging in
+
 # Data
 current_user = ""
 admin_mode = False
+
+def check_for_login():
+    if not debug_mode and current_user == "":
+        print("You must be logged!")
+        return redirect(app.url_for('login_page', error=True))
+    else:
+        return None
 
 # Handle login
 @app.route('/', methods=['POST', 'GET'])
@@ -24,12 +34,10 @@ def try_authenticate():
     index = 0
     for user in data['users']:
         if user['username'] == username and user['password'] == password:
-            if index == 0:
-                global admin_mode
-                admin_mode = True
-
             global current_user
-            current_user = user
+            global admin_mode
+            current_user = user['username']
+            admin_mode = current_user == data['users'][0]['username']
             return redirect(app.url_for('home_page'))
         index += 1
     print("Login inválido! tente novamente.")
@@ -39,12 +47,18 @@ def try_authenticate():
 
 @app.route('/homepage')
 def home_page():
-    return render_template("home_page.html")
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    return render_template("home_page.html", current_user = current_user,admin_mode=admin_mode)
 
 # Handle Crud for users
 
 @app.route('/try-register-user', methods=['POST', 'GET'])
 def try_register_user():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -68,16 +82,25 @@ def try_register_user():
 
 @app.route('/register-user')
 def register_user():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
     return render_template("register_user.html")
 
 @app.route('/remove-user')
 def remove_user():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
     return render_template("remove_user.html")
 
 # Handle Crud for locomotives
 
 @app.route('/try-register-cab', methods=['POST', 'GET'])
 def try_register_cab():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
     if request.method == 'POST':
         #print(">>>>>>>>>>>>>>>form: ", request.form)
         cab_id = int(request.form['cab_id'])
@@ -100,16 +123,25 @@ def try_register_cab():
 
 @app.route('/register-cab')
 def register_cab():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
     return render_template("register_cab.html")
 
 @app.route('/remove-cab')
 def remove_cab():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
     return render_template("remove_cab.html")
 
 # Handle Crud for sensors
 
 @app.route('/try-register-sensor', methods=['POST', 'GET'])
 def try_register_sensor():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
     if request.method == 'POST':
         name = request.form['name']
         value = request.form['value']
@@ -126,10 +158,16 @@ def try_register_sensor():
 
 @app.route('/register-sensor')
 def register_sensor():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
     return render_template("register_sensor.html")
 
 @app.route('/remove-sensor')
 def remove_sensor():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
     return render_template("remove_sensor.html")
 
 app.run(debug=True)

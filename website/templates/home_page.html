@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/home_page_styles.css') }}">
-  <script src="{{ url_for('static', filename='javascript/dcc.js') }}"></script>
+  <script src="{{ url_for('static', filename='javascript/homepage.js') }}"></script>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <title>Home Page</title>
@@ -23,19 +23,25 @@
         <div class="dropdown-container">
           <div class="navbar-items">
             <i class="ph-fill ph-user"></i>
-            <a href="#">Admin</a>
+            <a href="#">{{current_user}}</a>
           </div>
           <ul class="dropdown">
-            <li><a href="{{ url_for('register_user') }}">Cadastrar usuário</a></li>
-            <li><a href="{{ url_for('remove_user') }}">Deletar usuário</a></li>
-            <li><a href="{{ url_for('remove_user') }}">Listar usuários</a></li>
-            <li><a href="{{ url_for('register_cab') }}">Cadastrar locomotiva</a></li>
-            <li><a href="{{ url_for('remove_cab') }}">Deletar locomotiva</a></li>
-            <li><a href="{{ url_for('remove_cab') }}">Listar locomotivas</a></li>
+            {% if admin_mode %}
+              <li><a href="{{ url_for('register_user') }}">Cadastrar usuário</a></li>
+              <li><a href="{{ url_for('remove_user') }}">Deletar usuário</a></li>
+            <!--<li><a href="{{ url_for('remove_user') }}">Listar usuários</a></li>-->
+            {% endif %}
+            {% if admin_mode %}
+              <li><a href="{{ url_for('register_cab') }}">Cadastrar locomotiva</a></li>
+              <li><a href="{{ url_for('remove_cab') }}">Deletar locomotiva</a></li>
+            {% endif %}
+            <!--<li><li><a href="{{ url_for('remove_cab') }}">Listar locomotivas</a></li>-->
+            {% if admin_mode %}
             <li><a href="{{ url_for('register_sensor') }}">Cadastrar sensores</a></li>
             <li><a href="{{ url_for('remove_sensor') }}">Deletar sensores</a></li>
-            <li><a href="{{ url_for('remove_sensor') }}">Listar sensores</a></li>
-            <li><a href="{{ url_for('remove_sensor') }}">Sair</a></li>
+            {% endif %}
+            <!--<li><a href="{{ url_for('remove_sensor') }}">Listar sensores</a></li>-->
+            <li><a href="{{ url_for('login_page') }}">Sair</a></li>
           </ul>
         </div>
       </li>
@@ -272,6 +278,27 @@
       </div>
     </div>
   </main>
+  <script> 
+    //Won't work if it's not coded directly into the html file :/
+    document.addEventListener('DOMContentLoaded', function () {
+      const speedSlider = document.getElementById('speed-slider-input');
+      const speedInputField = document.getElementById('speed-number-input');
+
+      speedSlider.addEventListener('input', function () {
+        speedInputField.value = speedSlider.value;
+      });
+
+      speedInputField.addEventListener('input', function () {
+        let value = parseInt(speedInputField.value);
+        if (isNaN(value) || value < 0) {
+          value = 0;
+        } else if (value > 126) {
+          value = 126;
+        }
+        speedSlider.value = value;
+      });
+    });
+  </script>
 </body>
 
 </html>
