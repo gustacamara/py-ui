@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+  <title>Lista de locomotivas</title>
+{% endblock %}
+
+{% block credential %}
+  <div class="container">
+    <div class="title">
+      <i class="ph-fill ph-train"></i>
+      <h1>Lista de locomotivas</h1>
+    </div>
+    <div class="credencial">
+      <div class="list-itens">
+
+        <!-- for i in cabs  -->
+        <article>
+          <p>"id"</p>
+          <button class="trash-icon" id=""><!--  colocar id-->
+            <i class="ph ph-trash"></i>
+          </button>
+        </article>
+        <!--  fim do bloco-->
+
+      </div>
+    </div>
+    <div class="credencial">
+      <button type="submit" id=""><!--  colocar id-->
+        Cadastrar locomotivas
+      </button>
+    </div>
+  </div>
+  <a href="{{ url_for('home_page') }}">Voltar a página inicial</a>
+{% endblock %}
