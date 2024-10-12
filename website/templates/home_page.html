@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/home_page_styles.css') }}">
-  <script src="{{ url_for('static', filename='javascript/dcc.js') }}"></script>
+  <script src="{{ url_for('static', filename='javascript/homepage.js') }}"></script>
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 
   <title>Home Page</title>
@@ -272,6 +272,27 @@
       </div>
     </div>
   </main>
+  <script> 
+    //Won't work if it's not coded directly into the html file :/
+    document.addEventListener('DOMContentLoaded', function () {
+      const speedSlider = document.getElementById('speed-slider-input');
+      const speedInputField = document.getElementById('speed-number-input');
+
+      speedSlider.addEventListener('input', function () {
+        speedInputField.value = speedSlider.value;
+      });
+
+      speedInputField.addEventListener('input', function () {
+        let value = parseInt(speedInputField.value);
+        if (isNaN(value) || value < 0) {
+          value = 0;
+        } else if (value > 126) {
+          value = 126;
+        }
+        speedSlider.value = value;
+      });
+    });
+  </script>
 </body>
 
 </html>
