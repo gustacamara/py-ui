@@ -64,7 +64,7 @@ def try_register_user():
         password = request.form['password']
         data = jsonutil.import_json(app.root_path + '/database/credentials.json')
 
-        if username.strip(' ') == "":
+        if username.strip(' ') == "" and password.strip(' ') == "":
             print("Usuário inválido!") # Change to a popup later!
             return redirect(app.url_for('register_user'))
 
@@ -103,11 +103,17 @@ def try_register_cab():
         return login_check
     if request.method == 'POST':
         #print(">>>>>>>>>>>>>>>form: ", request.form)
-        cab_id = int(request.form['cab_id'])
+        cab_id = request.form['cab_id']
         manufacturer = request.form['manufacturer']
         model = request.form['model']
 
         data = jsonutil.import_json(app.root_path + '/database/cabs.json')
+
+        if cab_id.strip('') == "" or manufacturer.strip('') == "" or model.strip('') == "":
+            print("Locomotiva inválida!")
+            return redirect(app.url_for('register_cab')) # Change to a popup later!
+
+        cab_id = int(cab_id)
 
         for cab in data['cabs']:
             if int(cab['id']) == cab_id:
@@ -146,6 +152,10 @@ def try_register_sensor():
         name = request.form['name']
         value = request.form['value']
         data = jsonutil.import_json(app.root_path + '/database/sensors.json')
+
+        if name.strip('') == "" or value.strip('') == "":
+            print("Sensor inválido!")
+            return redirect(app.url_for('register_sensor'))
 
         for sensor in data['sensors']:
             if sensor['name'] == name:
