@@ -13,19 +13,20 @@
   <div class="credencial">
     <div class="list-itens">
 
-      <!-- for i in users  -->
+      {% for id, sensor in sensors.items() %}
       <article>
-        <p>Sensor SOCOOORRO</p>
-        <div class="tools">
+        <p>{{sensor}}</p>
+        <form class="tools" id="form" method="POST" action="{{ url_for('try_remove_sensor') }}">
           <button class="edit-icon" id=""><!--  colocar id-->
             <i class="ph ph-pencil-line"></i>
           </button>
           <button class="trash-icon" id=""><!--  colocar id-->
             <i class="ph ph-trash"></i>
           </button>
-        </div>
+          <input type="hidden" name="sensor_id" id="sensor_id" value="{{id}}">
+        </form>
       </article>
-      <!--  fim do bloco-->
+      {% endfor %}
 
     </div>
   </div>

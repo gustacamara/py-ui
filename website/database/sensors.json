@@ -1,12 +1,17 @@
-[{
-    "id": 1,
-    "sensor": "RFID",
-    "value": "3560"
-  },
-
-  {
-    "id": 2,
-    "sensor": "IR",
-    "value": true
-  }
+[
+    {
+        "id": 1,
+        "sensor": "RFID",
+        "value": "3560"
+    },
+    {
+        "id": 2,
+        "sensor": "IR",
+        "value": true
+    },
+    {
+        "id": "3",
+        "name": "ERRADO",
+        "value": "13"
+    }
 ]

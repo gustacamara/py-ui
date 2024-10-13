@@ -17,15 +17,15 @@
     </div>
     <!-- endif -->
 
-    <div class="credencial">
-      <p>Id</p>
-      <div class="inputContent">
-        <i class="ph ph-fingerprint-simple"></i>
-        <input type="text" name="sensor" id="id" placeholder="Id">
-      </div>
-    </div>
-
     <form class="form" id="form" method="POST" action="{{ url_for('try_register_sensor') }}">
+      <div class="credencial">
+        <p>Id</p>
+        <div class="inputContent">
+          <i class="ph ph-fingerprint-simple"></i>
+          <input type="text" name="id" id="id" placeholder="Id">
+        </div>
+      </div>
+
       <div class="credencial">
         <p>Nome</p>
         <div class="inputContent">

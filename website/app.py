@@ -216,6 +216,7 @@ def try_register_sensor():
     if login_check != None:
         return login_check
     if request.method == 'POST':
+        sensor_id = request.form['id']
         name = request.form['name']
         value = request.form['value']
         data = jsonutil.import_json(app.root_path + '/database/sensors.json')
@@ -224,12 +225,12 @@ def try_register_sensor():
             print("Sensor inválido!")
             return redirect(app.url_for('register_sensor'))
 
-        for sensor in data['sensors']:
-            if sensor['name'] == name:
+        for sensor in data:
+            if sensor['id'] == sensor_id:
                 print("Sensor já cadastrado!")
                 return redirect(app.url_for('register_sensor')) # Change to a popup later!
         
-        data['sensors'].append({'name': name, 'value': value})
+        data.append({'id': sensor_id, 'name': name, 'value': value})
         jsonutil.export_json(app.root_path + '/database/sensors.json', data)
         return redirect(app.url_for('list_sensor')) # Redirect to list of sensors later
 
@@ -249,7 +250,31 @@ def remove_sensor():
 
 @app.route('/list-sensor')
 def list_sensor():
-    return render_template("list_sensor.html")
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    data = jsonutil.import_json(app.root_path + '/database/sensors.json')
+    sensors = {}
+    index = 0
+    for sensor in data:
+        print('\n\n\n\n\n\n\n\n\n\n\n\n\n', sensor)
+        sensors.update({index: sensor['sensor']})
+        index += 1
+    return render_template("list_sensor.html", sensors = sensors)
+
+@app.route('/try-remove-sensor', methods=['POST', 'GET'])
+def try_remove_sensor():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    if request.method == 'POST':
+        sensor_id = request.form['sensor_id']
+        data = jsonutil.import_json(app.root_path + '/database/sensors.json')
+        # print("\n\n\n\n\n\n\n\n\n\nSensor a ser removido:", sensor_id)
+        name = data.pop(int(sensor_id))
+        jsonutil.export_json(app.root_path + '/database/sensors.json', data)
+        print("O sensor", name, "foi removido com sucesso!")
+        return redirect(app.url_for('list_sensor'))
 
 app.run(debug = True)
 
