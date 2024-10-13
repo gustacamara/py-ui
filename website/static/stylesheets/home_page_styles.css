@@ -275,6 +275,10 @@ ul li:hover ul.dropdown {
     border: 0px;
   }
 
+  & button:hover {
+    background-color: var(--blue-700);
+  }
+
 }
 
 .cab-control{
