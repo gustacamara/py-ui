@@ -55,7 +55,7 @@ header{
   justify-content: space-between;
   width: fit-content;
   & a{
-    font-size: 32px;
+    font-size: 28px;
     color: var(--offwhite);
   }
   & a:hover {
@@ -106,7 +106,7 @@ ul.dropdown {
 
   border-radius: 3px;
   padding: 10px;
-  margin-top: 36px;
+  margin-top: 32px;
   & li {
     display: block;
   }

@@ -17,6 +17,14 @@
     </div>
     <!-- endif -->
 
+    <div class="credencial">
+      <p>Id</p>
+      <div class="inputContent">
+        <i class="ph ph-fingerprint-simple"></i>
+        <input type="text" name="sensor" id="id" placeholder="Id">
+      </div>
+    </div>
+
     <form class="form" id="form" method="POST" action="{{ url_for('try_register_sensor') }}">
       <div class="credencial">
         <p>Nome</p>
@@ -41,5 +49,5 @@
       </div>
     </form>
   </div>
-  <a href="{{ url_for('home_page') }}">Voltar a página inicial</a>
+  <a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
 {% endblock %}

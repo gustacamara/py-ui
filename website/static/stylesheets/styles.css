@@ -32,15 +32,14 @@ body{
 
 header{
   display: flex;
-  padding-left:20px;
-  padding-right: 90px;
+  padding-inline: 50px;
+
   background-color: var(--slate-800);
   border-bottom: 1px solid var(--offwhite-10);
   padding-block: 8px;
 
   & img {
-    min-height: 36.13px;
-    min-width: 163px;
+    height: 32px;
   }
 }
 
@@ -56,11 +55,32 @@ input[type=number] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
-
 .navbar-items {
   display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: fit-content;
   align-items: center;
   gap: 10px;
+
+  & a {
+    font-size: 32px;
+    color: var(--offwhite);
+  }
+
+  & a:hover {
+    opacity: 1;
+  }
+
+  & i:hover {
+    cursor: pointer;
+    
+  }
+  & p {
+    font-size: 28px;
+    padding: 0px;
+    margin: 0px;
+  }
 }
 
 a:hover {
