@@ -23,13 +23,13 @@
         <div class="dropdown-container">
           <div class="navbar-items">
             <i class="ph-fill ph-user"></i>
-            <a href="#">{{current_user}}</a>
+            <a href="#" class="navbar-items">{{current_user}}</a>
           </div>
           <ul class="dropdown">
             {% if admin_mode %}
               <li><a href="{{ url_for('register_user') }}">Cadastrar usuário</a></li>
               <li><a href="{{ url_for('remove_user') }}">Deletar usuário</a></li>
-            <li><a href="{{ url_for('list_user') }}">Listar usuários</a></li>
+              <li><a href="{{ url_for('list_user') }}">Listar usuários</a></li>
             {% endif %}
             {% if admin_mode %}
               <li><a href="{{ url_for('register_cab') }}">Cadastrar locomotiva</a></li>
@@ -37,11 +37,11 @@
               <li><a href="{{ url_for('list_cab') }}">Listar locomotivas</a></li>
             {% endif %}
             {% if admin_mode %}
-            <li><a href="{{ url_for('register_sensor') }}">Cadastrar sensores</a></li>
-            <li><a href="{{ url_for('remove_sensor') }}">Deletar sensores</a></li>
-            <li><a href="{{ url_for('list_sensor') }}">Listar sensores</a></li>
+              <li><a href="{{ url_for('register_sensor') }}">Cadastrar sensores</a></li>
+              <li><a href="{{ url_for('remove_sensor') }}">Deletar sensores</a></li>
+              <li><a href="{{ url_for('list_sensor') }}">Listar sensores</a></li>
             {% endif %}
-            <li><a href="{{ url_for('login_page') }}">Sair</a></li>
+            <li><a class="exit" href="{{ url_for('login_page') }}">Sair</a></li>
           </ul>
         </div>
       </li>
@@ -66,7 +66,7 @@
         </div>
 
         <div class="composition-container">
-          <div class="wagon">
+          <div class="wagon container-type">
             <div class="composition-header">
               <div class="title-id">
                 <i class="ph-fill ph-train-regional"></i>
@@ -91,7 +91,7 @@
             </div>
           </div>
 
-          <div class="cab">
+          <div class="cab container-type">
             <div class="composition-header">
               <div class="title-id">
                 <i class="ph-fill ph-train"></i>
@@ -112,8 +112,10 @@
                 <p>Em descida: 35 vagões</p>
                 <p>Em nível: 30 vagões</p>
                 <p>Em subida: 20 vagões</p>
-                <h3>Fabricante: Frateschi</h3>
-                <h3>Modelo: U20</h3>
+                <h3>Fabricante:</h3>
+                <p>Frateschi</p>
+                <h3>Modelo:</h3>
+                <p>U20</p>
               </div>
             </div>
           </div>
