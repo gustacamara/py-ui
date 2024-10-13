@@ -10,12 +10,12 @@
       <i class="ph ph-broadcast"></i>
       <h1>Cadastrar sensor</h1>
     </div>
-    <!-- if error  -->
+    {% if error %}
     <div class="invalid-credentials-error">
       <h2>Erro ao cadastrar</h2>
       <p>Verifique se todos os campos estão preenchidos corretamente.</p>
     </div>
-    <!-- endif -->
+    {% endif %}
 
     <form class="form" id="form" method="POST" action="{{ url_for('try_register_sensor') }}">
       <div class="credencial">

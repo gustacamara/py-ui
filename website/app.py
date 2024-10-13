@@ -69,13 +69,13 @@ def try_register_user():
         data = jsonutil.import_json(app.root_path + '/database/credentials.json')
 
         if username.strip(' ') == "" and password.strip(' ') == "":
-            print("Usuário inválido!") # Change to a popup later!
-            return redirect(app.url_for('register_user'))
+            print("Usuário inválido!")
+            return register_user(error=True)
 
         for user in data['users']:
             if user['username'] == username:
-                print("Usuário já cadastrado!") # Change to a popup later!
-                return redirect(app.url_for('register_user'))
+                print("Usuário já cadastrado!")
+                return register_user(error=True)
 
         data['users'].append({'username': username, 'password': password})
         jsonutil.export_json(app.root_path + '/database/credentials.json', data)
@@ -85,11 +85,11 @@ def try_register_user():
         return redirect(app.url_for('register_user')) # ERRO!
 
 @app.route('/register-user')
-def register_user():
+def register_user(error = False):
     login_check = check_for_login()
     if login_check != None:
         return login_check
-    return render_template("register_user.html")
+    return render_template("register_user.html", error = error)
 
 @app.route('/remove-user')
 def remove_user():
@@ -148,14 +148,14 @@ def try_register_cab():
 
         if cab_id.strip('') == "" or manufacturer.strip('') == "" or model.strip('') == "":
             print("Locomotiva inválida!")
-            return redirect(app.url_for('register_cab')) # Change to a popup later!
+            return register_cab(error=True) 
 
         cab_id = int(cab_id)
 
         for cab in data['cabs']:
             if int(cab['id']) == cab_id:
-                print("Locomotiva já cadastrada!") # Change to a popup later!
-                return redirect(app.url_for('register_cab'))
+                print("Locomotiva já cadastrada!") 
+                return register_cab(error=True)
             
         data['cabs'].append({'id': cab_id, 'manufacturer': manufacturer, 'model': model})
         jsonutil.export_json(app.root_path + '/database/cabs.json', data)
@@ -165,11 +165,11 @@ def try_register_cab():
         return redirect(app.url_for('register_cab')) # ERRO!
 
 @app.route('/register-cab')
-def register_cab():
+def register_cab(error = False):
     login_check = check_for_login()
     if login_check != None:
         return login_check
-    return render_template("register_cab.html")
+    return render_template("register_cab.html", error = error)
 
 @app.route('/remove-cab')
 def remove_cab():
@@ -228,14 +228,14 @@ def try_register_sensor():
         for sensor in data:
             if sensor['id'] == sensor_id:
                 print("Sensor já cadastrado!")
-                return redirect(app.url_for('register_sensor')) # Change to a popup later!
+                return register_sensor(error=True)
         
         data.append({'id': sensor_id, 'sensor': name, 'value': value})
         jsonutil.export_json(app.root_path + '/database/sensors.json', data)
         return redirect(app.url_for('list_sensor')) # Redirect to list of sensors later
 
 @app.route('/register-sensor')
-def register_sensor():
+def register_sensor(error = False):
     login_check = check_for_login()
     if login_check != None:
         return login_check
