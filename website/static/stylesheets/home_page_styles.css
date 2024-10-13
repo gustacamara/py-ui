@@ -189,15 +189,23 @@ ul li:hover ul.dropdown {
 
   padding-block: 6px;
   padding-inline: 8px;
-  border-bottom: 1px solid var(--offwhite-10);
 }
 
 .description{
   display: flex;
   flex-direction: column;
 
-  gap: 6px;
+  gap:3px;
   padding-block: 6px;
+  & p + h3{
+    border-top: 1px solid var(--offwhite-10);
+    padding-top: 6px;
+
+  }
+}
+
+.container-type + .container-type{
+  border-top: 1px solid var(--offwhite-15);
 }
 
 /* Railmodel content */
