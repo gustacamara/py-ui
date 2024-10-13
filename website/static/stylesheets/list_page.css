@@ -31,17 +31,32 @@ article + article{
 }
 
 /* button */
-.trash-icon {
-  display: flex;
-  background-color: var(--offwhite);
+.tools {
+  padding: 0px;
   align-items: center;
   justify-content: center;
-  color: var(--slate-600);
-  max-width: 32px ;
-  max-height: 32px;
-  padding: 0px;
+  display: flex;
+  gap: 5px;
+  & button{
+    max-width: 32px ;
+    max-height: 32px;
+    display: flex;
+    justify-content: center;
+    background-color: transparent;
+  }
 
+  & i{
+    color: var(--slate-600);
+  }
 }
+
+.edit-icon:hover{
+  background-color: var(--blue-600-20);
+  & i{
+    color: var(--blue-700);
+  }
+}
+
 .trash-icon:hover{
   background-color: var(--red-500-20);
   & i{
