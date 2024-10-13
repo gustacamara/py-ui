@@ -65,6 +65,26 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   setInterval(getSensorsValues, 1000)
+
+  function sendTurnoutCmd(event) {
+    const element = event.target
+
+    const cmd = { id: element.dataset.id, direction: element.value}
+    console.log(cmd)
+
+    fetch('/send_turnout_cmd', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(cmd)
+    })
+  }
+
+  document.querySelectorAll(".turnout-direction").forEach((select) => {
+    select.addEventListener("input",sendTurnoutCmd)
+  })
+  
 })
 
 

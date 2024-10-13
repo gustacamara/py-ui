@@ -22,6 +22,18 @@ sensors_values = {
     }
 }
 
+turnouts = [
+    {
+        "id": 1,
+        "actuator": "SERVO",
+        "value": 128
+    },
+    {
+        "id": 2,
+        "actuator": "SERVO",
+        "value": 128
+    }
+]
 
 app.config['MQTT_BROKER_URL'] = 'mqtt-dashboard.com'
 app.config['MQTT_BROKER_PORT'] = 1883
@@ -79,7 +91,7 @@ def home_page():
     login_check = check_for_login()
     if login_check != None:
         return login_check
-    return render_template("home_page.html", current_user = current_user,admin_mode=admin_mode)
+    return render_template("home_page.html", current_user = current_user,admin_mode=admin_mode, turnouts = turnouts)
 
 # Handle CRUD for users
 
@@ -243,6 +255,23 @@ def send_dcc_cmd():
     publish_to_mqtt(topic_dcc, cmds)
     return ""
 
+@app.route('/send_turnout_cmd', methods=['POST'])
+def send_turnout_cmd():
+    global topic_accessories 
+
+    data = request.get_json()
+
+    turnoutValue = 0 if data["direction"] == "left" else 128 # Ajust angles 
+
+    cmd = {
+        "id": data["id"],
+        "actuator": "SERVO",
+        "value": turnoutValue
+    }
+
+    publish_to_mqtt(topic_accessories , json.dumps(cmd))
+    return ""
+
 @app.route('/get_sensors_values', methods=['GET'])
 def get_sensors_values():
     global sensors_values
@@ -268,8 +297,9 @@ def handle_mqtt_message(client, userdata, message):
     data = json.loads(message.payload.decode())
     print(str(data))
     
-    sensors_values[data["id"]] = data
-    print(sensors_values)
+    if "sensor" in data:
+        sensors_values[data["id"]] = data
+        print(sensors_values)
 
 app.run(debug = True)
 
