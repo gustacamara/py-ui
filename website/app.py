@@ -9,6 +9,20 @@ from lib.dccpp import generateDccThrottleCmd, generateDccFunctionCmd
 app = Flask(__name__)
 app.static_folder = 'static'
 
+sensors_values = {
+    1: {
+        "id": 1,
+        "sensor": "RFID",
+        "value": "3560"
+    },
+    2: {
+        "id": 2,
+        "sensor": "IR",
+        "value": True
+    }
+}
+
+
 app.config['MQTT_BROKER_URL'] = 'mqtt-dashboard.com'
 app.config['MQTT_BROKER_PORT'] = 1883
 app.config['MQTT_USERNAME'] = '' #and password Set this item when you need to verify username a
@@ -18,9 +32,8 @@ app.config['MQTT_TLS_ENABLED'] = False # If your broker supports TLS, set it Tru
 
 mqtt_client = Mqtt()
 mqtt_client.init_app(app)
-topic_subscribe_dcc = "pyui/dcc-K3xWvP4p4D"
-
-# mqtt_client.publish(topic_subscribe_dcc, "yay")
+topic_dcc = "pyui/dcc-K3xWvP4p4D"
+topic_accessories = "pyui/accessories-9P5nN15kdp"
 
 # Settings
 debug_mode = False # Enable this to be able to view pages all pages without logging in
@@ -215,7 +228,7 @@ def publish_to_mqtt(topic, message):
 
 @app.route('/send_dcc_cmd', methods=['POST'])
 def send_dcc_cmd():
-    global topic_subscribe_dcc
+    global topic_dcc
 
     data = request.get_json()
 
@@ -227,16 +240,20 @@ def send_dcc_cmd():
     cmds = generateDccThrottleCmd(cabId, speed, direction) 
     cmds += generateDccFunctionCmd(cabId, frontLight, secondaryLights)
 
-    publish_to_mqtt(topic_subscribe_dcc, cmds)
+    publish_to_mqtt(topic_dcc, cmds)
     return ""
 
-app.run(debug=True)
+@app.route('/get_sensors_values', methods=['GET'])
+def get_sensors_values():
+    global sensors_values
+
+    return jsonify(sensors_values)
 
 @mqtt_client.on_connect()
 def handle_connect(client, userdata, flags, rc):
     if rc == 0:
         print('Broker Connected successfully')
-        mqtt_client.subscribe(topic_subscribe_dcc)
+        mqtt_client.subscribe(topic_accessories)
     else:
         print('Bad connection. Code:', rc)
 
@@ -246,11 +263,13 @@ def handle_disconnect(client, userdata, rc):
 
 @mqtt_client.on_message()
 def handle_mqtt_message(client, userdata, message):
-    global data
-    js = json.loads(message.payload.decode())
-    print(str(js) + "olá")
-    cab = js["cab"]
-    speed = js["speed"]
-    direction = js["direction"]
-    lights = js["lights"]
+    global sensors_values
+
+    data = json.loads(message.payload.decode())
+    print(str(data))
+    
+    sensors_values[data["id"]] = data
+    print(sensors_values)
+
+app.run(debug = True)
 
