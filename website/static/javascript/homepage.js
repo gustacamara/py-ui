@@ -55,4 +55,19 @@ document.addEventListener("DOMContentLoaded", () => {
     //   console.log("up")
     // })
   
-  });
+  function getSensorsValues() {
+    fetch('/get_sensors_values')
+      .then((response) => response.text())
+      .then((html) => {
+        const dom = new DOMParser().parseFromString(html, "text/xml")
+        document.getElementById("real-time").replaceChildren(dom.firstChild)
+      })
+  }
+
+  setInterval(getSensorsValues, 1000)
+})
+
+
+
+
+

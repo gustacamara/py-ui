@@ -36,7 +36,7 @@ topic_dcc = "pyui/dcc-K3xWvP4p4D"
 topic_accessories = "pyui/accessories-9P5nN15kdp"
 
 # Settings
-debug_mode = False # Enable this to be able to view pages all pages without logging in
+debug_mode = True # Enable this to be able to view pages all pages without logging in
 
 # Data
 current_user = ""
@@ -247,7 +247,7 @@ def send_dcc_cmd():
 def get_sensors_values():
     global sensors_values
 
-    return jsonify(sensors_values)
+    return render_template("real_time.html", sensors_values = sensors_values)
 
 @mqtt_client.on_connect()
 def handle_connect(client, userdata, flags, rc):
