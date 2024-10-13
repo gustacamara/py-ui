@@ -196,5 +196,9 @@ def list_cab():
 def list_sensor():
     return render_template("list_sensor.html")
 
+@app.route('/list-detour')
+def list_detour():
+  return render_template("list_detour.html")
+
 app.run(debug = True)
 
