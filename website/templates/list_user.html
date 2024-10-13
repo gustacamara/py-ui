@@ -23,14 +23,15 @@
       {% for id, user in users.items() %}
         <article>
           <p>{{user}}</p>
-          <div class="tools">
-            <button class="edit-icon" id=""><!--  colocar id-->
+          <form class="tools" id="form" method="POST" action="{{ url_for('try_remove_user') }}">
+            <button type="submit" class="edit-icon" id=""><!--  colocar id-->
               <i class="ph ph-pencil-line"></i>
             </button>
-              <button class="trash-icon" id=""><!--  colocar id-->
+              <button type="submit" class="trash-icon" id=""><!--  colocar id-->
                 <i class="ph ph-trash"></i>
               </button>
-          </div>
+          <input type="hidden" name="user_id" id="user_id" value="{{id}}">
+          </form>
         </article>
         {% endfor %}
 
