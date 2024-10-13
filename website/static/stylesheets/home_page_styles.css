@@ -67,11 +67,6 @@ header{
   }
 }
 
-.navbar-items:has(a:hover),  .navbar-items:has(a:hover, i:hober){
-  background: var(--offwhite-10);
-  border-radius: 4px;
-}
-
 ul{
   width: 100%;
   padding: 0px;
