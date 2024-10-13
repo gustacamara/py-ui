@@ -27,15 +27,9 @@
           </div>
           <ul class="dropdown">
             {% if admin_mode %}
-              <li><a href="{{ url_for('register_user') }}">Cadastrar usuário</a></li>
-              <li><a href="{{ url_for('remove_user') }}">Deletar usuário</a></li>
-              <li><a href="{{ url_for('list_user') }}">Listar usuários</a></li>
-              <li><a href="{{ url_for('register_cab') }}">Cadastrar locomotiva</a></li>
-              <li><a href="{{ url_for('remove_cab') }}">Deletar locomotiva</a></li>
-              <li><a href="{{ url_for('list_cab') }}">Listar locomotivas</a></li>
-              <li><a href="{{ url_for('register_sensor') }}">Cadastrar sensores</a></li>
-              <li><a href="{{ url_for('remove_sensor') }}">Deletar sensores</a></li>
-              <li><a href="{{ url_for('list_sensor') }}">Listar sensores</a></li>
+              <li><a href="{{ url_for('list_user') }}">Usuários</a></li>
+              <li><a href="{{ url_for('list_cab') }}">Locomotivas</a></li>
+              <li><a href="{{ url_for('list_sensor') }}">Sensores</a></li>
             {% endif %}
             <li><a class="exit" href="{{ url_for('login_page') }}">Sair</a></li>
           </ul>
