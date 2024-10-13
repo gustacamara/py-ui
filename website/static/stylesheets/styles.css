@@ -76,8 +76,8 @@ input[type=number] {
     cursor: pointer;
     
   }
-  & h1 {
-    font-size: 18px;
+  & p {
+    font-size: 28px;
     padding: 0px;
     margin: 0px;
   }
