@@ -1,12 +1,12 @@
-{
-    "sensors": [
-        {
-            "name": "Entry 1",
-            "value": "Value 1"
-        },
-        {
-            "name": "Entry 2",
-            "value": "Value 2"
-        }
-    ]
-}
+[{
+    "id": 1,
+    "sensor": "RFID",
+    "value": "3560"
+  },
+
+  {
+    "id": 2,
+    "sensor": "IR",
+    "value": true
+  }
+]

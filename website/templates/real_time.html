@@ -1,0 +1,7 @@
+<div>
+    <h3>Lista de sensores:</h3><br/>
+    {% for sensor in sensors_values %}
+    <h2>{{sensors_values[sensor].sensor}}:</h2>
+    <h2>{{sensors_values[sensor].value}}</h2>
+    {% endfor %}
+</div>
