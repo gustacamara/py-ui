@@ -200,5 +200,9 @@ def list_sensor():
 def list_detour():
   return render_template("list_detour.html")
 
+@app.route('/register-detour')
+def register_detour():
+  return render_template("register_detour.html")
+
 app.run(debug = True)
 
