@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.static_folder = 'static'
 
 # Settings
-debug_mode = False # Enable this to be able to view pages all pages without logging in
+debug_mode = True # Enable this to be able to view pages all pages without logging in
 
 # Data
 current_user = ""
@@ -98,6 +98,20 @@ def remove_user():
         return login_check
     return render_template("remove_user.html")
 
+@app.route('/try-remove-user', methods=['POST', 'GET'])
+def try_remove_user():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    if request.method == 'POST':
+        user_id = request.form['user_id']
+        data = jsonutil.import_json(app.root_path + '/database/credentials.json')
+        print("\n\n\n\n\n\n\n\n\n\nUsuário a ser removido:", user_id)
+        name = data['users'].pop(int(user_id))
+        jsonutil.export_json(app.root_path + '/database/credentials.json', data)
+        print("O usuário", name, "foi removido com sucesso!")
+        return redirect(app.url_for('list_user')) # Redirect to list of users later
+
 @app.route('/list-user')
 def list_user():
     login_check = check_for_login()
@@ -114,7 +128,7 @@ def list_user():
         else:
             admin_name = user['username']
         index += 1
-    print(users)
+    # print("\n\n\n\n\n\n\n\n\n\n\n\n\nUsuários:", users)
     return render_template("list_user.html", users = users, admin_name = admin_name, admin_id = admin_id)
 
 # Handle CRUD for locomotives
