@@ -1,51 +1,12 @@
 import sys
 from flask import Flask, redirect, render_template, request, jsonify # pip install flask
+from flask_mqtt import Mqtt
 import jinja2 # pip install jinja2
 import jsonutil
-from flask_mqtt import Mqtt #pip install flask-mqtt
-import json
-from lib.dccpp import generateDccThrottleCmd, generateDccFunctionCmd
+from client import client, turnouts
 
 app = Flask(__name__)
 app.static_folder = 'static'
-
-sensors_values = {
-    1: {
-        "id": 1,
-        "sensor": "RFID",
-        "value": "3560"
-    },
-    2: {
-        "id": 2,
-        "sensor": "IR",
-        "value": True
-    }
-}
-
-turnouts = [
-    {
-        "id": 1,
-        "actuator": "SERVO",
-        "value": 128
-    },
-    {
-        "id": 2,
-        "actuator": "SERVO",
-        "value": 128
-    }
-]
-
-app.config['MQTT_BROKER_URL'] = 'mqtt-dashboard.com'
-app.config['MQTT_BROKER_PORT'] = 1883
-app.config['MQTT_USERNAME'] = '' #and password Set this item when you need to verify username a
-app.config['MQTT_PASSWORD'] = '' #and password Set this item when you need to verify username
-app.config['MQTT_KEEPALIVE'] = 5000 # Set KeepAlive time in seconds
-app.config['MQTT_TLS_ENABLED'] = False # If your broker supports TLS, set it True
-
-mqtt_client = Mqtt()
-mqtt_client.init_app(app)
-topic_dcc = "pyui/dcc-K3xWvP4p4D"
-topic_accessories = "pyui/accessories-9P5nN15kdp"
 
 # Settings
 debug_mode = True # Enable this to be able to view pages all pages without logging in
@@ -53,6 +14,8 @@ debug_mode = True # Enable this to be able to view pages all pages without loggi
 # Data
 current_user = ""
 admin_mode = False
+
+app.register_blueprint(client)
 
 def check_for_login():
     if not debug_mode and current_user == "":
@@ -223,83 +186,15 @@ def remove_sensor():
 
 @app.route('/list-user')
 def list_user():
-  return render_template("list_user.html")
+    return render_template("list_user.html")
 
 @app.route('/list-cab')
 def list_cab():
-  return render_template("list_cab.html")
+    return render_template("list_cab.html")
 
 @app.route('/list-sensor')
 def list_sensor():
-  return render_template("list_sensor.html")
-
-
-# Handle MQTT
-def publish_to_mqtt(topic, message):
-    mqtt_client.publish(topic, message)
-
-@app.route('/send_dcc_cmd', methods=['POST'])
-def send_dcc_cmd():
-    global topic_dcc
-
-    data = request.get_json()
-
-    cabId = data["cab"] or 3
-    speed = data["speed"]
-    direction = data["direction"]
-    frontLight = data["frontLight"]
-    secondaryLights = data["secondaryLight"]
-    cmds = generateDccThrottleCmd(cabId, speed, direction) 
-    cmds += generateDccFunctionCmd(cabId, frontLight, secondaryLights)
-
-    publish_to_mqtt(topic_dcc, cmds)
-    return ""
-
-@app.route('/send_turnout_cmd', methods=['POST'])
-def send_turnout_cmd():
-    global topic_accessories 
-
-    data = request.get_json()
-
-    turnoutValue = 0 if data["direction"] == "left" else 128 # Ajust angles 
-
-    cmd = {
-        "id": data["id"],
-        "actuator": "SERVO",
-        "value": turnoutValue
-    }
-
-    publish_to_mqtt(topic_accessories , json.dumps(cmd))
-    return ""
-
-@app.route('/get_sensors_values', methods=['GET'])
-def get_sensors_values():
-    global sensors_values
-
-    return render_template("real_time.html", sensors_values = sensors_values)
-
-@mqtt_client.on_connect()
-def handle_connect(client, userdata, flags, rc):
-    if rc == 0:
-        print('Broker Connected successfully')
-        mqtt_client.subscribe(topic_accessories)
-    else:
-        print('Bad connection. Code:', rc)
-
-@mqtt_client.on_disconnect()
-def handle_disconnect(client, userdata, rc):
-    print("Disconnected from broker")
-
-@mqtt_client.on_message()
-def handle_mqtt_message(client, userdata, message):
-    global sensors_values
-
-    data = json.loads(message.payload.decode())
-    print(str(data))
-    
-    if "sensor" in data:
-        sensors_values[data["id"]] = data
-        print(sensors_values)
+    return render_template("list_sensor.html")
 
 app.run(debug = True)
 
