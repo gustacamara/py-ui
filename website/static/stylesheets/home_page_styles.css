@@ -406,6 +406,9 @@ input[type=range]:focus{
 #emergency:focus{
   outline: 1px solid var(--red-600);
 }
+.handle-switch + .handle-switch{
+  padding-top: 2px;
+}
 
 .icon-button{
   width: fit-content;
