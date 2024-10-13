@@ -178,6 +178,36 @@ def remove_cab():
         return login_check
     return render_template("remove_cab.html")
 
+@app.route('/list-cab')
+def list_cab():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    data = jsonutil.import_json(app.root_path + '/database/cabs.json')['cabs']
+    # print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n',data)
+    cabs = {}
+    
+    index = 0
+    for cab in data:
+        cabs.update({index: cab['id']})
+        index += 1
+    
+    return render_template("list_cab.html", cabs = cabs)
+
+@app.route('/try-remove-cab', methods=['POST', 'GET'])
+def try_remove_cab():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    if request.method == 'POST':
+        cab_id = request.form['cab_id']
+        data = jsonutil.import_json(app.root_path + '/database/cabs.json')
+        # print("\n\n\n\n\n\n\n\n\n\nLocomotiva a ser removida:", cab_id)
+        name = data['cabs'].pop(int(cab_id))
+        jsonutil.export_json(app.root_path + '/database/cabs.json', data)
+        print("A locomotiva", name, "foi removida com sucesso!")
+        return redirect(app.url_for('list_cab'))
+
 # Handle CRUD for sensors
 
 @app.route('/try-register-sensor', methods=['POST', 'GET'])
@@ -216,10 +246,6 @@ def remove_sensor():
     if login_check != None:
         return login_check
     return render_template("remove_sensor.html")
-
-@app.route('/list-cab')
-def list_cab():
-    return render_template("list_cab.html")
 
 @app.route('/list-sensor')
 def list_sensor():
