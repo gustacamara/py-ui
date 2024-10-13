@@ -230,7 +230,7 @@ def try_register_sensor():
                 print("Sensor já cadastrado!")
                 return redirect(app.url_for('register_sensor')) # Change to a popup later!
         
-        data.append({'id': sensor_id, 'name': name, 'value': value})
+        data.append({'id': sensor_id, 'sensor': name, 'value': value})
         jsonutil.export_json(app.root_path + '/database/sensors.json', data)
         return redirect(app.url_for('list_sensor')) # Redirect to list of sensors later
 
