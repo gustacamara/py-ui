@@ -98,6 +98,19 @@ def remove_user():
         return login_check
     return render_template("remove_user.html")
 
+@app.route('/list-user')
+def list_user():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    data = jsonutil.import_json(app.root_path + '/database/credentials.json')['users']
+    users = []
+    for user in data:
+        users.append(user['username'])
+    print(users)
+    
+    return render_template("list_user.html", users = users)
+
 # Handle CRUD for locomotives
 
 @app.route('/try-register-cab', methods=['POST', 'GET'])
@@ -183,10 +196,6 @@ def remove_sensor():
     if login_check != None:
         return login_check
     return render_template("remove_sensor.html")
-
-@app.route('/list-user')
-def list_user():
-    return render_template("list_user.html")
 
 @app.route('/list-cab')
 def list_cab():

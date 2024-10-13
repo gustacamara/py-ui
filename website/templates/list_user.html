@@ -13,9 +13,9 @@
     <div class="credencial">
       <div class="list-itens">
 
-      <!-- for i in users  -->
+      {% for user in users %}
         <article>
-          <p>SUPER MEGA SERVO!</p>
+          <p>{{user}}</p>
           <div class="tools">
             <button class="edit-icon" id=""><!--  colocar id-->
               <i class="ph ph-pencil-line"></i>
@@ -25,7 +25,7 @@
             </button>
           </div>
         </article>
-        <!--  fim do bloco-->
+        {% endfor %}
 
       </div>
     </div>
