@@ -106,7 +106,7 @@ def try_remove_user():
     if request.method == 'POST':
         user_id = request.form['user_id']
         data = jsonutil.import_json(app.root_path + '/database/credentials.json')
-        print("\n\n\n\n\n\n\n\n\n\nUsuário a ser removido:", user_id)
+        # print("\n\n\n\n\n\n\n\n\n\nUsuário a ser removido:", user_id)
         name = data['users'].pop(int(user_id))
         jsonutil.export_json(app.root_path + '/database/credentials.json', data)
         print("O usuário", name, "foi removido com sucesso!")
