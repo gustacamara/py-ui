@@ -409,7 +409,7 @@ input[type=range]:focus{
 }
 
 #emergency:focus{
-  outline: 1px solid var(--red-500);
+  outline: 1px solid var(--red-600);
 }
 
 .icon-button{
