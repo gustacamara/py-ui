@@ -1,10 +1,26 @@
 import sys
-from flask import Flask, redirect, render_template, request # pip install flask
+from flask import Flask, redirect, render_template, request, jsonify # pip install flask
 import jinja2 # pip install jinja2
 import jsonutil
+from flask_mqtt import Mqtt #pip install flask-mqtt
+import json
+from lib.dccpp import generateDccThrottleCmd, generateDccFunctionCmd
 
 app = Flask(__name__)
 app.static_folder = 'static'
+
+app.config['MQTT_BROKER_URL'] = 'mqtt-dashboard.com'
+app.config['MQTT_BROKER_PORT'] = 1883
+app.config['MQTT_USERNAME'] = '' #and password Set this item when you need to verify username a
+app.config['MQTT_PASSWORD'] = '' #and password Set this item when you need to verify username
+app.config['MQTT_KEEPALIVE'] = 5000 # Set KeepAlive time in seconds
+app.config['MQTT_TLS_ENABLED'] = False # If your broker supports TLS, set it True
+
+mqtt_client = Mqtt()
+mqtt_client.init_app(app)
+topic_subscribe_dcc = "pyui/dcc-K3xWvP4p4D"
+
+# mqtt_client.publish(topic_subscribe_dcc, "yay")
 
 # Settings
 debug_mode = False # Enable this to be able to view pages all pages without logging in
@@ -52,7 +68,7 @@ def home_page():
         return login_check
     return render_template("home_page.html", current_user = current_user,admin_mode=admin_mode)
 
-# Handle Crud for users
+# Handle CRUD for users
 
 @app.route('/try-register-user', methods=['POST', 'GET'])
 def try_register_user():
@@ -94,7 +110,7 @@ def remove_user():
         return login_check
     return render_template("remove_user.html")
 
-# Handle Crud for locomotives
+# Handle CRUD for locomotives
 
 @app.route('/try-register-cab', methods=['POST', 'GET'])
 def try_register_cab():
@@ -141,7 +157,7 @@ def remove_cab():
         return login_check
     return render_template("remove_cab.html")
 
-# Handle Crud for sensors
+# Handle CRUD for sensors
 
 @app.route('/try-register-sensor', methods=['POST', 'GET'])
 def try_register_sensor():
@@ -192,4 +208,49 @@ def list_cab():
 def list_sensor():
   return render_template("list_sensor.html")
 
+
+# Handle MQTT
+def publish_to_mqtt(topic, message):
+    mqtt_client.publish(topic, message)
+
+@app.route('/send_dcc_cmd', methods=['POST'])
+def send_dcc_cmd():
+    global topic_subscribe_dcc
+
+    data = request.get_json()
+
+    cabId = data["cab"] or 3
+    speed = data["speed"]
+    direction = data["direction"]
+    frontLight = data["frontLight"]
+    secondaryLights = data["secondaryLight"]
+    cmds = generateDccThrottleCmd(cabId, speed, direction) 
+    cmds += generateDccFunctionCmd(cabId, frontLight, secondaryLights)
+
+    publish_to_mqtt(topic_subscribe_dcc, cmds)
+    return ""
+
 app.run(debug=True)
+
+@mqtt_client.on_connect()
+def handle_connect(client, userdata, flags, rc):
+    if rc == 0:
+        print('Broker Connected successfully')
+        mqtt_client.subscribe(topic_subscribe_dcc)
+    else:
+        print('Bad connection. Code:', rc)
+
+@mqtt_client.on_disconnect()
+def handle_disconnect(client, userdata, rc):
+    print("Disconnected from broker")
+
+@mqtt_client.on_message()
+def handle_mqtt_message(client, userdata, message):
+    global data
+    js = json.loads(message.payload.decode())
+    print(str(js) + "olá")
+    cab = js["cab"]
+    speed = js["speed"]
+    direction = js["direction"]
+    lights = js["lights"]
+

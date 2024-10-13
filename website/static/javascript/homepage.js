@@ -1,22 +1,24 @@
 document.addEventListener("DOMContentLoaded", () => {
     const cab = document.getElementById("cab-id")
-    const speedScrollbar = document.getElementById("speed-slider-input")
-    const direction = document.getElementById("direction-usage")
-    const lights = document.getElementById("front-light")
+    const speed = document.getElementById("speed-slider-input")
+    const direction = document.getElementById("direction-switch")
+    const frontLight = document.getElementById("front-light")
+    const secondaryLight = document.getElementById("secondary-light")
     const cabButton = document.getElementById("confirm-cab-id") 
-    //const honkButton = document.getElementById("honkButton") //Não achei o botão de buzina
+    //const honkButton = document.getElementById("honkButton")
 
     function sendData() {
       const data = {
         'cab': parseInt(cab.value),
-        'speedScrollbar': parseInt(speedScrollbar.value),
+        'speed': parseInt(speed.value),
         'direction': direction.value,
-        'lights': lights.checked
+        'frontLight': frontLight.checked,
+        'secondaryLight': secondaryLight.checked
       }
   
       console.log(data)
   
-      fetch('http://192.168.100.107:3000', {
+      fetch('/send_dcc_cmd', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -25,11 +27,15 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     }
   
-    speedScrollbar.addEventListener("input", (event) => {
+    speed.addEventListener("input", (event) => {
       sendData()
     })
   
-    lights.addEventListener("input", (event) => {
+    frontLight.addEventListener("input", (event) => {
+      sendData()
+    })
+
+    secondaryLight.addEventListener("input", (event) => {
       sendData()
     })
   

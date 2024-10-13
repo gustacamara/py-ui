@@ -139,7 +139,6 @@
           Ok
         </button>
       </div>
-
       <div class="cab-control">
         <div class="control-header">
           <h1>Locomotiva - "id"</h1>
@@ -159,9 +158,9 @@
               <!-- switch -->
               <label class="text-switch">
                 <!-- <input type="checkbox" checked id="directionSwitch"> -->
-                <select name="on-off" id="direction-usage">
-                  <option value="front">Frente</option>
-                  <option value="back">Trás</option>
+                <select name="on-off" id="direction-switch">
+                  <option value="1">Frente</option>
+                  <option value="0">Trás</option>
                 </select>
                 <span class="slider"></span>
               </label>
@@ -258,7 +257,7 @@
               <div class="handle-switch">
                 <p>Farol secundário</p>
                 <label class="no-text-switch">
-                  <input type="checkbox" id="low-light">
+                  <input type="checkbox" id="secondary-light">
                   <span class="slider"></span>
                 </label>
               </div>
@@ -273,7 +272,7 @@
             </div>
           </div>
 
-          <button id="emergency" class="emergency" title="Botão de emergência">
+          <button id="emergency" class="emergency" title="Botão de emergência" style="display: none;">
             Parar
           </button>
         </div>
