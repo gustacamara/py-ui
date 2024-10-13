@@ -12,17 +12,24 @@
     </div>
     <div class="credencial">
       <div class="list-itens">
-
-      {% for user in users %}
+        <article> <!-- Replace with a base later! -->
+          <p>{{admin_name}}</p>
+          <div class="tools">
+            <button class="edit-icon" id=""><!--  colocar id-->
+              <i class="ph ph-pencil-line"></i>
+            </button>
+          </div>
+        </article>
+      {% for id, user in users.items() %}
         <article>
           <p>{{user}}</p>
           <div class="tools">
             <button class="edit-icon" id=""><!--  colocar id-->
               <i class="ph ph-pencil-line"></i>
             </button>
-            <button class="trash-icon" id=""><!--  colocar id-->
-              <i class="ph ph-trash"></i>
-            </button>
+              <button class="trash-icon" id=""><!--  colocar id-->
+                <i class="ph ph-trash"></i>
+              </button>
           </div>
         </article>
         {% endfor %}

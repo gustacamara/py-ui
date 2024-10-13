@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.static_folder = 'static'
 
 # Settings
-debug_mode = True # Enable this to be able to view pages all pages without logging in
+debug_mode = False # Enable this to be able to view pages all pages without logging in
 
 # Data
 current_user = ""
@@ -104,12 +104,18 @@ def list_user():
     if login_check != None:
         return login_check
     data = jsonutil.import_json(app.root_path + '/database/credentials.json')['users']
-    users = []
+    admin_name = ''
+    admin_id = 0
+    users = {}
+    index = 0
     for user in data:
-        users.append(user['username'])
+        if index > 0:
+            users.update({index: user['username']})
+        else:
+            admin_name = user['username']
+        index += 1
     print(users)
-    
-    return render_template("list_user.html", users = users)
+    return render_template("list_user.html", users = users, admin_name = admin_name, admin_id = admin_id)
 
 # Handle CRUD for locomotives
 
