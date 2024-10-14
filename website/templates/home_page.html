@@ -48,12 +48,11 @@
         </div>
       </li>
     </ul>
-
-    <!-- <i class="ph-bold ph-list"></i> -->
     </div>
   </header>
 
   <main>
+<!-- composition sidebar -->
     <div class="train-sidebar">
       <div class="composition">
 
@@ -126,6 +125,7 @@
       </div>
     </div>
 
+<!-- main content -->
     <div class="rail-road-model">
       <div class="rail-model-container">
         <h1>Maquete do Roberto</h1>
@@ -133,6 +133,7 @@
       </div>
     </div>
 
+<!-- control sidebar -->
     <div class="control-sidebar">
       <div class="cab-id">
         <h1>ID</h1>
@@ -141,7 +142,7 @@
           Ok
         </button>
       </div>
-      <div class="cab-control">
+      <div class="cab-control panel">
         <div class="control-header">
           <h1>Locomotiva - "id"</h1>
           <button class="icon-button">
@@ -184,8 +185,6 @@
               </div>
             </div>
           </div>
-
-          <div id="real-time"></div>
 
           <div class="hooter control-option" style="display: none;">
             <div class="control-title">
@@ -311,6 +310,19 @@
           </button>
         </div>
       </div>
+
+      <div class="sensor-control panel">
+        <div class="control-header">
+          <h1>lista de sensores</h1>
+          <button class="icon-button">
+            <i class="ph ph-minus"></i>
+          </button>
+        </div>
+        <div class="control-list-content">
+          <div id="real-time"></div>
+        </div>
+      </div>
+      
     </div>
   </main>
   <script>
