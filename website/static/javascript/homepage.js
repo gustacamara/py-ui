@@ -59,8 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch('/get_sensors_values')
       .then((response) => response.text())
       .then((html) => {
-        const dom = new DOMParser().parseFromString(html, "text/xml")
-        document.getElementById("real-time").replaceChildren(dom.firstChild)
+        document.getElementById("real-time").innerHTML = html
       })
   }
 
