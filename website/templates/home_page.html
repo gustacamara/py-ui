@@ -275,36 +275,6 @@
             </div>
           </div>
 
-          <div class="detour control-option">
-            <div class="control-title">
-              <div class="control-name">
-                <i class="ph ph-arrows-left-right"></i>
-                <h3>Desvios</h3>
-              </div>
-
-              <!-- <label class="text-switch">
-                <input type="checkbox" id="hooterMainSwitch">
-                <select name="on-off" id="hooter-usage">
-                  <option value="on">Ligado</option>
-                  <option value="off">Desligado</option>
-                </select>
-                <span class="slider"></span>
-              </label> -->
-            </div>
-
-            <div class="detour-content">
-            {% for turnout in turnouts %}
-              <div class="handle-switch">
-              	<p>{{turnout["id"]}}</p>
-                <select name="on-off" class="turnout-direction" data-id="{{turnout['id']}}">
-                  <option value="right">Direita</option>
-                  <option value="left">Esquerda</option>
-                </select>
-              </div>
-            {% endfor %}
-            </div>
-          </div>
-
           <button id="emergency" class="emergency" title="Botão de emergência" style="display: none;">
             Parar
           </button>
@@ -313,7 +283,7 @@
 
       <div class="sensor-control panel">
         <div class="control-header">
-          <h1>lista de sensores</h1>
+          <h1>Lista de sensores</h1>
           <button class="icon-button">
             <i class="ph ph-minus"></i>
           </button>
@@ -322,7 +292,45 @@
           <div id="real-time"></div>
         </div>
       </div>
-      
+
+      <div class="detour-control panel">
+        <div class="control-header">
+          <h1>Lista de desvios</h1>
+          <button class="icon-button">
+            <i class="ph ph-minus"></i>
+          </button>
+        </div>
+        <div class="control-list-content">
+          <div class="detour control-option">
+            <div class="control-title">
+              <div class="control-name">
+                <i class="ph ph-arrows-left-right"></i>
+                <h3>Desvios</h3>
+              </div>
+          
+              <!-- <label class="text-switch">
+                                  <input type="checkbox" id="hooterMainSwitch">
+                                  <select name="on-off" id="hooter-usage">
+                                    <option value="on">Ligado</option>
+                                    <option value="off">Desligado</option>
+                                  </select>
+                                  <span class="slider"></span>
+                                </label> -->
+            </div>
+            <div class="detour-content">
+              {% for turnout in turnouts %}
+              <div class="handle-switch">
+                <p>{{turnout["id"]}}</p>
+                <select name="on-off" class="turnout-direction" data-id="{{turnout['id']}}">
+                  <option value="right">Direita</option>
+                  <option value="left">Esquerda</option>
+                </select>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>  
+      </div>
     </div>
   </main>
   <script>

@@ -317,7 +317,7 @@ ul li:hover ul.dropdown {
 }
 
 .panel+ .panel{
-  border-top: 1px solid var(--offwhite-15);
+  border-top: 1px solid var(--offwhite-10);
 }
 
 .control-header{
