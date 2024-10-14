@@ -83,13 +83,58 @@ def try_register_user():
     else:
         print("Método inválido:", request.method)
         return redirect(app.url_for('register_user')) # ERRO!
-
-@app.route('/register-user')
-def register_user(error = False):
+    
+    
+@app.route('/try-edit-user', methods=['POST', 'GET'])
+def try_edit_user():
     login_check = check_for_login()
     if login_check != None:
         return login_check
-    return render_template("register_user.html", error = error)
+    
+    if request.method == 'POST':
+        user_id = int(request.form['user_id'])
+        print('\n'*100,request.form)
+        username = request.form['username']
+        password = request.form['password']
+        data = jsonutil.import_json(app.root_path + '/database/credentials.json')
+
+        if username.strip(' ') == "" and password.strip(' ') == "":
+            print("Usuário inválido!")
+            return register_user(error=True)
+
+        index = 0
+        for user in data['users']:
+            if index != user_id and user['username'] == username:
+                print("Usuário já cadastrado!")
+                return register_user(error=True, data=[username, password], edit_id=user_id)
+            index += 1
+
+        data['users'][user_id] = {'username': username, 'password': password}
+        jsonutil.export_json(app.root_path + '/database/credentials.json', data)
+        return redirect(app.url_for('list_user')) # Redirect to list of users later
+    else:
+        print("Método inválido:", request.method)
+        return redirect(app.url_for('register_user')) # ERRO!
+
+@app.route('/register-user')
+def register_user(error = False, data = ['', ''], edit_id = -1):
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    return render_template("register_user.html", error = error, data=data, edit_id = edit_id)
+
+@app.route('/edit-user', methods=['POST', 'GET'])
+def edit_user(error = False, data = ['', ''], edit_id = -1):
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    if request.method == 'POST':
+        user_id = request.form['user_id']
+        data = jsonutil.import_json(app.root_path + '/database/credentials.json')['users'][int(user_id)]
+        return register_user(error, [data['username'], data['password']], int(user_id))
+    else:
+        print("Método inválido:", request.method)
+        return redirect(app.url_for('register_user'))
 
 @app.route('/remove-user')
 def remove_user():
