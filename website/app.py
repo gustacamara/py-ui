@@ -69,27 +69,73 @@ def try_register_user():
         data = jsonutil.import_json(app.root_path + '/database/credentials.json')
 
         if username.strip(' ') == "" and password.strip(' ') == "":
-            print("Usuário inválido!") # Change to a popup later!
-            return redirect(app.url_for('register_user'))
+            print("Usuário inválido!")
+            return register_user(error=True)
 
         for user in data['users']:
             if user['username'] == username:
-                print("Usuário já cadastrado!") # Change to a popup later!
-                return redirect(app.url_for('register_user'))
+                print("Usuário já cadastrado!")
+                return register_user(error=True)
 
         data['users'].append({'username': username, 'password': password})
         jsonutil.export_json(app.root_path + '/database/credentials.json', data)
-        return redirect(app.url_for('home_page')) # Redirect to list of users later
+        return redirect(app.url_for('list_user')) # Redirect to list of users later
+    else:
+        print("Método inválido:", request.method)
+        return redirect(app.url_for('register_user')) # ERRO!
+    
+    
+@app.route('/try-edit-user', methods=['POST', 'GET'])
+def try_edit_user():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    
+    if request.method == 'POST':
+        user_id = int(request.form['user_id'])
+        # print('\n'*100,request.form)
+        username = request.form['username']
+        password = request.form['password']
+        data = jsonutil.import_json(app.root_path + '/database/credentials.json')
+
+        print('n'*100, user_id, username, password)
+        if username.strip(' ') == "" or password.strip(' ') == "":
+            print("Usuário inválido!")
+            return register_user(error=True, data=[username, password], edit_id=user_id)
+
+        index = 0
+        for user in data['users']:
+            if index != user_id and user['username'] == username:
+                print("Usuário já cadastrado!")
+                return register_user(error=True, data=[username, password], edit_id=user_id)
+            index += 1
+
+        data['users'][user_id] = {'username': username, 'password': password}
+        jsonutil.export_json(app.root_path + '/database/credentials.json', data)
+        return redirect(app.url_for('list_user')) # Redirect to list of users later
     else:
         print("Método inválido:", request.method)
         return redirect(app.url_for('register_user')) # ERRO!
 
 @app.route('/register-user')
-def register_user():
+def register_user(error = False, data = ['', ''], edit_id = -1):
     login_check = check_for_login()
     if login_check != None:
         return login_check
-    return render_template("register_user.html")
+    return render_template("register_user.html", error = error, data=data, edit_id = edit_id)
+
+@app.route('/edit-user', methods=['POST', 'GET'])
+def edit_user(error = False):
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    if request.method == 'POST':
+        user_id = request.form['user_id']
+        data = jsonutil.import_json(app.root_path + '/database/credentials.json')['users'][int(user_id)]
+        return register_user(error, [data['username'], data['password']], int(user_id))
+    else:
+        print("Método inválido:", request.method)
+        return redirect(app.url_for('register_user'))
 
 @app.route('/remove-user')
 def remove_user():
@@ -97,6 +143,39 @@ def remove_user():
     if login_check != None:
         return login_check
     return render_template("remove_user.html")
+
+@app.route('/try-remove-user', methods=['POST', 'GET'])
+def try_remove_user():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    if request.method == 'POST':
+        user_id = request.form['user_id']
+        data = jsonutil.import_json(app.root_path + '/database/credentials.json')
+        # print("\n\n\n\n\n\n\n\n\n\nUsuário a ser removido:", user_id)
+        name = data['users'].pop(int(user_id))
+        jsonutil.export_json(app.root_path + '/database/credentials.json', data)
+        print("O usuário", name, "foi removido com sucesso!")
+        return redirect(app.url_for('list_user')) # Redirect to list of users later
+
+@app.route('/list-user')
+def list_user():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    data = jsonutil.import_json(app.root_path + '/database/credentials.json')['users']
+    admin_name = ''
+    admin_id = 0
+    users = {}
+    index = 0
+    for user in data:
+        if index > 0:
+            users.update({index: user['username']})
+        else:
+            admin_name = user['username']
+        index += 1
+    # print("\n\n\n\n\n\n\n\n\n\n\n\n\nUsuários:", users)
+    return render_template("list_user.html", users = users, admin_name = admin_name, admin_id = admin_id)
 
 # Handle CRUD for locomotives
 
@@ -113,30 +192,79 @@ def try_register_cab():
 
         data = jsonutil.import_json(app.root_path + '/database/cabs.json')
 
-        if cab_id.strip('') == "" or manufacturer.strip('') == "" or model.strip('') == "":
+        if cab_id.strip('') == "" or manufacturer.strip('') == "" or model.strip('') == "" and isnumeric(cab_id):
             print("Locomotiva inválida!")
-            return redirect(app.url_for('register_cab')) # Change to a popup later!
+            return register_cab(error=True) 
 
         cab_id = int(cab_id)
 
         for cab in data['cabs']:
             if int(cab['id']) == cab_id:
-                print("Locomotiva já cadastrada!") # Change to a popup later!
-                return redirect(app.url_for('register_cab'))
+                print("Locomotiva já cadastrada!") 
+                return register_cab(error=True)
             
         data['cabs'].append({'id': cab_id, 'manufacturer': manufacturer, 'model': model})
         jsonutil.export_json(app.root_path + '/database/cabs.json', data)
-        return redirect(app.url_for('home_page')) # Redirect to list of locomotives later
+        return redirect(app.url_for('list_cab')) # Redirect to list of locomotives later
+    else:
+        print("Método inválido:", request.method)
+        return redirect(app.url_for('register_cab')) # ERRO!
+    
+    
+@app.route('/try-edit-cab', methods=['POST', 'GET'])
+def try_edit_cab():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    if request.method == 'POST':
+        #print("\n"*100, request.form)
+        edit_id = int(request.form['edit_id']   )
+        cab_id = request.form['cab_id']
+        manufacturer = request.form['manufacturer']
+        model = request.form['model']
+
+        data = jsonutil.import_json(app.root_path + '/database/cabs.json')
+
+        if cab_id.strip('') == "" or manufacturer.strip('') == "" or model.strip('') == "" or not cab_id.isnumeric():
+            print("Locomotiva inválida!")
+            return register_cab(error=True, data=[cab_id, manufacturer, model], edit_id=edit_id) 
+
+        cab_id = int(cab_id)
+
+        index = 0
+        for cab in data['cabs']:
+            if index != edit_id and int(cab['id']) == cab_id:
+                print("Locomotiva já cadastrada!") 
+                return register_cab(error=True, data=[cab_id, manufacturer, model], edit_id=edit_id)
+            index += 1
+            
+        data['cabs'][edit_id] = {'id': cab_id, 'manufacturer': manufacturer, 'model': model}
+        jsonutil.export_json(app.root_path + '/database/cabs.json', data)
+        return redirect(app.url_for('list_cab')) # Redirect to list of locomotives later
     else:
         print("Método inválido:", request.method)
         return redirect(app.url_for('register_cab')) # ERRO!
 
 @app.route('/register-cab')
-def register_cab():
+def register_cab(error = False, data = ['', '', ''], edit_id = -1):
     login_check = check_for_login()
     if login_check != None:
         return login_check
-    return render_template("register_cab.html")
+    return render_template("register_cab.html", error = error, data=data, edit_id = edit_id)
+
+@app.route('/edit-cab', methods=['POST', 'GET'])
+def edit_cab(error = False):
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    if request.method == 'POST':
+        edit_id = request.form['edit_id']
+        data = jsonutil.import_json(app.root_path + '/database/cabs.json')['cabs'][int(edit_id)]
+        # print('\n'*100, data)
+        return register_cab(error, [data['id'], data['manufacturer'], data['model']], int(edit_id))
+    else:
+        print("Método inválido:", request.method)
+        return redirect(app.url_for('register_user'))
 
 @app.route('/remove-cab')
 def remove_cab():
@@ -144,6 +272,36 @@ def remove_cab():
     if login_check != None:
         return login_check
     return render_template("remove_cab.html")
+
+@app.route('/list-cab')
+def list_cab():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    data = jsonutil.import_json(app.root_path + '/database/cabs.json')['cabs']
+    # print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n',data)
+    cabs = {}
+    
+    index = 0
+    for cab in data:
+        cabs.update({index: cab['id']})
+        index += 1
+    
+    return render_template("list_cab.html", cabs = cabs)
+
+@app.route('/try-remove-cab', methods=['POST', 'GET'])
+def try_remove_cab():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    if request.method == 'POST':
+        cab_id = request.form['cab_id']
+        data = jsonutil.import_json(app.root_path + '/database/cabs.json')
+        # print("\n\n\n\n\n\n\n\n\n\nLocomotiva a ser removida:", cab_id)
+        name = data['cabs'].pop(int(cab_id))
+        jsonutil.export_json(app.root_path + '/database/cabs.json', data)
+        print("A locomotiva", name, "foi removida com sucesso!")
+        return redirect(app.url_for('list_cab'))
 
 # Handle CRUD for sensors
 
@@ -153,6 +311,7 @@ def try_register_sensor():
     if login_check != None:
         return login_check
     if request.method == 'POST':
+        sensor_id = request.form['id']
         name = request.form['name']
         value = request.form['value']
         data = jsonutil.import_json(app.root_path + '/database/sensors.json')
@@ -161,21 +320,69 @@ def try_register_sensor():
             print("Sensor inválido!")
             return redirect(app.url_for('register_sensor'))
 
-        for sensor in data['sensors']:
-            if sensor['name'] == name:
+        for sensor in data:
+            if sensor['id'] == sensor_id:
                 print("Sensor já cadastrado!")
-                return redirect(app.url_for('register_sensor')) # Change to a popup later!
+                return register_sensor(error=True)
         
-        data['sensors'].append({'name': name, 'value': value})
+        data.append({'id': sensor_id, 'sensor': name, 'value': value})
         jsonutil.export_json(app.root_path + '/database/sensors.json', data)
-        return redirect(app.url_for('home_page')) # Redirect to list of sensors later
+        return redirect(app.url_for('list_sensor')) # Redirect to list of sensors later
+    
 
-@app.route('/register-sensor')
-def register_sensor():
+@app.route('/try-edit-sensor', methods=['POST', 'GET'])
+def try_edit_sensor():
     login_check = check_for_login()
     if login_check != None:
         return login_check
-    return render_template("register_sensor.html")
+    if request.method == 'POST':
+        print("\n"*100, request.form)
+        edit_id = int(request.form['edit_id']   )
+        id = request.form['id']
+        name = request.form['name']
+        value = request.form['value']
+
+        data = jsonutil.import_json(app.root_path + '/database/sensors.json')
+
+        if id.strip('') == "" or name.strip('') == "" or value.strip('') == "" or not id.isnumeric():
+            print("Sensor inválido!")
+            return register_sensor(error=True, data=[id, name, value], edit_id=edit_id)
+
+        id = int(id)
+
+        index = 0
+        for sensor in data:
+            if index != edit_id and int(sensor['id']) == id:
+                print("Sensor já cadastrado!") 
+                return register_sensor(error=True, data=[id, name, value], edit_id=edit_id)
+            index += 1
+            
+        data[edit_id] = {'id': id, 'sensor': name, 'value': value}
+        jsonutil.export_json(app.root_path + '/database/sensors.json', data)
+        return redirect(app.url_for('list_sensor')) # Redirect to list of locomotives later
+    else:
+        print("Método inválido:", request.method)
+        return redirect(app.url_for('register_sensor')) # ERRO!
+
+@app.route('/edit-sensor', methods=['POST', 'GET'])
+def edit_sensor(error = False):
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    if request.method == 'POST':
+        sensor_id = request.form['sensor_id']
+        data = jsonutil.import_json(app.root_path + '/database/sensors.json')[int(sensor_id)]
+        return register_sensor(error, [data['id'], data['sensor'], data['value']], int(sensor_id))
+    else:
+        print("Método inválido:", request.method)
+        return redirect(app.url_for('register_sensor'))
+
+@app.route('/register-sensor')
+def register_sensor(error = False, data = ['', '', ''], edit_id = -1):
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    return render_template("register_sensor.html", error = error, data=data, edit_id = edit_id)
 
 @app.route('/remove-sensor')
 def remove_sensor():
@@ -184,17 +391,33 @@ def remove_sensor():
         return login_check
     return render_template("remove_sensor.html")
 
-@app.route('/list-user')
-def list_user():
-    return render_template("list_user.html")
-
-@app.route('/list-cab')
-def list_cab():
-    return render_template("list_cab.html")
-
 @app.route('/list-sensor')
 def list_sensor():
-    return render_template("list_sensor.html")
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    data = jsonutil.import_json(app.root_path + '/database/sensors.json')
+    sensors = {}
+    index = 0
+    for sensor in data:
+        print('\n\n\n\n\n\n\n\n\n\n\n\n\n', sensor)
+        sensors.update({index: sensor['sensor']})
+        index += 1
+    return render_template("list_sensor.html", sensors = sensors)
+
+@app.route('/try-remove-sensor', methods=['POST', 'GET'])
+def try_remove_sensor():
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    if request.method == 'POST':
+        sensor_id = request.form['sensor_id']
+        data = jsonutil.import_json(app.root_path + '/database/sensors.json')
+        # print("\n\n\n\n\n\n\n\n\n\nSensor a ser removido:", sensor_id)
+        name = data.pop(int(sensor_id))
+        jsonutil.export_json(app.root_path + '/database/sensors.json', data)
+        print("O sensor", name, "foi removido com sucesso!")
+        return redirect(app.url_for('list_sensor'))
 
 @app.route('/list-detour')
 def list_detour():

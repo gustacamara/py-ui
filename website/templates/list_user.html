@@ -1,39 +1,57 @@
 {% extends "base.html" %}
 
 {% block title %}
-  <title>Lista de usurios</title>
+<title>Lista de usurios</title>
 {% endblock %}
 
 {% block credential %}
-  <div class="container">
-    <div class="title">
-      <i class="ph-fill ph-user"></i>
-      <h1>Lista de usuários</h1>
-    </div>
-    <div class="credencial">
-      <div class="list-itens">
-
-      <!-- for i in users  -->
-        <article>
-          <p>SUPER MEGA SERVO!</p>
-          <div class="tools">
-            <button class="edit-icon" id=""><!--  colocar id-->
+<div class="container">
+  <div class="title">
+    <i class="ph-fill ph-user"></i>
+    <h1>Lista de usuários</h1>
+  </div>
+  <div class="credencial">
+    <div class="list-itens">
+      <article> <!-- Replace with a base later! -->
+        <p>{{admin_name}}</p>
+        <div class="tools">
+          <form id="form" method="POST" action="{{ url_for('edit_user') }}">
+          <button type="submit" class="edit-icon" id=""><!--  colocar id-->
+            <i class="ph ph-pencil-line"></i>
+          </button>
+          <input type="hidden" name="user_id" id="user_id" value="0">
+        </form>
+        </div>
+      </article>
+      {% for id, user in users.items() %}
+      <article>
+        <p>{{user}}</p>
+        <div class="tools">
+          <form id="form" method="POST" action="{{ url_for('edit_user') }}">
+            <button type="submit" class="edit-icon" id=""><!--  colocar id-->
               <i class="ph ph-pencil-line"></i>
             </button>
-            <button class="trash-icon" id=""><!--  colocar id-->
-              <i class="ph ph-trash"></i>
-            </button>
-          </div>
-        </article>
-        <!--  fim do bloco-->
+            <input type="hidden" name="user_id" id="user_id" value="{{id}}">
+          </form>
+          <form id="form" method="POST" action="{{ url_for('try_remove_user') }}">
+          <button type="submit" class="trash-icon" id=""><!--  colocar id-->
+            <i class="ph ph-trash"></i>
+          </button>
+          <input type="hidden" name="user_id" id="user_id" value="{{id}}">
+          </form>
+        </div>
+      </article>
+      {% endfor %}
 
-      </div>
     </div>
-    <div class="credencial">
+  </div>
+  <div class="credencial">
+    <a href="{{url_for('register_user')}}">
       <button type="submit" id=""> <!--  colocar id-->
         Cadastrar usuários
       </button>
-    </div>
+    </a>
   </div>
-  <a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
+</div>
+<a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
 {% endblock %}

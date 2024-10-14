@@ -8,21 +8,42 @@
   <div class="container">
     <div class="title">
       <i class="ph-fill ph-train"></i>
-      <h1>Cadastrar locomotiva</h1>
+      <h1>
+        {% if edit_id < 0 %}
+        Cadastrar
+      {% else %}
+        Editar
+      {% endif %}
+      locomotiva
+    </h1>
     </div>
-    <!-- if error -->
+    {% if error %}
     <div class="invalid-credentials-error">
-      <h2>Erro ao cadastrar</h2>
+      <h2>
+        Erro ao 
+        {% if edit_id < 0 %}
+          Cadastrar
+        {% else %}
+          Editar
+        {% endif %}
+        locomotiva.
+      </h2>
       <p>Verifique se todos os campos estão preenchidos corretamente.</p>
     </div>
-    <!-- endif-->
+    {% endif %}
 
-    <form class="form" id="form" method="POST" action="{{ url_for('try_register_cab') }}">
+    <form class="form" id="form" method="POST" action="
+      {% if edit_id <0 %}
+      {{ url_for('try_register_cab') }}
+      {% else %}
+      {{ url_for('try_edit_cab') }}
+      {% endif %}
+    ">
       <div class="credencial">
         <p>Id da locomotiva</p>
         <div class="inputContent">
           <i class="ph ph-fingerprint-simple"></i>
-          <input type="number" name="cab_id" id="cab_id" placeholder="Id">
+          <input type="number" name="cab_id" id="cab_id" placeholder="Id" value="{{data[0]}}">
         </div>
       </div>
   
@@ -30,7 +51,7 @@
         <p>Fabricante</p>
         <div class="inputContent">
           <i class="ph ph-hammer"></i>
-          <input type="text" id="manufacturer" name="manufacturer" placeholder="Fabricante">
+          <input type="text" id="manufacturer" name="manufacturer" placeholder="Fabricante" value="{{data[1]}}">
         </div>
       </div>
   
@@ -38,17 +59,22 @@
         <p>Modelo</p>
         <div class="inputContent">
           <i class="ph ph-identification-badge"></i>
-          <input type="text" name="model" id="model" placeholder="Modelo">
+          <input type="text" name="model" id="model" placeholder="Modelo" value="{{data[2]}}">
         </div>
       </div>
   
   
       <div class="credencial">
         <button type="submit" id="sendNewUser" name="sendNewUser">
+          {% if edit_id < 0 %}
           Cadastrar
+          {% else %}
+          Salvar
+          {% endif %}
         </button>
       </div>
+      <input type="hidden" name="edit_id" id="edit_id" value="{{edit_id}}">
     </form>
   </div>
-  <a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
+  <a href="{{ url_for('list_cab') }}">Voltar à lista</a>
 {% endblock %}

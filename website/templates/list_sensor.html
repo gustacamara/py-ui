@@ -1,39 +1,47 @@
 {% extends "base.html" %}
 
 {% block title %}
-  <title>Lista de sensores</title>
+<title>Lista de sensores</title>
 {% endblock %}
 
 {% block credential %}
-  <div class="container">
-    <div class="title">
-      <i class="ph ph-broadcast"></i>
-      <h1>Lista de sensores</h1>
-    </div>
-    <div class="credencial">
-      <div class="list-itens">
+<div class="container">
+  <div class="title">
+    <i class="ph ph-broadcast"></i>
+    <h1>Lista de sensores</h1>
+  </div>
+  <div class="credencial">
+    <div class="list-itens">
 
-        <!-- for i in users  -->
-        <article>
-            <p>Sensor SOCOOORRO</p>
-          <div class="tools">
-            <button class="edit-icon" id=""><!--  colocar id-->
-              <i class="ph ph-pencil-line"></i>
-            </button>
-            <button class="trash-icon" id=""><!--  colocar id-->
-              <i class="ph ph-trash"></i>
-            </button>
-          </div>
-        </article>
-        <!--  fim do bloco-->
+      {% for id, sensor in sensors.items() %}
+      <article>
+        <p>{{sensor}}</p>
+        <div class="tools">
+          <form id="form" method="POST" action="{{ url_for('edit_sensor') }}">
+          <button class="edit-icon" id=""><!--  colocar id-->
+            <i class="ph ph-pencil-line"></i>
+          </button>
+          <input type="hidden" name="sensor_id" id="sensor_id" value="{{id}}">
+          </form>
+          <form id="form" method="POST" action="{{ url_for('try_remove_sensor') }}">
+          <button class="trash-icon" id=""><!--  colocar id-->
+            <i class="ph ph-trash"></i>
+          </button>
+          <input type="hidden" name="sensor_id" id="sensor_id" value="{{id}}">
+          </form>
+        </div>
+      </article>
+      {% endfor %}
 
-      </div>
-    </div>
-    <div class="credencial">
-      <button type="submit" id=""><!--  colocar id-->
-        Cadastrar sensores
-      </button>
     </div>
   </div>
-  <a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
+  <div class="credencial">
+    <a href="{{url_for('register_sensor')}}">
+    <button type="submit" id=""><!--  colocar id-->
+      Cadastrar sensores
+    </button>
+    </a>
+  </div>
+</div>
+<a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
 {% endblock %}

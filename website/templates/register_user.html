@@ -8,21 +8,41 @@
   <div class="container">
     <div class="title">
       <i class="ph-fill ph-user"></i>
-      <h1>Cadastrar usuário</h1>
+      <h1>
+        {% if edit_id < 0 %}
+          Cadastrar
+        {% else %}
+          Editar
+        {% endif %}
+        usuário
+      </h1>
     </div>
-    <!-- if error -->
+    {% if error %}
     <div class="invalid-credentials-error">
-      <h2>Erro ao cadastrar</h2>
+      <h2>Erro ao 
+        {% if edit_id < 0 %}
+        cadastrar
+        {% else %}
+        editar
+        {% endif %}
+        usuário.
+      </h2>
       <p>Verifique se todos os campos estão preenchidos corretamente.</p>
     </div>
-    <!-- endif -->
+    {% endif %}
   
-    <form class="form" id="form" method="POST" action="{{ url_for('try_register_user') }}">
+    <form class="form" id="form" method="POST" action="
+      {% if edit_id <0 %}
+      {{ url_for('try_register_user') }}
+      {% else %}
+      {{ url_for('try_edit_user') }}
+      {% endif %}
+    ">
       <div class="credencial">
         <p>Nome do usuário</p>
         <div class="inputContent">
           <i class="ph ph-at"></i>
-          <input type="text" name="username" id="username" placeholder="Usuário">
+          <input type="text" name="username" id="username" placeholder="Usuário" value="{{data[0]}}">
         </div>
       </div>
   
@@ -30,16 +50,21 @@
         <p>Senha do usuário</p>
         <div class="inputContent">
           <i class="ph ph-fingerprint-simple"></i>
-          <input type="text" name="password" id="password" placeholder="Senha">
+          <input type="text" name="password" id="password" placeholder="Senha" value ="{{data[1]}}">
         </div>
       </div>
   
       <div class="credencial">
         <button type="submit" id="sendNewUser" name="sendNewUser">
+          {% if edit_id < 0 %}
           Cadastrar
+          {% else %}
+          Salvar
+          {% endif %}
         </button>
       </div>
+      <input type="hidden" name="user_id" id="user_id" value="{{edit_id}}">
     </form>
   </div>
-  <a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
+  <a href="{{ url_for('list_user') }}">Voltar à lista</a>
 {% endblock %}
