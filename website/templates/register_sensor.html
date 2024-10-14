@@ -32,7 +32,7 @@
 
   <form class="form" id="form" method="POST"
     action="
-      {% if edit_id <0 %}
+      {% if edit_id < 0 %}
       {{ url_for('try_register_sensor') }}
       {% else %}
       {{ url_for('try_edit_sensor') }}
@@ -58,7 +58,7 @@
       <p>Valor</p>
       <div class="inputContent">
         <i class="ph ph-hash-straight"></i>
-        <input type="text" name="value" id="value" placeholder="Valor">
+        <input type="text" name="value" id="value" placeholder="Valor" value="{{data[2]}}">
       </div>
     </div>
 
@@ -71,6 +71,7 @@
         {% endif %}
       </button>
     </div>
+    <input type="hidden" name="edit_id" id="edit_id" value="{{edit_id}}">
   </form>
 </div>
 <a href="{{ url_for('list_sensor') }}">Voltar à lista</a>

@@ -16,15 +16,20 @@
       {% for id, sensor in sensors.items() %}
       <article>
         <p>{{sensor}}</p>
-        <form class="tools" id="form" method="POST" action="{{ url_for('try_remove_sensor') }}">
+        <div class="tools">
+          <form id="form" method="POST" action="{{ url_for('edit_sensor') }}">
           <button class="edit-icon" id=""><!--  colocar id-->
             <i class="ph ph-pencil-line"></i>
           </button>
+          <input type="hidden" name="sensor_id" id="sensor_id" value="{{id}}">
+          </form>
+          <form id="form" method="POST" action="{{ url_for('try_remove_sensor') }}">
           <button class="trash-icon" id=""><!--  colocar id-->
             <i class="ph ph-trash"></i>
           </button>
           <input type="hidden" name="sensor_id" id="sensor_id" value="{{id}}">
-        </form>
+          </form>
+        </div>
       </article>
       {% endfor %}
 

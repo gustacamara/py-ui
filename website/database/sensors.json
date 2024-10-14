@@ -7,6 +7,6 @@
     {
         "id": 2,
         "sensor": "IR",
-        "value": true
+        "value": "True"
     }
 ]
