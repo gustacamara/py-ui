@@ -1,7 +1,7 @@
 from flask_mqtt import Mqtt #pip install flask-mqtt
 import json
 from lib.dccpp import generateDccThrottleCmd, generateDccFunctionCmd
-from flask import Blueprint, request, render_template, redirect, url_for, current_app
+from flask import Blueprint, request, render_template
 client = Blueprint("client",__name__, template_folder="templates")
 
 sensors_values = {
@@ -32,19 +32,17 @@ turnouts = [
 
 mqtt_client = Mqtt()
 
-@client.before_app_request
-def init_mqtt():
+def init_mqtt(app):
     global mqtt_client
-    if not mqtt_client._connect_handler:
-        # Set MQTT config before init
-        current_app.config['MQTT_BROKER_URL'] = 'mqtt-dashboard.com'
-        current_app.config['MQTT_BROKER_PORT'] = 1883
-        current_app.config['MQTT_USERNAME'] = '' 
-        current_app.config['MQTT_PASSWORD'] = '' 
-        current_app.config['MQTT_KEEPALIVE'] = 5000 
-        current_app.config['MQTT_TLS_ENABLED'] = False
-        
-        mqtt_client.init_app(current_app)
+
+    app.config['MQTT_BROKER_URL'] = 'mqtt-dashboard.com'
+    app.config['MQTT_BROKER_PORT'] = 1883
+    app.config['MQTT_USERNAME'] = ''
+    app.config['MQTT_PASSWORD'] = ''
+    app.config['MQTT_KEEPALIVE'] = 5000
+    app.config['MQTT_TLS_ENABLED'] = False
+
+    mqtt_client.init_app(app)
 
 topic_dcc = "pyui/dcc-K3xWvP4p4D"
 topic_accessories = "pyui/accessories-9P5nN15kdp"
@@ -65,7 +63,7 @@ def send_dcc_cmd():
     direction = data["direction"]
     frontLight = data["frontLight"]
     secondaryLights = data["secondaryLight"]
-    cmds = generateDccThrottleCmd(cabId, speed, direction) 
+    cmds = generateDccThrottleCmd(cabId, speed, direction)
     cmds += generateDccFunctionCmd(cabId, frontLight, secondaryLights)
 
     publish_to_mqtt(topic_dcc, cmds)
@@ -73,11 +71,11 @@ def send_dcc_cmd():
 
 @client.route('/send_turnout_cmd', methods=['POST'])
 def send_turnout_cmd():
-    global topic_accessories 
+    global topic_accessories
 
     data = request.get_json()
 
-    turnoutValue = 0 if data["direction"] == "left" else 128 # Ajust angles 
+    turnoutValue = 0 if data["direction"] == "left" else 128 # Ajust angles
 
     cmd = {
         "id": data["id"],
@@ -112,7 +110,7 @@ def handle_mqtt_message(client, userdata, message):
 
     data = json.loads(message.payload.decode())
     print(str(data))
-    
+
     if "sensor" in data:
         sensors_values[data["id"]] = data
         print(sensors_values)
