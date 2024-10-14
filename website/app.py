@@ -93,7 +93,7 @@ def try_edit_user():
     
     if request.method == 'POST':
         user_id = int(request.form['user_id'])
-        print('\n'*100,request.form)
+        # print('\n'*100,request.form)
         username = request.form['username']
         password = request.form['password']
         data = jsonutil.import_json(app.root_path + '/database/credentials.json')
@@ -191,7 +191,7 @@ def try_register_cab():
 
         data = jsonutil.import_json(app.root_path + '/database/cabs.json')
 
-        if cab_id.strip('') == "" or manufacturer.strip('') == "" or model.strip('') == "":
+        if cab_id.strip('') == "" or manufacturer.strip('') == "" or model.strip('') == "" and isnumeric(cab_id):
             print("Locomotiva inválida!")
             return register_cab(error=True) 
 
@@ -208,13 +208,62 @@ def try_register_cab():
     else:
         print("Método inválido:", request.method)
         return redirect(app.url_for('register_cab')) # ERRO!
-
-@app.route('/register-cab')
-def register_cab(error = False):
+    
+    
+@app.route('/try-edit-cab', methods=['POST', 'GET'])
+def try_edit_cab():
     login_check = check_for_login()
     if login_check != None:
         return login_check
-    return render_template("register_cab.html", error = error)
+    if request.method == 'POST':
+        print("\n"*100, request.form)
+        edit_id = int(request.form['edit_id']   )
+        cab_id = request.form['cab_id']
+        manufacturer = request.form['manufacturer']
+        model = request.form['model']
+
+        data = jsonutil.import_json(app.root_path + '/database/cabs.json')
+
+        if cab_id.strip('') == "" or manufacturer.strip('') == "" or model.strip('') == "" or not cab_id.isnumeric():
+            print("Locomotiva inválida!")
+            return register_cab(error=True, data=[cab_id, manufacturer, model], edit_id=edit_id) 
+
+        cab_id = int(cab_id)
+
+        index = 0
+        for cab in data['cabs']:
+            if index != edit_id and int(cab['id']) == cab_id:
+                print("Locomotiva já cadastrada!") 
+                return register_cab(error=True, data=[cab_id, manufacturer, model], edit_id=edit_id)
+            index += 1
+            
+        data['cabs'][edit_id] = {'id': cab_id, 'manufacturer': manufacturer, 'model': model}
+        jsonutil.export_json(app.root_path + '/database/cabs.json', data)
+        return redirect(app.url_for('list_cab')) # Redirect to list of locomotives later
+    else:
+        print("Método inválido:", request.method)
+        return redirect(app.url_for('register_cab')) # ERRO!
+
+@app.route('/register-cab')
+def register_cab(error = False, data = ['', '', ''], edit_id = -1):
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    return render_template("register_cab.html", error = error, data=data, edit_id = edit_id)
+
+@app.route('/edit-cab', methods=['POST', 'GET'])
+def edit_cab(error = False, data = ['', '', ''], edit_id = -1):
+    login_check = check_for_login()
+    if login_check != None:
+        return login_check
+    if request.method == 'POST':
+        edit_id = request.form['edit_id']
+        data = jsonutil.import_json(app.root_path + '/database/cabs.json')['cabs'][int(edit_id)]
+        # print('\n'*100, data)
+        return register_cab(error, [data['id'], data['manufacturer'], data['model']], int(edit_id))
+    else:
+        print("Método inválido:", request.method)
+        return redirect(app.url_for('register_user'))
 
 @app.route('/remove-cab')
 def remove_cab():

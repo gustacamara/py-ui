@@ -1,42 +1,47 @@
 {% extends "base.html" %}
 
 {% block title %}
-  <title>Lista de locomotivas</title>
+<title>Lista de locomotivas</title>
 {% endblock %}
 
 {% block credential %}
-  <div class="container">
-    <div class="title">
-      <i class="ph-fill ph-train"></i>
-      <h1>Lista de locomotivas</h1>
-    </div>
-    <div class="credencial">
-      <div class="list-itens">
+<div class="container">
+  <div class="title">
+    <i class="ph-fill ph-train"></i>
+    <h1>Lista de locomotivas</h1>
+  </div>
+  <div class="credencial">
+    <div class="list-itens">
 
-        {% for id, cab in cabs.items() %}
-        <article>
-          <p>{{cab}}</p>
-          <form class="tools" id="form" method="POST" action="{{ url_for('try_remove_cab') }}">
-            <button class="edit-icon" id=""><!--  colocar id-->
-              <i class="ph ph-pencil-line"></i>
-            </button>
-            <button class="trash-icon" id=""><!--  colocar id-->
-              <i class="ph ph-trash"></i>
-            </button>
-            <input type="hidden" name="cab_id" id="cab_id" value="{{id}}">
+      {% for id, cab in cabs.items() %}
+      <article>
+        <p>{{cab}}</p>
+        <div class="tools">
+          <form id="form" method="POST" action="{{ url_for('edit_cab') }}">
+          <button class="edit-icon" id=""><!--  colocar id-->
+            <i class="ph ph-pencil-line"></i>
+          </button>
+          <input type="hidden" name="edit_id" id="edit_id" value="{{id}}">
           </form>
-        </article>
-        {% endfor %}
+          <form id="form" method="POST" action="{{ url_for('try_remove_cab') }}">
+          <button class="trash-icon" id=""><!--  colocar id-->
+            <i class="ph ph-trash"></i>
+            <input type="hidden" name="cab_id" id="cab_id" value="{{id}}">
+          </button>
+          </form>
+        </div>
+      </article>
+      {% endfor %}
 
-      </div>
-    </div>
-    <div class="credencial">
-      <a href="{{url_for('register_cab')}}">
-      <button type="submit" id=""><!--  colocar id-->
-        Cadastrar locomotivas
-      </a>
-      </button>
     </div>
   </div>
-  <a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
+  <div class="credencial">
+    <a href="{{url_for('register_cab')}}">
+      <button type="submit" id=""><!--  colocar id-->
+        Cadastrar locomotivas
+    </a>
+    </button>
+  </div>
+</div>
+<a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
 {% endblock %}
