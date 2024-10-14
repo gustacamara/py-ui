@@ -36,7 +36,7 @@ mqtt_client = Mqtt()
 def init_mqtt():
     global mqtt_client
     if not mqtt_client._connect_handler:
-        # Set MQTT config within the application context
+        # Set MQTT config before init
         current_app.config['MQTT_BROKER_URL'] = 'mqtt-dashboard.com'
         current_app.config['MQTT_BROKER_PORT'] = 1883
         current_app.config['MQTT_USERNAME'] = '' 
