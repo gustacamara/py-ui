@@ -108,9 +108,12 @@ def handle_disconnect(client, userdata, rc):
 def handle_mqtt_message(client, userdata, message):
     global sensors_values
 
-    data = json.loads(message.payload.decode())
-    print(str(data))
+    try:
+        print(message.payload.decode())
+        data = json.loads(message.payload.decode())
+        if "sensor" in data:
+            sensors_values[data["id"]] = data
+            print(sensors_values)
+    except:
+        pass
 
-    if "sensor" in data:
-        sensors_values[data["id"]] = data
-        print(sensors_values)
