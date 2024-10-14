@@ -192,7 +192,7 @@ def try_register_cab():
 
         data = jsonutil.import_json(app.root_path + '/database/cabs.json')
 
-        if cab_id.strip('') == "" or manufacturer.strip('') == "" or model.strip('') == "" and isnumeric(cab_id):
+        if cab_id.strip('') == "" or manufacturer.strip('') == "" or model.strip('') == "" and cab_id.isnumeric():
             print("Locomotiva inválida!")
             return register_cab(error=True) 
 
