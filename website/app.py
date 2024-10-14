@@ -3,7 +3,7 @@ from flask import Flask, redirect, render_template, request, jsonify # pip insta
 from flask_mqtt import Mqtt
 import jinja2 # pip install jinja2
 import jsonutil
-from client import client, turnouts
+from client import client, turnouts, init_mqtt
 
 app = Flask(__name__)
 app.static_folder = 'static'
@@ -16,6 +16,7 @@ current_user = ""
 admin_mode = False
 
 app.register_blueprint(client)
+init_mqtt(app)
 
 def check_for_login():
     if not debug_mode and current_user == "":
@@ -427,5 +428,4 @@ def list_detour():
 def register_detour():
   return render_template("register_detour.html")
 
-app.run(debug = True)
-
+app.run()
