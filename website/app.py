@@ -276,5 +276,13 @@ def try_remove_sensor():
         print("O sensor", name, "foi removido com sucesso!")
         return redirect(app.url_for('list_sensor'))
 
+@app.route('/list-detour')
+def list_detour():
+  return render_template("list_detour.html")
+
+@app.route('/register-detour')
+def register_detour():
+  return render_template("register_detour.html")
+
 app.run(debug = True)
 

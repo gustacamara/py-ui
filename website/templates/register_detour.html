@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+<title>Cadastrar desvio</title>
+{% endblock %}
+
+{% block credential %}
+<div class="container">
+  <div class="title">
+    <i class="ph ph-arrows-left-right"></i>
+    <h1>Cadastrar desvio</h1>
+  </div>
+  <!-- if error  -->
+  <div class="invalid-credentials-error">
+    <h2>Erro ao cadastrar</h2>
+    <p>Verifique se todos os campos estão preenchidos corretamente.</p>
+  </div>
+  <!-- endif -->
+
+  <div class="credencial">
+    <p>Id</p>
+    <div class="inputContent">
+      <i class="ph ph-fingerprint-simple"></i>
+      <input type="text" name="sensor" id="id" placeholder="Id">
+    </div>
+  </div>
+
+  <form class="form" id="form" method="POST" action="">
+    <div class="credencial">
+      <p>Nome</p>
+      <div class="inputContent">
+        <i class="ph ph-arrows-left-right"></i>
+        <input type="text" name="name" id="name" placeholder="Desvio">
+      </div>
+    </div>
+
+    <div class="credencial">
+      <p>Valor</p>
+      <div class="inputContent">
+        <i class="ph ph-hash-straight"></i>
+        <input type="text" name="value" id="value" placeholder="Valor">
+      </div>
+    </div>
+
+    <div class="credencial">
+      <button type="submit" id="addDetour" name="">
+        Cadastrar
+      </button>
+    </div>
+  </form>
+</div>
+<a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
+{% endblock %}
