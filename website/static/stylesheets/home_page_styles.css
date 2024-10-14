@@ -98,7 +98,7 @@ ul li {
 }
 
 ul.dropdown {
-  width: 180px;
+  width: 110px;
   position: absolute;
   display: none;
 
@@ -108,8 +108,14 @@ ul.dropdown {
   padding: 10px;
   margin-top: 32px;
   & li {
-    display: block;
+    display: flex;
+    gap: 5px;
+    & i{
+      color: var(--slate-800);
+      font-size: 16px;
+    }
   }
+
 }
 
 ul li:hover ul.dropdown {

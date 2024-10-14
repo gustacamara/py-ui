@@ -27,11 +27,23 @@
           </div>
           <ul class="dropdown">
             {% if admin_mode %}
-              <li><a href="{{ url_for('list_user') }}">Usuários</a></li>
-              <li><a href="{{ url_for('list_cab') }}">Locomotivas</a></li>
-              <li><a href="{{ url_for('list_sensor') }}">Sensores</a></li>
+              <li>
+                <!-- <i class="ph-fill ph-users"></i> -->
+                <a href="{{ url_for('list_user') }}">Usuários</a>
+              </li>
+              <li>
+                <!-- <i class="ph-fill ph-train"></i> -->
+                <a href="{{ url_for('list_cab') }}">Locomotivas</a>
+              </li>
+              <li>
+                <!-- <i class="ph ph-broadcast"></i> -->
+                <a href="{{ url_for('list_sensor') }}">Sensores</a>
+              </li>
             {% endif %}
-            <li><a class="exit" href="{{ url_for('login_page') }}">Sair</a></li>
+            <li>
+              <!-- <i class="ph-fill ph-sign-out"></i> -->
+              <a class="exit" href="{{ url_for('login_page') }}">Sair</a>
+            </li>
           </ul>
         </div>
       </li>
