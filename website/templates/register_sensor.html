@@ -1,53 +1,77 @@
 {% extends "base.html" %}
 
 {% block title %}
-  <title>Cadastrar sensor</title>
+<title>Cadastrar sensor</title>
 {% endblock %}
 
 {% block credential %}
-  <div class="container">
-    <div class="title">
-      <i class="ph ph-broadcast"></i>
-      <h1>Cadastrar sensor</h1>
-    </div>
-    {% if error %}
-    <div class="invalid-credentials-error">
-      <h2>Erro ao cadastrar</h2>
-      <p>Verifique se todos os campos estão preenchidos corretamente.</p>
-    </div>
-    {% endif %}
-
-    <form class="form" id="form" method="POST" action="{{ url_for('try_register_sensor') }}">
-      <div class="credencial">
-        <p>Id</p>
-        <div class="inputContent">
-          <i class="ph ph-fingerprint-simple"></i>
-          <input type="text" name="id" id="id" placeholder="Id">
-        </div>
-      </div>
-
-      <div class="credencial">
-        <p>Nome</p>
-        <div class="inputContent">
-          <i class="ph ph-aperture"></i>
-          <input type="text" name="name" id="name" placeholder="Sensor">
-        </div>
-      </div>
-
-      <div class="credencial">
-        <p>Valor</p>
-        <div class="inputContent">
-          <i class="ph ph-hash-straight"></i>
-          <input type="text" name="value" id="value" placeholder="Valor">
-        </div>
-      </div>
-
-      <div class="credencial">
-        <button type="submit" id="sendNewUser" name="sendNewUser">
-          Cadastrar
-        </button>
-      </div>
-    </form>
+<div class="container">
+  <div class="title">
+    <i class="ph ph-broadcast"></i>
+    <h1>
+      {% if edit_id < 0 %}
+      Cadastrar sensor
+      {% else %}
+      Editar sensor
+      {% endif %}
+    </h1>
   </div>
-  <a href="{{ url_for('list_sensor') }}">Voltar à lista</a>
+  {% if error %}
+  <div class="invalid-credentials-error">
+    <h2>Erro ao
+      {% if edit_id < 0 %}
+      Cadastrar
+      {% else %}
+      Editar
+      {% endif %}
+      sensor
+    </h2>
+    <p>Verifique se todos os campos estão preenchidos corretamente.</p>
+  </div>
+  {% endif %}
+
+  <form class="form" id="form" method="POST"
+    action="
+      {% if edit_id <0 %}
+      {{ url_for('try_register_sensor') }}
+      {% else %}
+      {{ url_for('try_edit_sensor') }}
+      {% endif %}
+    ">
+    <div class="credencial">
+      <p>Id</p>
+      <div class="inputContent">
+        <i class="ph ph-fingerprint-simple"></i>
+        <input type="text" name="id" id="id" placeholder="Id" value="{{data[0]}}">
+      </div>
+    </div>
+
+    <div class="credencial">
+      <p>Nome</p>
+      <div class="inputContent">
+        <i class="ph ph-aperture"></i>
+        <input type="text" name="name" id="name" placeholder="Sensor" value="{{data[1]}}">
+      </div>
+    </div>
+
+    <div class="credencial">
+      <p>Valor</p>
+      <div class="inputContent">
+        <i class="ph ph-hash-straight"></i>
+        <input type="text" name="value" id="value" placeholder="Valor">
+      </div>
+    </div>
+
+    <div class="credencial">
+      <button type="submit" id="sendNewUser" name="sendNewUser">
+        {% if edit_id < 0 %}
+        Cadastrar
+        {% else %}
+        Salvar
+        {% endif %}
+      </button>
+    </div>
+  </form>
+</div>
+<a href="{{ url_for('list_sensor') }}">Voltar à lista</a>
 {% endblock %}

@@ -15,9 +15,12 @@
       <article> <!-- Replace with a base later! -->
         <p>{{admin_name}}</p>
         <div class="tools">
-          <button class="edit-icon" id=""><!--  colocar id-->
+          <form id="form" method="POST" action="{{ url_for('edit_user') }}">
+          <button type="submit" class="edit-icon" id=""><!--  colocar id-->
             <i class="ph ph-pencil-line"></i>
           </button>
+          <input type="hidden" name="user_id" id="user_id" value="0">
+        </form>
         </div>
       </article>
       {% for id, user in users.items() %}

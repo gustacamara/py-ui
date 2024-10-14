@@ -98,9 +98,10 @@ def try_edit_user():
         password = request.form['password']
         data = jsonutil.import_json(app.root_path + '/database/credentials.json')
 
-        if username.strip(' ') == "" and password.strip(' ') == "":
+        print('n'*100, user_id, username, password)
+        if username.strip(' ') == "" or password.strip(' ') == "":
             print("Usuário inválido!")
-            return register_user(error=True)
+            return register_user(error=True, data=[username, password], edit_id=user_id)
 
         index = 0
         for user in data['users']:
