@@ -98,7 +98,7 @@ ul li {
 }
 
 ul.dropdown {
-  width: 180px;
+  width: 110px;
   position: absolute;
   display: none;
 
@@ -108,8 +108,14 @@ ul.dropdown {
   padding: 10px;
   margin-top: 32px;
   & li {
-    display: block;
+    display: flex;
+    gap: 5px;
+    & i{
+      color: var(--slate-800);
+      font-size: 16px;
+    }
   }
+
 }
 
 ul li:hover ul.dropdown {
@@ -302,12 +308,16 @@ ul li:hover ul.dropdown {
 
 }
 
-.cab-control{
+.panel{
   display: flex;
   flex-direction: column;
   gap: 12px;
   padding-inline: 8px;
   padding-block: 16px;
+}
+
+.panel+ .panel{
+  border-top: 1px solid var(--offwhite-10);
 }
 
 .control-header{

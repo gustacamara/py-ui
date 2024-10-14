@@ -27,21 +27,32 @@
           </div>
           <ul class="dropdown">
             {% if admin_mode %}
-              <li><a href="{{ url_for('list_user') }}">Usuários</a></li>
-              <li><a href="{{ url_for('list_cab') }}">Locomotivas</a></li>
-              <li><a href="{{ url_for('list_sensor') }}">Sensores</a></li>
+              <li>
+                <!-- <i class="ph-fill ph-users"></i> -->
+                <a href="{{ url_for('list_user') }}">Usuários</a>
+              </li>
+              <li>
+                <!-- <i class="ph-fill ph-train"></i> -->
+                <a href="{{ url_for('list_cab') }}">Locomotivas</a>
+              </li>
+              <li>
+                <!-- <i class="ph ph-broadcast"></i> -->
+                <a href="{{ url_for('list_sensor') }}">Sensores</a>
+              </li>
             {% endif %}
-            <li><a class="exit" href="{{ url_for('login_page') }}">Sair</a></li>
+            <li>
+              <!-- <i class="ph-fill ph-sign-out"></i> -->
+              <a class="exit" href="{{ url_for('login_page') }}">Sair</a>
+            </li>
           </ul>
         </div>
       </li>
     </ul>
-
-    <!-- <i class="ph-bold ph-list"></i> -->
     </div>
   </header>
 
   <main>
+<!-- composition sidebar -->
     <div class="train-sidebar">
       <div class="composition">
 
@@ -114,6 +125,7 @@
       </div>
     </div>
 
+<!-- main content -->
     <div class="rail-road-model">
       <div class="rail-model-container">
         <h1>Maquete do Roberto</h1>
@@ -121,6 +133,7 @@
       </div>
     </div>
 
+<!-- control sidebar -->
     <div class="control-sidebar">
       <div class="cab-id">
         <h1>ID</h1>
@@ -129,7 +142,7 @@
           Ok
         </button>
       </div>
-      <div class="cab-control">
+      <div class="cab-control panel">
         <div class="control-header">
           <h1>Locomotiva - "id"</h1>
           <button class="icon-button">
@@ -172,8 +185,6 @@
               </div>
             </div>
           </div>
-
-          <div id="real-time"></div>
 
           <div class="hooter control-option" style="display: none;">
             <div class="control-title">
@@ -264,40 +275,61 @@
             </div>
           </div>
 
+          <button id="emergency" class="emergency" title="Botão de emergência" style="display: none;">
+            Parar
+          </button>
+        </div>
+      </div>
+
+      <div class="sensor-control panel">
+        <div class="control-header">
+          <h1>Lista de sensores</h1>
+          <button class="icon-button">
+            <i class="ph ph-minus"></i>
+          </button>
+        </div>
+        <div class="control-list-content">
+          <div id="real-time"></div>
+        </div>
+      </div>
+
+      <div class="detour-control panel">
+        <div class="control-header">
+          <h1>Lista de desvios</h1>
+          <button class="icon-button">
+            <i class="ph ph-minus"></i>
+          </button>
+        </div>
+        <div class="control-list-content">
           <div class="detour control-option">
             <div class="control-title">
               <div class="control-name">
                 <i class="ph ph-arrows-left-right"></i>
                 <h3>Desvios</h3>
               </div>
-
-              <label class="text-switch">
-                <!-- <input type="checkbox" id="hooterMainSwitch"> -->
-                <select name="on-off" id="hooter-usage">
-                  <option value="on">Ligado</option>
-                  <option value="off">Desligado</option>
-                </select>
-                <span class="slider"></span>
-              </label>
+          
+              <!-- <label class="text-switch">
+                                  <input type="checkbox" id="hooterMainSwitch">
+                                  <select name="on-off" id="hooter-usage">
+                                    <option value="on">Ligado</option>
+                                    <option value="off">Desligado</option>
+                                  </select>
+                                  <span class="slider"></span>
+                                </label> -->
             </div>
-
             <div class="detour-content">
-            {% for turnout in turnouts %}
+              {% for turnout in turnouts %}
               <div class="handle-switch">
-              	<p>{{turnout["id"]}}</p>
+                <p>{{turnout["id"]}}</p>
                 <select name="on-off" class="turnout-direction" data-id="{{turnout['id']}}">
                   <option value="right">Direita</option>
                   <option value="left">Esquerda</option>
                 </select>
               </div>
-            {% endfor %}
+              {% endfor %}
             </div>
           </div>
-
-          <button id="emergency" class="emergency" title="Botão de emergência" style="display: none;">
-            Parar
-          </button>
-        </div>
+        </div>  
       </div>
     </div>
   </main>
