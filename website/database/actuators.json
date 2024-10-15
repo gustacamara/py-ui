@@ -1,5 +1,7 @@
- [ {
-    "id": 1,
-    "actuator": "SERVO",
-    "value": 128
-}]
+[
+    {
+        "id": 1,
+        "actuator": "SERVO",
+        "value": 128
+    }
+]

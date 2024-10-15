@@ -8,10 +8,5 @@
         "id": 2,
         "sensor": "IR",
         "value": "True"
-    },
-    {
-        "id": "3",
-        "sensor": "teste",
-        "value": "12"
     }
 ]

@@ -78,7 +78,7 @@ def send_turnout_cmd():
     turnoutValue = 0 if data["direction"] == "left" else 128 # Ajust angles
 
     cmd = {
-        "id": data["id"],
+        "id": int(data["id"]),
         "actuator": "SERVO",
         "value": turnoutValue
     }
