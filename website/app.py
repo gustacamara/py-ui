@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.static_folder = 'static'
 
 # Settings
-debug_mode = True # Enable this to be able to view pages all pages without logging in
+debug_mode = False # Enable this to be able to view pages all pages without logging in
 
 # Data
 current_user = ""
@@ -530,4 +530,4 @@ def edit_detour(error = False):
         print("Método inválido:", request.method)
         return redirect(app.url_for('register_detour'))
 
-app.run(debug=True)
+app.run()
