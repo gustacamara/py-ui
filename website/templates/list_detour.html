@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-<title>Lista de desvios</title>
+<title>Lista de Desvios</title>
 {% endblock %}
 
 {% block credential %}
@@ -13,26 +13,34 @@
   <div class="credencial">
     <div class="list-itens">
 
-      <!-- for i in cabs  -->
+      {% for id, detour in detours.items() %}
       <article>
-        <p>Detour name</p>
-       <form class="tools" id="form" method="POST" action=""><!-- action func-->
-          <button type="submit" class="edit-icon" id=""><!--  colocar id-->
+        <p>{{detour}}</p>
+        <div class="tools">
+          <form id="form" method="POST" action="{{ url_for('edit_detour') }}">
+          <button class="edit-icon" id=""><!--  colocar id-->
             <i class="ph ph-pencil-line"></i>
           </button>
-          <button type="submit" class="trash-icon" id=""><!--  colocar id-->
+          <input type="hidden" name="edit_id" id="edit_id" value="{{id}}">
+          </form>
+          <form id="form" method="POST" action="{{ url_for('try_remove_detour') }}">
+          <button class="trash-icon" id=""><!--  colocar id-->
             <i class="ph ph-trash"></i>
+            <input type="hidden" name="detour_id" id="detour_id" value="{{id}}">
           </button>
-        </form>
+          </form>
+        </div>
       </article>
-      <!--  fim do bloco-->
+      {% endfor %}
 
     </div>
   </div>
   <div class="credencial">
-    <button type="submit" id="">
-      Cadastrar
-    </button>
+    <a href="{{url_for('register_detour')}}">
+      <button type="submit" >
+        Cadastrar desvios
+      </button>
+    </a>
   </div>
 </div>
 <a href="{{ url_for('home_page') }}">Voltar à página inicial</a>

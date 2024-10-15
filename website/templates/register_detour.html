@@ -8,29 +8,53 @@
 <div class="container">
   <div class="title">
     <i class="ph ph-arrows-left-right"></i>
-    <h1>Cadastrar desvio</h1>
+    <h1>
+      {% if edit_id < 0 %}
+      Cadastrar desvio
+      {% else %}
+      Editar desvio
+      {% endif %}
+    </h1>
   </div>
-  <!-- if error  -->
+  {% if error %}
   <div class="invalid-credentials-error">
-    <h2>Erro ao cadastrar</h2>
+    <h2>Erro ao
+      {% if edit_id < 0 %}
+      Cadastrar
+      {% else %}
+      Editar
+      {% endif %}
+      desvio
+    </h2>
     <p>Verifique se todos os campos estão preenchidos corretamente.</p>
   </div>
-  <!-- endif -->
+  {% endif %}
 
-  <div class="credencial">
-    <p>Id</p>
-    <div class="inputContent">
-      <i class="ph ph-fingerprint-simple"></i>
-      <input type="text" name="sensor" id="id" placeholder="Id">
+  <form class="form" id="form" method="POST"
+    action="
+      {% if edit_id < 0 %}
+      {{ url_for('try_register_detour') }}
+      {% else %}
+      {{ url_for('try_edit_detour') }}
+      {% endif %}
+    ">
+    <div class="credencial">
+      <!--"id": 1,
+    "actuator": "SERVO",
+    "value": 128-->
+
+      <p>Id</p>
+      <div class="inputContent">
+        <i class="ph ph-fingerprint-simple"></i>
+        <input type="text" name="id" id="id" placeholder="Id" value="{{data[0]}}">
+      </div>
     </div>
-  </div>
 
-  <form class="form" id="form" method="POST" action="">
     <div class="credencial">
       <p>Nome</p>
       <div class="inputContent">
-        <i class="ph ph-arrows-left-right"></i>
-        <input type="text" name="name" id="name" placeholder="Desvio">
+        <i class="ph ph-aperture"></i>
+        <input type="text" name="actuator" id="actuator" placeholder="Actuator" value="{{data[1]}}">
       </div>
     </div>
 
@@ -38,16 +62,21 @@
       <p>Valor</p>
       <div class="inputContent">
         <i class="ph ph-hash-straight"></i>
-        <input type="text" name="value" id="value" placeholder="Valor">
+        <input type="text" name="value" id="value" placeholder="Valor" value="{{data[2]}}">
       </div>
     </div>
 
     <div class="credencial">
-      <button type="submit" id="addDetour" name="">
+      <button type="submit" id="sendNewUser" name="sendNewUser">
+        {% if edit_id < 0 %}
         Cadastrar
+        {% else %}
+        Salvar
+        {% endif %}
       </button>
     </div>
+    <input type="hidden" name="edit_id" id="edit_id" value="{{edit_id}}">
   </form>
 </div>
-<a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
+<a href="{{ url_for('list_detour') }}">Voltar à lista</a>
 {% endblock %}
