@@ -33,9 +33,9 @@
   
     <form class="form" id="form" method="POST" action="
       {% if edit_id <0 %}
-      {{ url_for('try_register_user') }}
+      {{ url_for('user_blueprint.try_register_user') }}
       {% else %}
-      {{ url_for('try_edit_user') }}
+      {{ url_for('user_blueprint.try_edit_user') }}
       {% endif %}
     ">
       <div class="credencial">
@@ -66,5 +66,5 @@
       <input type="hidden" name="user_id" id="user_id" value="{{edit_id}}">
     </form>
   </div>
-  <a href="{{ url_for('list_user') }}">Voltar à lista</a>
+  <a href="{{ url_for('user_blueprint.list_user') }}">Voltar à lista</a>
 {% endblock %}

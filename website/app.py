@@ -4,26 +4,18 @@ from flask_mqtt import Mqtt
 import jinja2 # pip install jinja2
 import jsonutil
 from client import client, turnouts, init_mqtt
+from flask_data import debug_mode, current_user, admin_mode
+from flask_utils import check_for_login
+
+from user_blueprint import user_blueprint
 
 app = Flask(__name__)
 app.static_folder = 'static'
 
-# Settings
-debug_mode = False # Enable this to be able to view pages all pages without logging in
-
-# Data
-current_user = ""
-admin_mode = False
-
-app.register_blueprint(client)
+app.register_blueprint(client, url_prefix='')
+app.register_blueprint(user_blueprint, url_prefix='')
 init_mqtt(app)
 
-def check_for_login():
-    if not debug_mode and current_user == "":
-        print("You must be logged!")
-        return redirect(app.url_for('login_page', error=True))
-    else:
-        return None
 
 # Handle login
 @app.route('/', methods=['POST', 'GET'])
@@ -32,6 +24,7 @@ def login_page(error=False):
 
 @app.route('/try_authenticate', methods=['POST'])
 def try_authenticate():
+    global current_user, admin_mode
     username = request.form['username']
     password = request.form['password']
     data = jsonutil.import_json(app.root_path + '/database/credentials.json')
@@ -52,131 +45,14 @@ def try_authenticate():
 
 @app.route('/homepage')
 def home_page():
+    global current_user, admin_mode, turnouts
     login_check = check_for_login()
     if login_check != None:
         return login_check
+    print("Current user:", current_user, "Admin mode:", admin_mode)
     return render_template("home_page.html", current_user = current_user,admin_mode=admin_mode, turnouts = turnouts)
 
-# Handle CRUD for users
 
-@app.route('/try-register-user', methods=['POST', 'GET'])
-def try_register_user():
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        data = jsonutil.import_json(app.root_path + '/database/credentials.json')
-
-        if username.strip(' ') == "" and password.strip(' ') == "":
-            print("Usuário inválido!")
-            return register_user(error=True)
-
-        for user in data['users']:
-            if user['username'] == username:
-                print("Usuário já cadastrado!")
-                return register_user(error=True)
-
-        data['users'].append({'username': username, 'password': password})
-        jsonutil.export_json(app.root_path + '/database/credentials.json', data)
-        return redirect(app.url_for('list_user')) # Redirect to list of users later
-    else:
-        print("Método inválido:", request.method)
-        return redirect(app.url_for('register_user')) # ERRO!
-    
-    
-@app.route('/try-edit-user', methods=['POST', 'GET'])
-def try_edit_user():
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    
-    if request.method == 'POST':
-        user_id = int(request.form['user_id'])
-        # print('\n'*100,request.form)
-        username = request.form['username']
-        password = request.form['password']
-        data = jsonutil.import_json(app.root_path + '/database/credentials.json')
-
-        print('n'*100, user_id, username, password)
-        if username.strip(' ') == "" or password.strip(' ') == "":
-            print("Usuário inválido!")
-            return register_user(error=True, data=[username, password], edit_id=user_id)
-
-        index = 0
-        for user in data['users']:
-            if index != user_id and user['username'] == username:
-                print("Usuário já cadastrado!")
-                return register_user(error=True, data=[username, password], edit_id=user_id)
-            index += 1
-
-        data['users'][user_id] = {'username': username, 'password': password}
-        jsonutil.export_json(app.root_path + '/database/credentials.json', data)
-        return redirect(app.url_for('list_user')) # Redirect to list of users later
-    else:
-        print("Método inválido:", request.method)
-        return redirect(app.url_for('register_user')) # ERRO!
-
-@app.route('/register-user')
-def register_user(error = False, data = ['', ''], edit_id = -1):
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    return render_template("register_user.html", error = error, data=data, edit_id = edit_id)
-
-@app.route('/edit-user', methods=['POST', 'GET'])
-def edit_user(error = False):
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    if request.method == 'POST':
-        user_id = request.form['user_id']
-        data = jsonutil.import_json(app.root_path + '/database/credentials.json')['users'][int(user_id)]
-        return register_user(error, [data['username'], data['password']], int(user_id))
-    else:
-        print("Método inválido:", request.method)
-        return redirect(app.url_for('register_user'))
-
-@app.route('/remove-user')
-def remove_user():
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    return render_template("remove_user.html")
-
-@app.route('/try-remove-user', methods=['POST', 'GET'])
-def try_remove_user():
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    if request.method == 'POST':
-        user_id = request.form['user_id']
-        data = jsonutil.import_json(app.root_path + '/database/credentials.json')
-        # print("\n\n\n\n\n\n\n\n\n\nUsuário a ser removido:", user_id)
-        name = data['users'].pop(int(user_id))
-        jsonutil.export_json(app.root_path + '/database/credentials.json', data)
-        print("O usuário", name, "foi removido com sucesso!")
-        return redirect(app.url_for('list_user')) # Redirect to list of users later
-
-@app.route('/list-user')
-def list_user():
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    data = jsonutil.import_json(app.root_path + '/database/credentials.json')['users']
-    admin_name = ''
-    admin_id = 0
-    users = {}
-    index = 0
-    for user in data:
-        if index > 0:
-            users.update({index: user['username']})
-        else:
-            admin_name = user['username']
-        index += 1
-    # print("\n\n\n\n\n\n\n\n\n\n\n\n\nUsuários:", users)
-    return render_template("list_user.html", users = users, admin_name = admin_name, admin_id = admin_id)
 
 # Handle CRUD for locomotives
 
@@ -530,4 +406,4 @@ def edit_detour(error = False):
         print("Método inválido:", request.method)
         return redirect(app.url_for('register_detour'))
 
-app.run()
+app.run(debug=True)
