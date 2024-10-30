@@ -4,8 +4,6 @@ import jsonutil
 
 cab_blueprint = Blueprint('cab_blueprint', __name__, template_folder="templates") 
 
-# Handle CRUD for users
-
 # Handle CRUD for locomotives
 
 @cab_blueprint.route('/try-register-cab', methods=['POST', 'GET'])
