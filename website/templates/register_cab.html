@@ -34,9 +34,9 @@
 
     <form class="form" id="form" method="POST" action="
       {% if edit_id <0 %}
-      {{ url_for('try_register_cab') }}
+      {{ url_for('cab_blueprint.try_register_cab') }}
       {% else %}
-      {{ url_for('try_edit_cab') }}
+      {{ url_for('cab_blueprint.try_edit_cab') }}
       {% endif %}
     ">
       <div class="credencial">
@@ -76,5 +76,5 @@
       <input type="hidden" name="edit_id" id="edit_id" value="{{edit_id}}">
     </form>
   </div>
-  <a href="{{ url_for('list_cab') }}">Voltar à lista</a>
+  <a href="{{ url_for('cab_blueprint.list_cab') }}">Voltar à lista</a>
 {% endblock %}

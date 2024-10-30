@@ -8,12 +8,14 @@ from flask_data import debug_mode, current_user, admin_mode
 from flask_utils import check_for_login
 
 from user_blueprint import user_blueprint
+from cab_blueprint import cab_blueprint
 
 app = Flask(__name__)
 app.static_folder = 'static'
 
 app.register_blueprint(client, url_prefix='')
 app.register_blueprint(user_blueprint, url_prefix='')
+app.register_blueprint(cab_blueprint, url_prefix='')
 init_mqtt(app)
 
 
@@ -51,134 +53,6 @@ def home_page():
         return login_check
     print("Current user:", current_user, "Admin mode:", admin_mode)
     return render_template("home_page.html", current_user = current_user,admin_mode=admin_mode, turnouts = turnouts)
-
-
-
-# Handle CRUD for locomotives
-
-@app.route('/try-register-cab', methods=['POST', 'GET'])
-def try_register_cab():
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    if request.method == 'POST':
-        #print(">>>>>>>>>>>>>>>form: ", request.form)
-        cab_id = request.form['cab_id']
-        manufacturer = request.form['manufacturer']
-        model = request.form['model']
-
-        data = jsonutil.import_json(app.root_path + '/database/cabs.json')
-
-        if cab_id.strip('') == "" or manufacturer.strip('') == "" or model.strip('') == "" and cab_id.isnumeric():
-            print("Locomotiva inválida!")
-            return register_cab(error=True) 
-
-        cab_id = int(cab_id)
-
-        for cab in data['cabs']:
-            if int(cab['id']) == cab_id:
-                print("Locomotiva já cadastrada!") 
-                return register_cab(error=True)
-            
-        data['cabs'].append({'id': cab_id, 'manufacturer': manufacturer, 'model': model})
-        jsonutil.export_json(app.root_path + '/database/cabs.json', data)
-        return redirect(app.url_for('list_cab')) # Redirect to list of locomotives later
-    else:
-        print("Método inválido:", request.method)
-        return redirect(app.url_for('register_cab')) # ERRO!
-    
-    
-@app.route('/try-edit-cab', methods=['POST', 'GET'])
-def try_edit_cab():
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    if request.method == 'POST':
-        #print("\n"*100, request.form)
-        edit_id = int(request.form['edit_id']   )
-        cab_id = request.form['cab_id']
-        manufacturer = request.form['manufacturer']
-        model = request.form['model']
-
-        data = jsonutil.import_json(app.root_path + '/database/cabs.json')
-
-        if cab_id.strip('') == "" or manufacturer.strip('') == "" or model.strip('') == "" or not cab_id.isnumeric():
-            print("Locomotiva inválida!")
-            return register_cab(error=True, data=[cab_id, manufacturer, model], edit_id=edit_id) 
-
-        cab_id = int(cab_id)
-
-        index = 0
-        for cab in data['cabs']:
-            if index != edit_id and int(cab['id']) == cab_id:
-                print("Locomotiva já cadastrada!") 
-                return register_cab(error=True, data=[cab_id, manufacturer, model], edit_id=edit_id)
-            index += 1
-            
-        data['cabs'][edit_id] = {'id': cab_id, 'manufacturer': manufacturer, 'model': model}
-        jsonutil.export_json(app.root_path + '/database/cabs.json', data)
-        return redirect(app.url_for('list_cab')) # Redirect to list of locomotives later
-    else:
-        print("Método inválido:", request.method)
-        return redirect(app.url_for('register_cab')) # ERRO!
-
-@app.route('/register-cab')
-def register_cab(error = False, data = ['', '', ''], edit_id = -1):
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    return render_template("register_cab.html", error = error, data=data, edit_id = edit_id)
-
-@app.route('/edit-cab', methods=['POST', 'GET'])
-def edit_cab(error = False):
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    if request.method == 'POST':
-        edit_id = request.form['edit_id']
-        data = jsonutil.import_json(app.root_path + '/database/cabs.json')['cabs'][int(edit_id)]
-        # print('\n'*100, data)
-        return register_cab(error, [data['id'], data['manufacturer'], data['model']], int(edit_id))
-    else:
-        print("Método inválido:", request.method)
-        return redirect(app.url_for('register_user'))
-
-@app.route('/remove-cab')
-def remove_cab():
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    return render_template("remove_cab.html")
-
-@app.route('/list-cab')
-def list_cab():
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    data = jsonutil.import_json(app.root_path + '/database/cabs.json')['cabs']
-    # print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n',data)
-    cabs = {}
-    
-    index = 0
-    for cab in data:
-        cabs.update({index: cab['id']})
-        index += 1
-    
-    return render_template("list_cab.html", cabs = cabs)
-
-@app.route('/try-remove-cab', methods=['POST', 'GET'])
-def try_remove_cab():
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    if request.method == 'POST':
-        cab_id = request.form['cab_id']
-        data = jsonutil.import_json(app.root_path + '/database/cabs.json')
-        # print("\n\n\n\n\n\n\n\n\n\nLocomotiva a ser removida:", cab_id)
-        name = data['cabs'].pop(int(cab_id))
-        jsonutil.export_json(app.root_path + '/database/cabs.json', data)
-        print("A locomotiva", name, "foi removida com sucesso!")
-        return redirect(app.url_for('list_cab'))
 
 # Handle CRUD for sensors
 
