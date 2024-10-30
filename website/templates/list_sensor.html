@@ -17,13 +17,13 @@
       <article>
         <p>{{sensor}}</p>
         <div class="tools">
-          <form id="form" method="POST" action="{{ url_for('edit_sensor') }}">
+          <form id="form" method="POST" action="{{ url_for('sensor_blueprint.edit_sensor') }}">
           <button class="edit-icon" id=""><!--  colocar id-->
             <i class="ph ph-pencil-line"></i>
           </button>
           <input type="hidden" name="sensor_id" id="sensor_id" value="{{id}}">
           </form>
-          <form id="form" method="POST" action="{{ url_for('try_remove_sensor') }}">
+          <form id="form" method="POST" action="{{ url_for('sensor_blueprint.try_remove_sensor') }}">
           <button class="trash-icon" id=""><!--  colocar id-->
             <i class="ph ph-trash"></i>
           </button>
@@ -36,7 +36,7 @@
     </div>
   </div>
   <div class="credencial">
-    <a href="{{url_for('register_sensor')}}">
+    <a href="{{url_for('sensor_blueprint.register_sensor')}}">
     <button type="submit" id=""><!--  colocar id-->
       Cadastrar sensores
     </button>
