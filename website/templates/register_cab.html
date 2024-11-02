@@ -10,12 +10,12 @@
       <i class="ph-fill ph-train"></i>
       <h1>
         {% if edit_id < 0 %}
-        Cadastrar
-      {% else %}
-        Editar
-      {% endif %}
-      locomotiva
-    </h1>
+          Cadastrar
+        {% else %}
+          Editar
+        {% endif %}
+          locomotiva
+      </h1>
     </div>
     {% if error %}
     <div class="invalid-credentials-error">
@@ -26,7 +26,7 @@
         {% else %}
           Editar
         {% endif %}
-        locomotiva.
+          locomotiva.
       </h2>
       <p>Verifique se todos os campos estão preenchidos corretamente.</p>
     </div>
@@ -62,14 +62,33 @@
           <input type="text" name="model" id="model" placeholder="Modelo" value="{{data[2]}}">
         </div>
       </div>
+
+      <div class="credencial">
+        <p>Imagem</p>
+        <div class="inputContent">
+            <i class="ph ph-upload"></i>
+          <input type="file" name="image" id="image" placeholder="Imagem" accept=".png, .jpeg, .jpg" value="{{data[3]}}">
+        </div>
+      </div>
+
+      <div class="credencial">
+        <p>Tipo</p>
+        <div class="inputContent">
+          <i class="ph ph-train-simple"></i>
+          <select name="type" id="type">
+            <option value="cab" >Locomotiva</option>
+            <option value="wagon" >Vagão</option>
+          </select>
+        </div>
+      </div>
   
   
       <div class="credencial">
         <button type="submit" id="sendNewUser" name="sendNewUser">
           {% if edit_id < 0 %}
-          Cadastrar
+            Cadastrar
           {% else %}
-          Salvar
+            Salvar
           {% endif %}
         </button>
       </div>
