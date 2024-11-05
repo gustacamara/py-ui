@@ -1,7 +1,5 @@
-import sys
 from flask import Flask, redirect, render_template, request, jsonify # pip install flask
 from flask_mqtt import Mqtt
-import jinja2 # pip install jinja2
 import utils.json_util
 from utils.db_utils import create_db
 from client import client, turnouts, init_mqtt
@@ -12,9 +10,10 @@ from .cab_controller import cab_controller
 from .sensor_controller import sensor_controller
 from .detour_controller import detour_controller
 
-def create_app():
-    app = Flask(__name__,template_folder="./views/",static_folder="./static/", root_path="./")
-    app.static_folder = 'static'
+def create_app(path):
+    template_path = path + "/templates"
+    static_path = path + "/static"
+    app = Flask(__name__, template_folder=template_path, static_folder=static_path)
     
     db, cursor = create_db(True)
 
