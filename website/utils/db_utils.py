@@ -1,10 +1,7 @@
 import sqlite3
 
-cursor = None
-
 def create_db(recreate=False):
-    global cursor
-    db = sqlite3.connect('database/pyui.db')
+    db = sqlite3.connect('database/pyui.db', check_same_thread=False)
     cursor = db.cursor()
 
     if recreate:
@@ -69,21 +66,18 @@ def create_db(recreate=False):
         """
         
         cursor.executescript(create_tables_sql)
-        insert_user("admin", "admin")
+        start_query(db, "INSERT INTO users (username, password) VALUES ('admin', 'admin')") # Create admin user
+        start_query(db, "INSERT INTO users (username, password) VALUES ('user', 'user')") # Create admin user
         db.commit()
 
-    return db, cursor
+    cursor.close()
+    return db
 
 
-def get_query(query):
-    global cursor
+def start_query(db, query):
+    cursor = db.cursor()
     cursor.execute(query)
-    cursor.commit()
-    return cursor.fetchall()
-
-
-def insert_user(username, password):
-    global cursor
-    insert_sql = "INSERT INTO users (username, password) VALUES (?, ?);"
-    cursor.execute(insert_sql, (username, password))
-    cursor.connection.commit() 
+    db.commit()
+    result = cursor.fetchall()
+    cursor.close()
+    return result

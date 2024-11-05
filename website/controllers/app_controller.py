@@ -1,7 +1,7 @@
 from flask import Flask, redirect, render_template, request, jsonify # pip install flask
 from flask_mqtt import Mqtt
 import utils.json_util
-from utils.db_utils import create_db
+from utils.db_utils import create_db, start_query
 from client import client, turnouts, init_mqtt
 from utils.flask_utils import check_for_login
 
@@ -15,7 +15,7 @@ def create_app(path):
     static_path = path + "/static"
     app = Flask(__name__, template_folder=template_path, static_folder=static_path)
     
-    db, cursor = create_db(True)
+    db_conn = create_db(True)
 
     app.config['DEBUG_MODE'] = False  # Enable this to be able to view pages without logging in
     app.config['ADMIN_MODE'] = False
@@ -39,15 +39,13 @@ def create_app(path):
     def try_authenticate():
         username = request.form['username']
         password = request.form['password']
-        data = utils.json_util.import_json(app.root_path + '/database/credentials.json')
+        data = start_query(db_conn, "SELECT * FROM users")
 
-        index = 0
-        for user in data['users']:
-            if user['username'] == username and user['password'] == password:
-                app.config['CURRENT_USER'] = user['username']
-                app.config['ADMIN_MODE'] = app.config['CURRENT_USER'] == data['users'][0]['username']
-                return redirect(app.url_for('home_page'))
-            index += 1
+        for user in data:
+            if user[0] == username and user[1] == password:
+                app.config['CURRENT_USER'] = user[0]
+                app.config['ADMIN_MODE'] = app.config['CURRENT_USER'] == data[0][0]
+            return redirect(app.url_for('home_page'))
         print("Login inválido! tente novamente.")
         return login_page(error=True)
 
