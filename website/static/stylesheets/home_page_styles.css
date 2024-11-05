@@ -92,9 +92,21 @@ ul li {
     margin-top: 6px;
     border-top: 1px solid var(--slate-400);
   }
+
   & .exit:hover{
-    color: var(--red-600);
+    & a, i{
+      color: var(--red-600);  
+      transition: 0.3s;
+    }
   }
+  li:hover{
+    & i{
+      opacity: 0.85;
+      cursor: pointer;
+      transform: 0.3s;
+    }
+  }
+  
 }
 
 ul.dropdown {

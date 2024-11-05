@@ -28,25 +28,25 @@
           <ul class="dropdown">
             {% if admin_mode %}
               <li>
-                <!-- <i class="ph-fill ph-users"></i> -->
+                <i class="ph-fill ph-users"></i>
                 <a href="{{ url_for('user_blueprint.list_user') }}">Usuários</a>
               </li>
               <li>
-                <!-- <i class="ph-fill ph-train"></i> -->
+                <i class="ph-fill ph-train"></i>
                 <a href="{{ url_for('cab_blueprint.list_cab') }}">Locomotivas</a>
               </li>
               <li>
-                <!-- <i class="ph ph-arrows-left-right"></i> -->
+                <i class="ph ph-arrows-left-right"></i>
                 <a href="{{ url_for('detour_blueprint.list_detour') }}">Desvios</a>
               </li>
               <li>
-                <!-- <i class="ph ph-broadcast"></i> -->
+                <i class="ph ph-broadcast"></i>
                 <a href="{{ url_for('sensor_blueprint.list_sensor') }}">Sensores</a>
               </li>
             {% endif %}
-            <li>
-              <!-- <i class="ph-fill ph-sign-out"></i> -->
-              <a class="exit" href="{{ url_for('login_page') }}">Sair</a>
+            <li class="exit">
+              <i class="ph-fill ph-sign-out"></i>
+              <a href="{{ url_for('login_page') }}">Sair</a>
             </li>
           </ul>
         </div>
@@ -66,7 +66,6 @@
             <button class="icon-button">
               <i class="ph ph-caret-up"></i>
             </button>
-            <!-- <i class="ph ph-sliders-horizontal"></i> -->
           </div>
         </div>
 
@@ -78,11 +77,9 @@
                 <h1>CSX</h1>
               </div>
               <div class="show-composition-content">
-                <!-- if content ! hidden "+" : "-"-->
                 <button class="icon-button">
                 <i class="ph ph-caret-up"></i>
                 </button>
-                <!-- <i class="ph ph-plus"></i> -->
               </div>
             </div>
 
@@ -103,8 +100,6 @@
                 <h1>333</h1>
               </div>
               <div class="show-composition-content">
-                <!-- if content ! hidden "+" : "-"-->
-                <!-- <i class="ph ph-plus"></i> -->
                 <button class="icon-button">
                   <i class="ph ph-caret-up"></i>
                 </button>
@@ -164,7 +159,6 @@
 
               <!-- switch -->
               <label class="text-switch">
-                <!-- <input type="checkbox" checked id="directionSwitch"> -->
                 <select name="on-off" id="direction-switch">
                   <option value="1">Frente</option>
                   <option value="0">Trás</option>
@@ -199,7 +193,6 @@
 
               <!-- switch -->
               <label class="text-switch">
-                <!-- <input type="checkbox" id="hooterMainSwitch"> -->
                 <select name="on-off" id="hooter-usage">
                   <option value="on">Ligado</option>
                   <option value="off">Desligado</option>
@@ -243,7 +236,6 @@
 
               <!-- switch -->
               <label class="text-switch">
-                <!-- <input type="checkbox" id="lightMainSwitch"> -->
                 <select name="on-off" id="light-usage" style="display: none;">
                   <option value="on">Ligado</option>
                   <option value="off">Desligado</option>
@@ -302,14 +294,6 @@
                 <h3>Desvios</h3>
               </div>
           
-              <!-- <label class="text-switch">
-                                  <input type="checkbox" id="hooterMainSwitch">
-                                  <select name="on-off" id="hooter-usage">
-                                    <option value="on">Ligado</option>
-                                    <option value="off">Desligado</option>
-                                  </select>
-                                  <span class="slider"></span>
-                                </label> -->
             </div>
             <div class="detour-content">
               {% for turnout in turnouts %}
