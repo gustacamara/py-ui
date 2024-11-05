@@ -2,7 +2,7 @@ from flask import Blueprint, request, redirect, render_template, session, url_fo
 from utils.flask_utils import check_for_login
 import utils.json_util
 
-cab_controller = Blueprint('cab_blueprint', __name__, template_folder="templates") 
+cab_controller = Blueprint('cab_controller', __name__, template_folder="templates") 
 
 # Handle CRUD for locomotives
 
@@ -17,7 +17,7 @@ def try_register_cab():
         manufacturer = request.form['manufacturer']
         model = request.form['model']
 
-        data = utils.json_util.import_json(cab_blueprint.root_path + '/database/cabs.json')
+        data = utils.json_util.import_json(cab_controller.root_path + '/database/cabs.json')
 
         if cab_id.strip('') == "" or manufacturer.strip('') == "" or model.strip('') == "" and cab_id.isnumeric():
             print("Locomotiva inválida!")
@@ -31,11 +31,11 @@ def try_register_cab():
                 return register_cab(error=True)
             
         data['cabs'].append({'id': cab_id, 'manufacturer': manufacturer, 'model': model})
-        utils.json_util.export_json(cab_blueprint.root_path + '/database/cabs.json', data)
-        return redirect(url_for('cab_blueprint.list_cab')) # Redirect to list of locomotives later
+        utils.json_util.export_json(cab_controller.root_path + '/database/cabs.json', data)
+        return redirect(url_for('cab_controller.list_cab')) # Redirect to list of locomotives later
     else:
         print("Método inválido:", request.method)
-        return redirect(url_for('cab_blueprint.register_cab')) # ERRO!
+        return redirect(url_for('cab_controller.register_cab')) # ERRO!
     
     
 @cab_controller.route('/try-edit-cab', methods=['POST', 'GET'])
@@ -50,7 +50,7 @@ def try_edit_cab():
         manufacturer = request.form['manufacturer']
         model = request.form['model']
 
-        data = utils.json_util.import_json(cab_blueprint.root_path + '/database/cabs.json')
+        data = utils.json_util.import_json(cab_controller.root_path + '/database/cabs.json')
 
         if cab_id.strip('') == "" or manufacturer.strip('') == "" or model.strip('') == "" or not cab_id.isnumeric():
             print("Locomotiva inválida!")
@@ -66,11 +66,11 @@ def try_edit_cab():
             index += 1
             
         data['cabs'][edit_id] = {'id': cab_id, 'manufacturer': manufacturer, 'model': model}
-        utils.json_util.export_json(cab_blueprint.root_path + '/database/cabs.json', data)
-        return redirect(url_for('cab_blueprint.list_cab')) # Redirect to list of locomotives later
+        utils.json_util.export_json(cab_controller.root_path + '/database/cabs.json', data)
+        return redirect(url_for('cab_controller.list_cab')) # Redirect to list of locomotives later
     else:
         print("Método inválido:", request.method)
-        return redirect(url_for('cab_blueprint.register_cab')) # ERRO!
+        return redirect(url_for('cab_controller.register_cab')) # ERRO!
 
 @cab_controller.route('/register-cab')
 def register_cab(error = False, data = ['', '', ''], edit_id = -1):
@@ -86,12 +86,12 @@ def edit_cab(error = False):
         return login_check
     if request.method == 'POST':
         edit_id = request.form['edit_id']
-        data = utils.json_util.import_json(cab_blueprint.root_path + '/database/cabs.json')['cabs'][int(edit_id)]
+        data = utils.json_util.import_json(cab_controller.root_path + '/database/cabs.json')['cabs'][int(edit_id)]
         # print('\n'*100, data)
         return register_cab(error, [data['id'], data['manufacturer'], data['model']], int(edit_id))
     else:
         print("Método inválido:", request.method)
-        return redirect(url_for('cab_blueprint.register_cab'))
+        return redirect(url_for('cab_controller.register_cab'))
 
 @cab_controller.route('/remove-cab')
 def remove_cab():
@@ -105,7 +105,7 @@ def list_cab():
     login_check = check_for_login()
     if login_check != None:
         return login_check
-    data = utils.json_util.import_json(cab_blueprint.root_path + '/database/cabs.json')['cabs']
+    data = utils.json_util.import_json(cab_controller.root_path + '/database/cabs.json')['cabs']
     # print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n',data)
     cabs = {}
     
@@ -123,9 +123,9 @@ def try_remove_cab():
         return login_check
     if request.method == 'POST':
         cab_id = request.form['cab_id']
-        data = utils.json_util.import_json(cab_blueprint.root_path + '/database/cabs.json')
+        data = utils.json_util.import_json(cab_controller.root_path + '/database/cabs.json')
         # print("\n\n\n\n\n\n\n\n\n\nLocomotiva a ser removida:", cab_id)
         name = data['cabs'].pop(int(cab_id))
-        utils.json_util.export_json(cab_blueprint.root_path + '/database/cabs.json', data)
+        utils.json_util.export_json(cab_controller.root_path + '/database/cabs.json', data)
         print("A locomotiva", name, "foi removida com sucesso!")
-        return redirect(url_for('cab_blueprint.list_cab'))
+        return redirect(url_for('cab_controller.list_cab'))

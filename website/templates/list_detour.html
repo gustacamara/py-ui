@@ -17,13 +17,13 @@
       <article>
         <p>{{detour}}</p>
         <div class="tools">
-          <form id="form" method="POST" action="{{ url_for('detour_blueprint.edit_detour') }}">
+          <form id="form" method="POST" action="{{ url_for('detour_controller.edit_detour') }}">
           <button class="edit-icon" id=""><!--  colocar id-->
             <i class="ph ph-pencil-line"></i>
           </button>
           <input type="hidden" name="edit_id" id="edit_id" value="{{id}}">
           </form>
-          <form id="form" method="POST" action="{{ url_for('detour_blueprint.try_remove_detour') }}">
+          <form id="form" method="POST" action="{{ url_for('detour_controller.try_remove_detour') }}">
           <button class="trash-icon" id=""><!--  colocar id-->
             <i class="ph ph-trash"></i>
             <input type="hidden" name="detour_id" id="detour_id" value="{{id}}">
@@ -36,7 +36,7 @@
     </div>
   </div>
   <div class="credencial">
-    <a href="{{url_for('detour_blueprint.register_detour')}}">
+    <a href="{{url_for('detour_controller.register_detour')}}">
       <button type="submit" >
         Cadastrar desvios
       </button>

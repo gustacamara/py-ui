@@ -16,7 +16,7 @@ def create_app():
     app = Flask(__name__,template_folder="./views/",static_folder="./static/", root_path="./")
     app.static_folder = 'static'
     
-    db, cursor = create_db()
+    db, cursor = create_db(True)
 
     app.config['DEBUG_MODE'] = False  # Enable this to be able to view pages without logging in
     app.config['ADMIN_MODE'] = False

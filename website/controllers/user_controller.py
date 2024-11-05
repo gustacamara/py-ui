@@ -2,7 +2,7 @@ from flask import Blueprint, request, redirect, render_template, session, url_fo
 from utils.flask_utils import check_for_login
 import utils.json_util
 
-user_controller = Blueprint('user_blueprint', __name__, template_folder="templates") 
+user_controller = Blueprint('user_controller', __name__, template_folder="templates") 
 
 # Handle CRUD for users
 
@@ -14,7 +14,7 @@ def try_register_user():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        data = utils.json_util.import_json(user_blueprint.root_path + '/database/credentials.json')
+        data = utils.json_util.import_json(user_controller.root_path + '/database/credentials.json')
 
         if username.strip(' ') == "" and password.strip(' ') == "":
             print("Usuário inválido!")
@@ -26,11 +26,11 @@ def try_register_user():
                 return register_user(error=True)
 
         data['users'].append({'username': username, 'password': password})
-        utils.json_util.export_json(user_blueprint.root_path + '/database/credentials.json', data)
-        return redirect(url_for('user_blueprint.list_user')) # Redirect to list of users later
+        utils.json_util.export_json(user_controller.root_path + '/database/credentials.json', data)
+        return redirect(url_for('user_controller.list_user')) # Redirect to list of users later
     else:
         print("Método inválido:", request.method)
-        return redirect(url_for('user_blueprint.register_user')) # ERRO!
+        return redirect(url_for('user_controller.register_user')) # ERRO!
     
     
 @user_controller.route('/try-edit-user', methods=['POST', 'GET'])
@@ -44,7 +44,7 @@ def try_edit_user():
         # print('\n'*100,request.form)
         username = request.form['username']
         password = request.form['password']
-        data = utils.json_util.import_json(user_blueprint.root_path + '/database/credentials.json')
+        data = utils.json_util.import_json(user_controller.root_path + '/database/credentials.json')
 
         print('n'*100, user_id, username, password)
         if username.strip(' ') == "" or password.strip(' ') == "":
@@ -59,8 +59,8 @@ def try_edit_user():
             index += 1
 
         data['users'][user_id] = {'username': username, 'password': password}
-        utils.json_util.export_json(user_blueprint.root_path + '/database/credentials.json', data)
-        return redirect(url_for('user_blueprint.list_user'))
+        utils.json_util.export_json(user_controller.root_path + '/database/credentials.json', data)
+        return redirect(url_for('user_controller.list_user'))
     else:
         print("Método inválido:", request.method)
         return redirect(url_for('register_user')) # ERRO!
@@ -79,7 +79,7 @@ def edit_user(error = False):
         return login_check
     if request.method == 'POST':
         user_id = request.form['user_id']
-        data = utils.json_util.import_json(user_blueprint.root_path + '/database/credentials.json')['users'][int(user_id)]
+        data = utils.json_util.import_json(user_controller.root_path + '/database/credentials.json')['users'][int(user_id)]
         return register_user(error, [data['username'], data['password']], int(user_id))
     else:
         print("Método inválido:", request.method)
@@ -99,19 +99,19 @@ def try_remove_user():
         return login_check
     if request.method == 'POST':
         user_id = request.form['user_id']
-        data = utils.json_util.import_json(user_blueprint.root_path + '/database/credentials.json')
+        data = utils.json_util.import_json(user_controller.root_path + '/database/credentials.json')
         # print("\n\n\n\n\n\n\n\n\n\nUsuário a ser removido:", user_id)
         name = data['users'].pop(int(user_id))
-        utils.json_util.export_json(user_blueprint.root_path + '/database/credentials.json', data)
+        utils.json_util.export_json(user_controller.root_path + '/database/credentials.json', data)
         print("O usuário", name, "foi removido com sucesso!")
-        return redirect(url_for('user_blueprint.list_user')) # Redirect to list of users later
+        return redirect(url_for('user_controller.list_user')) # Redirect to list of users later
 
 @user_controller.route('/list-user')
 def list_user():
     login_check = check_for_login()
     if login_check != None:
         return login_check
-    data = utils.json_util.import_json(user_blueprint.root_path + '/database/credentials.json')['users']
+    data = utils.json_util.import_json(user_controller.root_path + '/database/credentials.json')['users']
     admin_name = ''
     admin_id = 0
     users = {}

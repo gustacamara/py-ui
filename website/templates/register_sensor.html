@@ -33,9 +33,9 @@
   <form class="form" id="form" method="POST"
     action="
       {% if edit_id < 0 %}
-      {{ url_for('sensor_blueprint.try_register_sensor') }}
+      {{ url_for('sensor_controller.try_register_sensor') }}
       {% else %}
-      {{ url_for('sensor_blueprint.try_edit_sensor') }}
+      {{ url_for('sensor_controller.try_edit_sensor') }}
       {% endif %}
     ">
     <div class="credencial">
@@ -85,5 +85,5 @@
     <input type="hidden" name="edit_id" id="edit_id" value="{{edit_id}}">
   </form>
 </div>
-<a href="{{ url_for('sensor_blueprint.list_sensor') }}">Voltar à lista</a>
+<a href="{{ url_for('sensor_controller.list_sensor') }}">Voltar à lista</a>
 {% endblock %}
