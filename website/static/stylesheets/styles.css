@@ -51,6 +51,10 @@ button{
   cursor: pointer;
 }
 
+button:hover{
+  transition: 0.3s;
+}
+
 input[type=number] {
   -moz-appearance: textfield;
   appearance: textfield;
@@ -84,6 +88,7 @@ input[type=number] {
 }
 
 a:hover {
+  transition: 0.3s;
   opacity: 0.85;
   text-decoration: none;
 }

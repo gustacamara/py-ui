@@ -1,17 +1,24 @@
-<div class="sensor control-option">
-  <div class="control-title">
-    <div class="control-name">
-      <i class="ph ph-broadcast"></i>
-      <h3>Dados dos sensores</h3>
-    </div> 
+  <div class="control-header">
+    <h1>Lista de sensores</h1>
+    <button class="icon-button">
+      <i class="ph ph-caret-up"></i>
+    </button>
   </div>
-  
-  {% for sensor in sensors_values %}
-  <div class="handle-switch">
-    <p>{{sensors_values[sensor].sensor}}:</p>
-    <p>{{sensors_values[sensor].value}}</p>
+  <div class="control-list-content">
+    <div class="sensor control-option">
+      <div class="control-title">
+        <div class="control-name">
+          <i class="ph ph-broadcast"></i>
+          <h3>Dados dos sensores</h3>
+        </div> 
+      </div>
+      
+      {% for sensor in sensors_values %}
+      <div class="handle-switch">
+        <p>{{sensors_values[sensor].sensor}}:</p>
+        <p>{{sensors_values[sensor].value}}</p>
+      </div>
+      {% endfor %}
+    
+    </div>
   </div>
-  {% endfor %}
-
-</div>
-
