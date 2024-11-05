@@ -33,6 +33,8 @@ def create_app(path):
     # Handle login
     @app.route('/', methods=['POST', 'GET'])
     def login_page(error=False):
+        app.config['CURRENT_USER'] = ""
+        app.config['ADMIN_MODE'] = False
         return render_template("login_page.html", error=error)
 
     @app.route('/try_authenticate', methods=['POST'])
@@ -40,12 +42,11 @@ def create_app(path):
         username = request.form['username']
         password = request.form['password']
         data = start_query(db_conn, "SELECT * FROM users")
-
         for user in data:
             if user[0] == username and user[1] == password:
                 app.config['CURRENT_USER'] = user[0]
                 app.config['ADMIN_MODE'] = app.config['CURRENT_USER'] == data[0][0]
-            return redirect(app.url_for('home_page'))
+                return redirect(app.url_for('home_page'))
         print("Login inválido! tente novamente.")
         return login_page(error=True)
 
