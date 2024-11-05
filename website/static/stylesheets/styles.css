@@ -32,14 +32,26 @@ body{
 
 header{
   display: flex;
-  padding-inline: 50px;
+  padding-inline: 8px;
 
   background-color: var(--slate-800);
   border-bottom: 1px solid var(--offwhite-10);
-  padding-block: 8px;
+  padding-block: 16px;
+  & a{
+    gap: 10px;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    margin: 0px;
+    & h1{
+      font-size: 18px;
+      padding: 0px;
+      margin: 0px;
+    }
+  }
 
   & img {
-    height: 32px;
+    height: 28px;
   }
 }
 
@@ -68,7 +80,7 @@ input[type=number] {
   gap: 10px;
 
   & a {
-    font-size: 32px;
+    font-size: 24px;
     color: var(--offwhite);
   }
 
@@ -81,7 +93,7 @@ input[type=number] {
     
   }
   & p {
-    font-size: 28px;
+    font-size: 24px;
     padding: 0px;
     margin: 0px;
   }

@@ -17,13 +17,13 @@
     <ul>
       <div class="navbar-items">
         <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
-        <p>Py - UI</p>
+        <h1>Py - UI</h1>
       </div>
       <li>
         <div class="dropdown-container">
           <div class="navbar-items">
             <i class="ph-fill ph-user"></i>
-            <a href="#" class="navbar-items">{{current_user}}</a>
+            <h1 href="#" class="navbar-items">{{current_user}}</h1>
           </div>
           <ul class="dropdown">
             {% if admin_mode %}

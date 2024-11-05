@@ -15,8 +15,10 @@
 <body>
   <header>
     <div class="navbar-items">
-      <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
-      <p>Py - UI</p>
+      <a href="{{ url_for('home_page') }}">
+        <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
+        <p>Py - UI</p>
+      </a>
     </div>
   </header>
   <main>
