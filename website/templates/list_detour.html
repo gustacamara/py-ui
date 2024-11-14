@@ -13,6 +13,12 @@
   <div class="credencial">
     <div class="list-itens">
 
+      {% if detours | length == 0 %}
+      <article>
+        <p>Não há desvios cadastrados no momento!</p>
+      </article>
+      {% endif %}
+        
       {% for id, detour in detours.items() %}
       <article>
         <p>{{detour}}</p>
