@@ -28,11 +28,11 @@
           <ul class="dropdown">
             {% if admin_mode %}
               <li>
-                <i class="ph-fill ph-users"></i>
+                <i class="ph ph-users"></i>
                 <a href="{{ url_for('user_blueprint.list_user') }}">Usuários</a>
               </li>
               <li>
-                <i class="ph-fill ph-train"></i>
+                <i class="ph ph-train"></i>
                 <a href="{{ url_for('cab_blueprint.list_cab') }}">Locomotivas</a>
               </li>
               <li>
@@ -44,8 +44,12 @@
                 <a href="{{ url_for('sensor_blueprint.list_sensor') }}">Sensores</a>
               </li>
             {% endif %}
+            <li>
+              <i class="ph ph-info"></i>
+              <a href=" url_for('about_page') ">Sobre</a>
+            </li>
             <li class="exit">
-              <i class="ph-fill ph-sign-out"></i>
+              <i class="ph ph-sign-out"></i>
               <a href="{{ url_for('login_page') }}">Sair</a>
             </li>
           </ul>
@@ -271,12 +275,11 @@
             </div>
           </div>
 
-          <!-- <button id="emergency" class="emergency" title="Botão de emergência" style="display: none;">
+          <!-- <button id="emergency" class="emergency" title="Botão de emergência" >
             Parar
           </button> -->
         </div>
       </div>
-<!-- render -->
       <div id="real-time" class="sensor-control panel"></div>
       
       <div class="detour-control panel">
@@ -290,7 +293,7 @@
           <div class="detour control-option">
             <div class="control-title">
               <div class="control-name">
-                <i class="ph ph-arrows-left-right"></i>
+                <i class="ph-fill ph-arrows-left-right"></i>
                 <h3>Desvios</h3>
               </div>
           
