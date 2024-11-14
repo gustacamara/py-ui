@@ -1,0 +1,47 @@
+.alert {
+  display: flex;
+  padding: 16px;
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  gap: 10px;
+  
+  background-color: var(--offwhite);
+  border-radius: 8px;
+
+  opacity: 0;
+  transform: translateY(100%);
+  animation: slideInOut 2s forwards;
+
+
+  & i {
+    color: var(--blue-600);
+    font-size: 14px;
+  }
+  & h4 {
+    color: var(--blue-600);
+    font-size: 14px;
+    margin: 0px;
+  }
+}
+
+
+
+@keyframes slideInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+}

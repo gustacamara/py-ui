@@ -1,4 +1,3 @@
-# app.py
 import os
 from controllers.app_controller import create_app
 

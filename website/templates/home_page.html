@@ -17,36 +17,40 @@
     <ul>
       <div class="navbar-items">
         <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
-        <p>Py - UI</p>
+        <h1>Py - UI</h1>
       </div>
       <li>
         <div class="dropdown-container">
           <div class="navbar-items">
             <i class="ph-fill ph-user"></i>
-            <a href="#" class="navbar-items">{{current_user}}</a>
+            <h1 href="#" class="navbar-items">{{current_user}}</h1>
           </div>
           <ul class="dropdown">
             {% if admin_mode %}
               <li>
-                <!-- <i class="ph-fill ph-users"></i> -->
-                <a href="{{ url_for('user_controller.list_user') }}">Usuários</a>
+                <i class="ph ph-users"></i>
+                <a href="{{ url_for('user_blueprint.list_user') }}">Usuários</a>
               </li>
               <li>
-                <!-- <i class="ph-fill ph-train"></i> -->
-                <a href="{{ url_for('cab_controller.list_cab') }}">Locomotivas</a>
+                <i class="ph ph-train"></i>
+                <a href="{{ url_for('cab_blueprint.list_cab') }}">Locomotivas</a>
               </li>
               <li>
-                <!-- <i class="ph ph-arrows-left-right"></i> -->
-                <a href="{{ url_for('detour_controller.list_detour') }}">Desvios</a>
+                <i class="ph ph-arrows-left-right"></i>
+                <a href="{{ url_for('detour_blueprint.list_detour') }}">Desvios</a>
               </li>
               <li>
-                <!-- <i class="ph ph-broadcast"></i> -->
-                <a href="{{ url_for('sensor_controller.list_sensor') }}">Sensores</a>
+                <i class="ph ph-broadcast"></i>
+                <a href="{{ url_for('sensor_blueprint.list_sensor') }}">Sensores</a>
               </li>
             {% endif %}
             <li>
-              <!-- <i class="ph-fill ph-sign-out"></i> -->
-              <a class="exit" href="{{ url_for('login_page') }}">Sair</a>
+              <i class="ph ph-info"></i>
+              <a href=" {{ url_for('about_page') }}">Sobre</a>
+            </li>
+            <li class="exit">
+              <i class="ph ph-sign-out"></i>
+              <a href="{{ url_for('login_page') }}">Sair</a>
             </li>
           </ul>
         </div>
@@ -66,7 +70,6 @@
             <button class="icon-button">
               <i class="ph ph-caret-up"></i>
             </button>
-            <!-- <i class="ph ph-sliders-horizontal"></i> -->
           </div>
         </div>
 
@@ -78,11 +81,9 @@
                 <h1>CSX</h1>
               </div>
               <div class="show-composition-content">
-                <!-- if content ! hidden "+" : "-"-->
                 <button class="icon-button">
                 <i class="ph ph-caret-up"></i>
                 </button>
-                <!-- <i class="ph ph-plus"></i> -->
               </div>
             </div>
 
@@ -103,8 +104,6 @@
                 <h1>333</h1>
               </div>
               <div class="show-composition-content">
-                <!-- if content ! hidden "+" : "-"-->
-                <!-- <i class="ph ph-plus"></i> -->
                 <button class="icon-button">
                   <i class="ph ph-caret-up"></i>
                 </button>
@@ -164,7 +163,6 @@
 
               <!-- switch -->
               <label class="text-switch">
-                <!-- <input type="checkbox" checked id="directionSwitch"> -->
                 <select name="on-off" id="direction-switch">
                   <option value="1">Frente</option>
                   <option value="0">Trás</option>
@@ -190,50 +188,6 @@
             </div>
           </div>
 
-          <div class="hooter control-option" style="display: none;">
-            <div class="control-title">
-              <div class="control-name">
-                <i class="ph-fill ph-speaker-high"></i>
-                <h3>Buzinas</h3>
-              </div>
-
-              <!-- switch -->
-              <label class="text-switch">
-                <!-- <input type="checkbox" id="hooterMainSwitch"> -->
-                <select name="on-off" id="hooter-usage">
-                  <option value="on">Ligado</option>
-                  <option value="off">Desligado</option>
-                </select>
-                <span class="slider"></span>
-              </label>
-            </div>
-            <div class="hooter-content">
-              <div class="handle-switch">
-                <p>Buzina</p>
-                <label class="no-text-switch">
-                  <input type="checkbox" id="buzzer-hooter">
-                  <span class="slider"></span>
-                </label>
-              </div>
-
-              <div class="handle-switch">
-                <p>Sino</p>
-                <label class="no-text-switch">
-                  <input type="checkbox" id="bell-Hooter">
-                  <span class="slider"></span>
-                </label>
-              </div>
-
-              <div class="handle-switch">
-                <p>Locomotiva</p>
-                <label class="no-text-switch">
-                  <input type="checkbox" id="cab-hooter">
-                  <span class="slider"></span>
-                </label>
-              </div>
-            </div>
-          </div>
-
           <div class="light control-option">
             <div class="control-title">
               <div class="control-name">
@@ -243,7 +197,6 @@
 
               <!-- switch -->
               <label class="text-switch">
-                <!-- <input type="checkbox" id="lightMainSwitch"> -->
                 <select name="on-off" id="light-usage" style="display: none;">
                   <option value="on">Ligado</option>
                   <option value="off">Desligado</option>
@@ -254,7 +207,7 @@
 
             <div class="light-content">
               <div class="handle-switch">
-                <p>Farol principal</p>
+                <p>Farol</p>
                 <label class="no-text-switch">
                   <input type="checkbox" id="front-light">
                   <span class="slider"></span>
@@ -262,7 +215,7 @@
               </div>
 
               <div class="handle-switch">
-                <p>Farol secundário</p>
+                <p>Luz da cabine</p>
                 <label class="no-text-switch">
                   <input type="checkbox" id="secondary-light">
                   <span class="slider"></span>
@@ -279,12 +232,11 @@
             </div>
           </div>
 
-          <button id="emergency" class="emergency" title="Botão de emergência" style="display: none;">
+          <!-- <button id="emergency" class="emergency" title="Botão de emergência" >
             Parar
-          </button>
+          </button> -->
         </div>
       </div>
-<!-- render -->
       <div id="real-time" class="sensor-control panel"></div>
       
       <div class="detour-control panel">
@@ -298,18 +250,10 @@
           <div class="detour control-option">
             <div class="control-title">
               <div class="control-name">
-                <i class="ph ph-arrows-left-right"></i>
+                <i class="ph-fill ph-arrows-left-right"></i>
                 <h3>Desvios</h3>
               </div>
           
-              <!-- <label class="text-switch">
-                                  <input type="checkbox" id="hooterMainSwitch">
-                                  <select name="on-off" id="hooter-usage">
-                                    <option value="on">Ligado</option>
-                                    <option value="off">Desligado</option>
-                                  </select>
-                                  <span class="slider"></span>
-                                </label> -->
             </div>
             <div class="detour-content">
               {% for turnout in turnouts %}

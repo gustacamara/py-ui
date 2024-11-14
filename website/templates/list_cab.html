@@ -13,6 +13,12 @@
   <div class="credencial">
     <div class="list-itens">
 
+      {% if cabs | length == 0 %}
+      <article>
+        <p>Não há itens cadastrados no momento!</p>
+      </article>
+      {% endif %}
+
       {% for id, cab in cabs.items() %}
       <article>
         <p>{{cab}}</p>
@@ -44,4 +50,8 @@
   </div>
 </div>
 <a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
+
+{% block register_sucessfully %}
+{% endblock %}
+
 {% endblock %}

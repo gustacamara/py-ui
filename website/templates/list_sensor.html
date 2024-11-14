@@ -13,6 +13,12 @@
   <div class="credencial">
     <div class="list-itens">
 
+      {% if sensors | length == 0 %}
+      <article>
+        <p>Não há sensores cadastrados no momento!</p>
+      </article>
+      {% endif %}
+
       {% for id, sensor in sensors.items() %}
       <article>
         <p>{{sensor}}</p>
@@ -44,4 +50,8 @@
   </div>
 </div>
 <a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
+
+{% block register_sucessfully %}
+{% endblock %}
+
 {% endblock %}

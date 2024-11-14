@@ -43,7 +43,6 @@
     "actuator": "SERVO",
     "value": 128-->
 
-      <p>Id</p>
       <div class="inputContent">
         <i class="ph ph-fingerprint-simple"></i>
         <input type="number" name="id" id="id" placeholder="Id" value="{{data[0]}}">
@@ -51,15 +50,13 @@
     </div>
 
     <div class="credencial">
-      <p>Nome</p>
       <div class="inputContent">
         <i class="ph ph-aperture"></i>
-        <input type="text" name="actuator" id="actuator" placeholder="Actuator" value="{{data[1]}}">
+        <input type="text" name="actuator" id="actuator" placeholder="Atuador" value="{{data[1]}}">
       </div>
     </div>
 
     <div class="credencial">
-      <p>Valor</p>
       <div class="inputContent">
         <i class="ph ph-hash-straight"></i>
         <input type="number" name="value" id="value" placeholder="Valor" value="{{data[2]}}">
@@ -78,5 +75,5 @@
     <input type="hidden" name="edit_id" id="edit_id" value="{{edit_id}}">
   </form>
 </div>
-<a href="{{ url_for('detour_controller.list_detour') }}">Voltar à lista</a>
+<a href="{{ url_for('detour_blueprint.list_detour') }}">Voltar à lista</a>
 {% endblock %}
