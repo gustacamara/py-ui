@@ -7,6 +7,8 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/list_page.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/credential_form.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='stylesheets/styles.css') }}">
+  <link rel="stylesheet" href="{{url_for('static', filename= 'stylesheets/register_sucessfully.css') }}">
+
   <script src="https://unpkg.com/@phosphor-icons/web"></script>
   {% block title %}
   {% endblock %}
@@ -15,8 +17,10 @@
 <body>
   <header>
     <div class="navbar-items">
-      <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
-      <p>Py - UI</p>
+      <a href="{{ url_for('home_page') }}">
+        <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" title="Py-UI">
+        <p>Py - UI</p>
+      </a>
     </div>
   </header>
   <main>

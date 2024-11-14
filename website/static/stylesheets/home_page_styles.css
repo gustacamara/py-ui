@@ -34,11 +34,11 @@ header{
   justify-content: center;
 
   & i {
-    font-size: 32px;
+    font-size: 21px;
     margin: 0px;
   }
   & img{
-    height: 32px;
+    height: 21px;
   }
 }
 
@@ -46,7 +46,7 @@ header{
   display: flex;
   flex-direction: column;
   gap: 1px;
-  align-items: center;
+  align-items: end;
 }
 
 .navbar-items{
@@ -55,7 +55,7 @@ header{
   justify-content: space-between;
   width: fit-content;
   & a{
-    font-size: 28px;
+    font-size: 24px;
     color: var(--offwhite);
   }
   & a:hover {
@@ -92,9 +92,20 @@ ul li {
     margin-top: 6px;
     border-top: 1px solid var(--slate-400);
   }
+
   & .exit:hover{
-    color: var(--red-600);
+    & a, i{
+      color: var(--red-600);  
+      transition: 0.3s;
+    }
   }
+  li:hover{
+    & i{
+      opacity: 0.85;
+      cursor: pointer;
+    }
+  }
+  
 }
 
 ul.dropdown {
@@ -106,7 +117,7 @@ ul.dropdown {
 
   border-radius: 3px;
   padding: 10px;
-  margin-top: 32px;
+  margin-top: 21px;
   & li {
     display: flex;
     gap: 5px;
@@ -277,7 +288,7 @@ ul li:hover ul.dropdown {
   width: 280px;
 
   border-bottom: 1px solid var(--offwhite-10);
-  padding-block: 6px;
+  padding-block: 16px;
 
   & input{
     width: 151px;

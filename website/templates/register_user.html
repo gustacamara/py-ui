@@ -39,7 +39,6 @@
       {% endif %}
     ">
       <div class="credencial">
-        <p>Nome do usuário</p>
         <div class="inputContent">
           <i class="ph ph-at"></i>
           <input type="text" name="username" id="username" placeholder="Usuário" value="{{data[0]}}">
@@ -47,7 +46,6 @@
       </div>
   
       <div class="credencial">
-        <p>Senha do usuário</p>
         <div class="inputContent">
           <i class="ph ph-fingerprint-simple"></i>
           <input type="text" name="password" id="password" placeholder="Senha" value ="{{data[1]}}">
@@ -67,4 +65,5 @@
     </form>
   </div>
   <a href="{{ url_for('user_blueprint.list_user') }}">Voltar à lista</a>
+
 {% endblock %}
