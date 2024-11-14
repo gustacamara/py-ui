@@ -34,9 +34,9 @@
 
     <form class="form" id="form" method="POST" action="
       {% if edit_id <0 %}
-      {{ url_for('cab_blueprint.try_register_cab') }}
+      {{ url_for('cab_controller.try_register_cab') }}
       {% else %}
-      {{ url_for('cab_blueprint.try_edit_cab') }}
+      {{ url_for('cab_controller.try_edit_cab') }}
       {% endif %}
     ">
       <div class="credencial">
@@ -91,5 +91,4 @@
     </form>
   </div>
   <a href="{{ url_for('cab_blueprint.list_cab') }}">Voltar à lista</a>
-
 {% endblock %}

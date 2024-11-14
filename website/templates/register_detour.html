@@ -33,9 +33,9 @@
   <form class="form" id="form" method="POST"
     action="
       {% if edit_id < 0 %}
-      {{ url_for('detour_blueprint.try_register_detour') }}
+      {{ url_for('detour_controller.try_register_detour') }}
       {% else %}
-      {{ url_for('detour_blueprint.try_edit_detour') }}
+      {{ url_for('detour_controller.try_edit_detour') }}
       {% endif %}
     ">
     <div class="credencial">
@@ -76,5 +76,4 @@
   </form>
 </div>
 <a href="{{ url_for('detour_blueprint.list_detour') }}">Voltar à lista</a>
-
 {% endblock %}

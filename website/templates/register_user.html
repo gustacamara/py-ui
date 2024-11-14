@@ -33,12 +33,13 @@
   
     <form class="form" id="form" method="POST" action="
       {% if edit_id <0 %}
-      {{ url_for('user_blueprint.try_register_user') }}
+      {{ url_for('user_controller.try_register_user') }}
       {% else %}
-      {{ url_for('user_blueprint.try_edit_user') }}
+      {{ url_for('user_controller.try_edit_user') }}
       {% endif %}
     ">
       <div class="credencial">
+        <p>Nome do usuário</p>
         <div class="inputContent">
           <i class="ph ph-at"></i>
           <input type="text" name="username" id="username" placeholder="Usuário" value="{{data[0]}}">
@@ -46,6 +47,7 @@
       </div>
   
       <div class="credencial">
+        <p>Senha do usuário</p>
         <div class="inputContent">
           <i class="ph ph-fingerprint-simple"></i>
           <input type="text" name="password" id="password" placeholder="Senha" value ="{{data[1]}}">
@@ -64,6 +66,5 @@
       <input type="hidden" name="user_id" id="user_id" value="{{edit_id}}">
     </form>
   </div>
-  <a href="{{ url_for('user_blueprint.list_user') }}">Voltar à lista</a>
-
+  <a href="{{ url_for('user_controller.list_user') }}">Voltar à lista</a>
 {% endblock %}
