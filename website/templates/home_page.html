@@ -29,19 +29,19 @@
             {% if admin_mode %}
               <li>
                 <i class="ph ph-users"></i>
-                <a href="{{ url_for('user_blueprint.list_user') }}">Usuários</a>
+                <a href="{{ url_for('user_controller.list_user') }}">Usuários</a>
               </li>
               <li>
                 <i class="ph ph-train"></i>
-                <a href="{{ url_for('cab_blueprint.list_cab') }}">Locomotivas</a>
+                <a href="{{ url_for('cab_controller.list_cab') }}">Locomotivas</a>
               </li>
               <li>
                 <i class="ph ph-arrows-left-right"></i>
-                <a href="{{ url_for('detour_blueprint.list_detour') }}">Desvios</a>
+                <a href="{{ url_for('detour_controller.list_detour') }}">Desvios</a>
               </li>
               <li>
                 <i class="ph ph-broadcast"></i>
-                <a href="{{ url_for('sensor_blueprint.list_sensor') }}">Sensores</a>
+                <a href="{{ url_for('sensor_controller.list_sensor') }}">Sensores</a>
               </li>
             {% endif %}
             <li>
