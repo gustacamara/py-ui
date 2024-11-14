@@ -59,4 +59,12 @@ def create_app(path):
             return login_check
         print("Current user:", app.config['CURRENT_USER'], "Admin mode:", app.config['ADMIN_MODE'])
         return render_template("home_page.html", current_user = app.config['CURRENT_USER'],admin_mode=app.config['ADMIN_MODE'], turnouts = turnouts)
+    @app.route('/about')
+    
+    def about_page():
+        login_check = check_for_login()
+        if login_check != None:
+            return login_check
+        return render_template("about_page.html", current_user = app.config['CURRENT_USER'],admin_mode=app.config['ADMIN_MODE'])
+    
     return app
