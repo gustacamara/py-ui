@@ -58,24 +58,7 @@
           <i class="ph ph-identification-badge"></i>
           <input type="text" name="model" id="model" placeholder="Modelo" value="{{data[2]}}">
         </div>
-      </div>
-
-      <div class="credencial">
-        <div class="inputContent">
-            <i class="ph ph-upload"></i>
-          <input type="file" name="image" id="image" placeholder="Imagem" accept=".png, .jpeg, .jpg" value="{{data[3]}}">
-        </div>
-      </div>
-
-      <div class="credencial">
-        <div class="inputContent">
-          <i class="ph ph-train-simple"></i>
-          <select name="type" id="type">
-            <option value="cab" >Locomotiva</option>
-            <option value="wagon" >Vagão</option>
-          </select>
-        </div>
-      </div>
+      </div>  
   
   
       <div class="credencial">
@@ -90,5 +73,5 @@
       <input type="hidden" name="edit_id" id="edit_id" value="{{edit_id}}">
     </form>
   </div>
-  <a href="{{ url_for('cab_blueprint.list_cab') }}">Voltar à lista</a>
+  <a href="{{ url_for('cab_controller.list_cab') }}">Voltar à lista</a>
 {% endblock %}

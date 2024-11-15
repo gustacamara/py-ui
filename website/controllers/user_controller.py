@@ -1,6 +1,7 @@
 from flask import Blueprint, request, redirect, render_template, session, url_for
 from utils.flask_utils import check_for_login
-import utils.json_util
+from utils.db_utils import create_db, start_query
+import sqlite3
 
 user_controller = Blueprint('user_controller', __name__, template_folder="templates") 
 
@@ -9,78 +10,74 @@ user_controller = Blueprint('user_controller', __name__, template_folder="templa
 @user_controller.route('/try-register-user', methods=['POST', 'GET'])
 def try_register_user():
     login_check = check_for_login()
-    if login_check != None:
+    if login_check is not None:
         return login_check
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        data = utils.json_util.import_json(user_controller.root_path + '/database/credentials.json')
 
-        if username.strip(' ') == "" and password.strip(' ') == "":
+        if username.strip() == "" or password.strip() == "":
             print("Usuário inválido!")
             return register_user(error=True)
 
-        for user in data['users']:
-            if user['username'] == username:
-                print("Usuário já cadastrado!")
-                return register_user(error=True)
+        existing_user = start_query(f"SELECT * FROM users WHERE username = '{username}'")
+        if existing_user:
+            print("Usuário já cadastrado!")
+            return register_user(error=True)
 
-        data['users'].append({'username': username, 'password': password})
-        utils.json_util.export_json(user_controller.root_path + '/database/credentials.json', data)
-        return redirect(url_for('user_controller.list_user')) # Redirect to list of users later
-    else:
-        print("Método inválido:", request.method)
-        return redirect(url_for('user_controller.register_user')) # ERRO!
-    
-    
-@user_controller.route('/try-edit-user', methods=['POST', 'GET'])
-def try_edit_user():
-    login_check = check_for_login()
-    if login_check != None:
-        return login_check
-    
-    if request.method == 'POST':
-        user_id = int(request.form['user_id'])
-        # print('\n'*100,request.form)
-        username = request.form['username']
-        password = request.form['password']
-        data = utils.json_util.import_json(user_controller.root_path + '/database/credentials.json')
-
-        print('n'*100, user_id, username, password)
-        if username.strip(' ') == "" or password.strip(' ') == "":
-            print("Usuário inválido!")
-            return register_user(error=True, data=[username, password], edit_id=user_id)
-
-        index = 0
-        for user in data['users']:
-            if index != user_id and user['username'] == username:
-                print("Usuário já cadastrado!")
-                return register_user(error=True, data=[username, password], edit_id=user_id)
-            index += 1
-
-        data['users'][user_id] = {'username': username, 'password': password}
-        utils.json_util.export_json(user_controller.root_path + '/database/credentials.json', data)
+        start_query(f"INSERT INTO users (username, password) VALUES ('{username}', '{password}')")
         return redirect(url_for('user_controller.list_user'))
     else:
         print("Método inválido:", request.method)
-        return redirect(url_for('register_user')) # ERRO!
+        return redirect(url_for('user_controller.register_user'))
+
+@user_controller.route('/try-edit-user', methods=['POST', 'GET'])
+def try_edit_user():
+    login_check = check_for_login()
+    if login_check is not None:
+        return login_check
+
+    if request.method == 'POST':
+        user_id = int(request.form['user_id'])
+        username = request.form['username']
+        password = request.form['password']
+
+        if username.strip() == "" or password.strip() == "":
+            print("Usuário inválido!")
+            return register_user(error=True, data=[username, password], edit_id=user_id)
+
+        existing_user = start_query(f"SELECT * FROM users WHERE username = '{username}' AND rowid != {user_id}")
+        if existing_user:
+            print("Usuário já cadastrado!")
+            return register_user(error=True, data=[username, password], edit_id=user_id)
+        
+        start_query(f"UPDATE users SET username = '{username}', password = '{password}' WHERE rowid = {user_id}")
+        return redirect(url_for('user_controller.list_user'))
+    else:
+        print("Método inválido:", request.method)
+        return redirect(url_for('register_user'))
 
 @user_controller.route('/register-user')
-def register_user(error = False, data = ['', ''], edit_id = -1):
+def register_user(error=False, data=['', ''], edit_id=-1):
     login_check = check_for_login()
-    if login_check != None:
+    if login_check is not None:
         return login_check
-    return render_template("register_user.html", error = error, data=data, edit_id = edit_id)
+    return render_template("register_user.html", error=error, data=data, edit_id=edit_id)
 
 @user_controller.route('/edit-user', methods=['POST', 'GET'])
-def edit_user(error = False):
+def edit_user(error=False):
     login_check = check_for_login()
-    if login_check != None:
+    if login_check is not None:
         return login_check
     if request.method == 'POST':
         user_id = request.form['user_id']
-        data = utils.json_util.import_json(user_controller.root_path + '/database/credentials.json')['users'][int(user_id)]
-        return register_user(error, [data['username'], data['password']], int(user_id))
+        user_data = start_query(f"SELECT username, password FROM users WHERE rowid = {int(user_id)}")
+        if user_data:
+            data = user_data[0]
+            return register_user(error, [data[0], data[1]], int(user_id))
+        else:
+            print("Usuário não encontrado.")
+            return redirect(url_for('user_controller.list_user'))
     else:
         print("Método inválido:", request.method)
         return redirect(url_for('register_user'))
@@ -88,39 +85,36 @@ def edit_user(error = False):
 @user_controller.route('/remove-user')
 def remove_user():
     login_check = check_for_login()
-    if login_check != None:
+    if login_check is not None:
         return login_check
     return render_template("remove_user.html")
 
 @user_controller.route('/try-remove-user', methods=['POST', 'GET'])
 def try_remove_user():
     login_check = check_for_login()
-    if login_check != None:
+    if login_check is not None:
         return login_check
     if request.method == 'POST':
         user_id = request.form['user_id']
-        data = utils.json_util.import_json(user_controller.root_path + '/database/credentials.json')
-        # print("\n\n\n\n\n\n\n\n\n\nUsuário a ser removido:", user_id)
-        name = data['users'].pop(int(user_id))
-        utils.json_util.export_json(user_controller.root_path + '/database/credentials.json', data)
-        print("O usuário", name, "foi removido com sucesso!")
-        return redirect(url_for('user_controller.list_user')) # Redirect to list of users later
+        user_data = start_query(f"SELECT username FROM users WHERE rowid = {int(user_id)}")
+        if user_data:
+            start_query(f"DELETE FROM users WHERE rowid = {int(user_id)}")
+            print(f"O usuário {user_data[0][0]} foi removido com sucesso!")
+            return redirect(url_for('user_controller.list_user'))
+        else:
+            print("Usuário não encontrado.")
+            return redirect(url_for('user_controller.list_user'))
+    else:
+        print("Método inválido:", request.method)
+        return redirect(url_for('register_user'))
 
 @user_controller.route('/list-user')
 def list_user():
     login_check = check_for_login()
-    if login_check != None:
+    if login_check is not None:
         return login_check
-    data = utils.json_util.import_json(user_controller.root_path + '/database/credentials.json')['users']
-    admin_name = ''
-    admin_id = 0
-    users = {}
-    index = 0
-    for user in data:
-        if index > 0:
-            users.update({index: user['username']})
-        else:
-            admin_name = user['username']
-        index += 1
-    # print("\n\n\n\n\n\n\n\n\n\n\n\n\nUsuários:", users)
-    return render_template("list_user.html", users = users, admin_name = admin_name, admin_id = admin_id)
+    data = start_query("SELECT rowid, username FROM users")
+    users = {row[0]: row[1] for row in data}
+    admin_name = users.pop(1, '')
+    admin_id = 1  
+    return render_template("list_user.html", users=users, admin_name=admin_name, admin_id=admin_id)
