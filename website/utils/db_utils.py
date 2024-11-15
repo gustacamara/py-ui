@@ -1,4 +1,5 @@
 import sqlite3
+import json
 
 db = None
 
@@ -23,7 +24,6 @@ def create_db(recreate=False):
             id INTEGER UNIQUE,
             manufacturer TEXT,
             model TEXT,
-            image TEXT,
             PRIMARY KEY(id)
         );
 
@@ -68,6 +68,7 @@ def create_db(recreate=False):
         cursor.executescript(create_tables_sql)
         start_query("INSERT INTO users (username, password) VALUES ('admin', 'admin')") # Create admin user
         start_query("INSERT INTO users (username, password) VALUES ('user', 'user')") # Create admin user
+        start_query("INSERT INTO cabs (id, manufacturer, model) VALUES (1, 'Locomotiva', 'Modelo 1')") 
         db.commit()
 
     cursor.close()
