@@ -44,14 +44,14 @@ header{
     text-decoration: none;
     margin: 0px;
     & h1{
-      font-size: 18px;
+      font-size: 1rem;
       padding: 0px;
       margin: 0px;
     }
   }
 
   & img {
-    height: 28px;
+    height: 21px;
   }
 }
 
