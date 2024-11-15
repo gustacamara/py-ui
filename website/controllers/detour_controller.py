@@ -15,7 +15,8 @@ def try_remove_detour():
     if request.method == 'POST':
         detour_id = request.form['detour_id']
         #data = utils.json_util.import_json(detour_controller.root_path + '/database/actuators.json')
-        start_query("DELETE FROM actuators WHERE id = " + detour_id)
+        delete_id = int(start_query("SELECT * FROM turnout")[int(detour_id)][0])
+        start_query(f"DELETE FROM turnout WHERE id = {delete_id}")
         print("O sensor foi removido com sucesso!")
         return redirect(url_for('detour_controller.list_detour'))
 
@@ -29,18 +30,19 @@ def try_register_detour():
         actuator = request.form['actuator']
         value = request.form['value']
         # data = utils.json_util.import_json(detour_controller.root_path + '/database/actuators.json')
-        data = start_query("SELECT * FROM actuators")
+        data = start_query("SELECT * FROM turnout")
 
         if actuator.strip('') == "" or not detour_id.isnumeric() or not value.isnumeric():
             print("Desvio inválido!")
             return register_detour(error=True)
 
+        print(data)
         for detour in data:
             if detour[0] == detour_id:
                 print("Desvio já cadastrado!")
                 return register_detour(error=True)
         
-        start_query("INSERT INTO actuators (id, actuator, value) VALUES (" + detour_id + ", '" + actuator + "', " + value + ")")
+        start_query(f"INSERT INTO turnout (id, actuator, value) VALUES ({detour_id}, '{actuator}', {value})")
         return redirect(url_for('detour_controller.list_detour'))
 
 @detour_controller.route('/try-edit-detour', methods=['POST', 'GET'])
@@ -50,7 +52,7 @@ def try_edit_detour():
         return login_check
     if request.method == 'POST':
         #print("\n"*100, request.form)
-        edit_id = int(request.form['edit_id']   )
+        edit_id = int(request.form['edit_id'])
         id = request.form['id']
         actuator = request.form['actuator']
         value = request.form['value']
@@ -70,7 +72,8 @@ def try_edit_detour():
                 return register_detour(error=True, data=[id, actuator, value], edit_id=edit_id)
             index += 1
             
-        start_query("UPDATE actuators SET id = " + str(id) + ", actuator = '" + actuator + "', value = " + value + " WHERE id = " + str(edit_id))
+        start_query(f"DELETE FROM turnout WHERE id = {id}")
+        start_query(f"INSERT INTO turnout (id, actuator, value) VALUES ({id}, '{actuator}', '{value}')")
         return redirect(url_for('detour_controller.list_detour')) # Redirect to list of locomotives later
     else:
         print("Método inválido:", request.method)
@@ -84,7 +87,6 @@ def list_detour():
         return login_check
     # data = utils.json_util.import_json(detour_controller.root_path + '/database/actuators.json')
     data = start_query("SELECT * FROM turnout")
-    print(data)
     detours = {}
     index = 0
     for actuator in data:
