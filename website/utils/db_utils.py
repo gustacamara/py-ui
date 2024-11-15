@@ -69,6 +69,7 @@ def create_db(recreate=False):
         start_query("INSERT INTO users (username, password) VALUES ('admin', 'admin')") # Create admin user
         start_query("INSERT INTO users (username, password) VALUES ('user', 'user')") # Create admin user
         start_query("INSERT INTO cabs (id, manufacturer, model) VALUES (1, 'Locomotiva', 'Modelo 1')") 
+        start_query("INSERT INTO turnout (id, actuator, value) VALUES (1, 'Desvio 1', 0)")
         db.commit()
 
     cursor.close()
