@@ -41,7 +41,7 @@ def create_app(path):
     def try_authenticate():
         username = request.form['username']
         password = request.form['password']
-        data = start_query(db_conn, "SELECT * FROM users")
+        data = start_query("SELECT * FROM users")
         for user in data:
             if user[0] == username and user[1] == password:
                 app.config['CURRENT_USER'] = user[0]

@@ -1,6 +1,9 @@
 import sqlite3
 
+db = None
+
 def create_db(recreate=False):
+    global db
     db = sqlite3.connect('database/pyui.db', check_same_thread=False)
     cursor = db.cursor()
 
@@ -21,9 +24,6 @@ def create_db(recreate=False):
             manufacturer TEXT,
             model TEXT,
             image TEXT,
-            level_capacity INTEGER,
-            downhill_capacity INTEGER,
-            slope_capacity INTEGER,
             PRIMARY KEY(id)
         );
 
@@ -66,15 +66,16 @@ def create_db(recreate=False):
         """
         
         cursor.executescript(create_tables_sql)
-        start_query(db, "INSERT INTO users (username, password) VALUES ('admin', 'admin')") # Create admin user
-        start_query(db, "INSERT INTO users (username, password) VALUES ('user', 'user')") # Create admin user
+        start_query("INSERT INTO users (username, password) VALUES ('admin', 'admin')") # Create admin user
+        start_query("INSERT INTO users (username, password) VALUES ('user', 'user')") # Create admin user
         db.commit()
 
     cursor.close()
     return db
 
 
-def start_query(db, query):
+def start_query(query):
+    global db
     cursor = db.cursor()
     cursor.execute(query)
     db.commit()
