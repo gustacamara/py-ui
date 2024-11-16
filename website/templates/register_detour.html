@@ -8,24 +8,24 @@
 <div class="container">
   <div class="title">
     <i class="ph ph-arrows-left-right"></i>
-    <h1>
+    <p>
       {% if edit_id < 0 %}
       Cadastrar desvio
       {% else %}
       Editar desvio
       {% endif %}
-    </h1>
+    </p>
   </div>
   {% if error %}
   <div class="invalid-credentials-error">
-    <h2>Erro ao
+    <h1>Erro ao
       {% if edit_id < 0 %}
       Cadastrar
       {% else %}
       Editar
       {% endif %}
       desvio
-    </h2>
+    </h1>
     <p>Verifique se todos os campos estão preenchidos corretamente.</p>
   </div>
   {% endif %}
@@ -39,10 +39,8 @@
       {% endif %}
     ">
     <div class="credencial">
-      <!--"id": 1,
-    "actuator": "SERVO",
-    "value": 128-->
 
+    <p>id</p>
       <div class="inputContent">
         <i class="ph ph-fingerprint-simple"></i>
         <input type="number" name="id" id="id" placeholder="Id" value="{{data[0]}}">
@@ -50,6 +48,7 @@
     </div>
 
     <div class="credencial">
+      <p>Atuador</p>
       <div class="inputContent">
         <i class="ph ph-aperture"></i>
         <input type="text" name="actuator" id="actuator" placeholder="Atuador" value="{{data[1]}}">
@@ -57,6 +56,7 @@
     </div>
 
     <div class="credencial">
+      <p>Valor</p>
       <div class="inputContent">
         <i class="ph ph-hash-straight"></i>
         <input type="number" name="value" id="value" placeholder="Valor" value="{{data[2]}}">
