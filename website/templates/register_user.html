@@ -8,28 +8,16 @@
   <div class="container">
     <div class="title">
       <i class="ph-fill ph-user"></i>
-      <h1>
+      <p>
         {% if edit_id < 0 %}
           Cadastrar
         {% else %}
           Editar
         {% endif %}
         usuário
-      </h1>
+      </p>
     </div>
-    {% if error %}
-    <div class="invalid-credentials-error">
-      <h2>Erro ao 
-        {% if edit_id < 0 %}
-        cadastrar
-        {% else %}
-        editar
-        {% endif %}
-        usuário.
-      </h2>
-      <p>Verifique se todos os campos estão preenchidos corretamente.</p>
-    </div>
-    {% endif %}
+    
   
     <form class="form" id="form" method="POST" action="
       {% if edit_id <0 %}
@@ -67,4 +55,12 @@
     </form>
   </div>
   <a href="{{ url_for('user_controller.list_user') }}">Voltar à lista</a>
+
+  {% if error %}
+  <div class="invalid-credentials-error invalid-credentials-error-pulse-animation">
+    <h1>Erro ao
+      {% if edit_id < 0 %} cadastrar {% else %} editar {% endif %} usuário. </h1>
+        <p>Verifique se todos os campos estão preenchidos corretamente.</p>
+  </div>
+  {% endif %}
 {% endblock %}

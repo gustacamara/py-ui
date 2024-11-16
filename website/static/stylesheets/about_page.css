@@ -1,3 +1,12 @@
+p, a, ul, li {
+  font-size: 0.875rem;
+}
+
+h1{
+  font-size: 1.125rem;
+  margin-block: 0.875rem;
+}
+
 img{
   display: flex;
   max-width: 50rem;
@@ -28,9 +37,6 @@ body {
   img {
     max-width: 100%;
   }
-}
-p, a, ul, li{
-  font-size: 0.75rem;
 }
 
 .img-container {

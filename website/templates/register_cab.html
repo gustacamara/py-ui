@@ -8,18 +8,18 @@
   <div class="container">
     <div class="title">
       <i class="ph-fill ph-train"></i>
-      <h1>
+      <p>
         {% if edit_id < 0 %}
           Cadastrar
         {% else %}
           Editar
         {% endif %}
           locomotiva
-      </h1>
+      </p>
     </div>
     {% if error %}
     <div class="invalid-credentials-error">
-      <h2>
+      <h1>
         Erro ao 
         {% if edit_id < 0 %}
           Cadastrar
@@ -27,7 +27,7 @@
           Editar
         {% endif %}
           locomotiva.
-      </h2>
+      </h1>
       <p>Verifique se todos os campos estão preenchidos corretamente.</p>
     </div>
     {% endif %}
@@ -40,6 +40,7 @@
       {% endif %}
     ">
       <div class="credencial">
+        <p>Id</p> 
         <div class="inputContent">
           <i class="ph ph-fingerprint-simple"></i>
           <input type="number" name="cab_id" id="cab_id" placeholder="Id" value="{{data[0]}}">
@@ -47,6 +48,7 @@
       </div>
   
       <div class="credencial">
+        <p>Fabricante</p>
         <div class="inputContent">
           <i class="ph ph-hammer"></i>
           <input type="text" id="manufacturer" name="manufacturer" placeholder="Fabricante" value="{{data[1]}}">
@@ -54,12 +56,12 @@
       </div>
   
       <div class="credencial">
+        <p>Modelo</p>
         <div class="inputContent">
           <i class="ph ph-identification-badge"></i>
           <input type="text" name="model" id="model" placeholder="Modelo" value="{{data[2]}}">
         </div>
       </div>  
-  
   
       <div class="credencial">
         <button type="submit" id="sendNewUser" name="sendNewUser">

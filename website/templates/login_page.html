@@ -8,17 +8,18 @@
   <div class="container">
     <div class="title">
       <i class="ph-fill ph-user"></i>
-      <h1>Login</h1>
+      <p>Login</p>
     </div>
     {% if error %}
     <div class="invalid-credentials-error">
-      <h2>Login inválido</h2>
+      <h1>Login inválido</h1>
       <p>Verifique se o usuário e a senha estão corretos.</p>
     </div>
     {% endif %}
     
     <form class="form" id="form" method="post" action="{{ url_for('try_authenticate') }}">
       <div class="credencial">
+        <p>Usuário</p>
         <div class="inputContent">
           <i class="ph ph-at"></i>
           <input 
@@ -31,6 +32,7 @@
       </div> 
     
       <div class="credencial">
+        <p>Senha</p>
         <div class="inputContent">
           <i class="ph ph-fingerprint-simple"></i>
           <input 
