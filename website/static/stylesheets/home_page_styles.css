@@ -278,6 +278,27 @@ ul li:hover ul.dropdown {
     z-index: 100;
     stroke: blue !important;
   }
+
+  & .ir-sensor {
+    width: 20px;
+    height: 20px;
+    z-index: 100;
+    position: absolute;
+    background: rgb(66, 66, 66);
+    top: 295px;
+    right: 170px;
+  }
+
+  & .rfid-sensor {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    z-index: 100;
+    position: absolute;
+    background: rgb(66, 66, 66);
+    top: 275px;
+    right: 330px;
+  }
 }
 
 .rail-model-container{
