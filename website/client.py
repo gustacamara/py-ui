@@ -17,18 +17,18 @@ sensors_values = {
     }
 }
 
-turnouts = [
-    {
+turnouts = {
+    1: {
         "id": 1,
         "actuator": "SERVO",
-        "value": 128
+        "value": 0
     },
-    {
+    2: {
         "id": 2,
         "actuator": "SERVO",
-        "value": 128
+        "value": 60
     }
-]
+}
 
 mqtt_client = Mqtt()
 
@@ -99,8 +99,9 @@ def send_turnout_cmd():
 @client.route('/get_sensors_values', methods=['GET'])
 def get_sensors_values():
     global sensors_values
+    global turnouts
 
-    return render_template("real_time.html", sensors_values = sensors_values)
+    return render_template("real_time.html", sensors_values = sensors_values, actuator_values = turnouts)
 
 @mqtt_client.on_connect()
 def handle_connect(client, userdata, flags, rc):
@@ -123,7 +124,10 @@ def handle_mqtt_message(client, userdata, message):
         data = json.loads(message.payload.decode())
         if "sensor" in data:
             sensors_values[data["id"]] = data
-            print(sensors_values)
+
+        if "actuator" in data:
+            turnouts[data["id"]] = data
+
     except:
         pass
 
