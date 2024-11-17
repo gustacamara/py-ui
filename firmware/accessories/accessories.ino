@@ -1,8 +1,8 @@
 #include <ESP32Servo.h>
-#include <WiFi.h> 
+#include <WiFi.h>
 #include "PubSubClient.h"
 #include <ArduinoJson.h>
-#include "ServoEasing.hpp"
+#include <ESP32Servo.h>
 #include <SPI.h>
 #include <MFRC522.h>
 
@@ -12,31 +12,29 @@
 #define MQTT_TOPIC "pyui/accessories-9P5nN15kdp"
 #define MQTT_SERVER "broker.hivemq.com"
 #define MQTT_PORT 1883
-#define MQTT_CLIENT_ID "pyui-accessories-MhiEKhUQWv"
+#define MQTT_CLIENT_ID "pyui-accessories-MhiEK"
 
 #define IR_SENSOR_PIN 2
-#define SERVO_PIN 5
+#define SERVO_1_PIN 5
+#define SERVO_2_PIN 15
 
 #define RFID_SS_PIN 21
 #define RFID_RST_PIN 22
 
 MFRC522 rfid(RFID_SS_PIN, RFID_RST_PIN);
 
-ServoEasing servo;
+Servo servo1;
+Servo servo2;
 int previousIrSensorState = -1;
 
 WiFiClient wifiClient;
 PubSubClient mqttClient(wifiClient);
 
-void handleServo(int value) {
-  servo.easeTo(value, 45);
-}
-
 void mqttMessageCallback(char* topic, byte* rawPayload, unsigned int length) {
   Serial.print("[mqtt] Message arrived [");
   Serial.print(topic);
   Serial.print("] ");
-  
+
   String payload = "";
   for (int i = 0; i < length; i++) {
     payload += (char)rawPayload[i];
@@ -48,7 +46,13 @@ void mqttMessageCallback(char* topic, byte* rawPayload, unsigned int length) {
   deserializeJson(doc, payload);
 
   if (doc["actuator"] == "SERVO" && doc["id"] == 1) {
-    handleServo(doc["value"]);
+    int val = doc["value"];
+    servo1.write(val);
+  }
+
+  if (doc["actuator"] == "SERVO" && doc["id"] == 2) {
+    int val = doc["value"];
+    servo2.write(val);
   }
 }
 
@@ -56,8 +60,17 @@ void setup() {
   Serial.begin(115200);
   Serial.flush();
 
+  // Setup IR
+  pinMode(IR_SENSOR_PIN, OUTPUT);
+
+  // Setup Servo
+  servo1.attach(SERVO_1_PIN);
+  servo2.attach(SERVO_2_PIN);
+  servo1.write(0);
+  servo2.write(60);
+
   // Setup Wifi
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD); 
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
   Serial.print("[wifi] Connecting...");
   while (WiFi.status() != WL_CONNECTED) {
     delay(250);
@@ -68,14 +81,8 @@ void setup() {
 
   // Setup MQTT Client
   mqttClient.setServer(MQTT_SERVER, MQTT_PORT);
+  mqttClient.setSocketTimeout(30);
   mqttClient.setCallback(mqttMessageCallback);
-
-  // Setup IR
-  pinMode(IR_SENSOR_PIN, INPUT);
-
-  // Setup Servo
-  servo.attach(SERVO_PIN);
-  servo.write(0);
 
   // Setup RFIR
   SPI.begin();
@@ -84,14 +91,24 @@ void setup() {
 
 void connectMqtt() {
   while (!mqttClient.connected()) {
-    Serial.print("[mqtt] Connecting...");
+    Serial.print("[mqtt] Connecting...\n");
+
+    pinMode(IR_SENSOR_PIN, OUTPUT);
+    digitalWrite(IR_SENSOR_PIN, LOW);
+    delay(150);
+    digitalWrite(IR_SENSOR_PIN, HIGH);
+    delay(150);
+    digitalWrite(IR_SENSOR_PIN, LOW);
+    delay(150);
+    digitalWrite(IR_SENSOR_PIN, HIGH);
+
     if (mqttClient.connect(MQTT_CLIENT_ID)) {
-      Serial.print("[mqtt] Connected...");
+      Serial.print("[mqtt] Connected...\n");
       mqttClient.subscribe(MQTT_TOPIC);
+      pinMode(IR_SENSOR_PIN, INPUT_PULLUP);
     }
     else {
-      Serial.print(".");
-      delay(1000);
+      Serial.printf("Error: %d\n", mqttClient.state());
     }
   }
 }
