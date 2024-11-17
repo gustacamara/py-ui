@@ -39,7 +39,7 @@ def init_mqtt(app):
     app.config['MQTT_BROKER_PORT'] = 1883
     app.config['MQTT_USERNAME'] = ''
     app.config['MQTT_PASSWORD'] = ''
-    app.config['MQTT_KEEPALIVE'] = 5000
+    app.config['MQTT_KEEPALIVE'] = 60
     app.config['MQTT_TLS_ENABLED'] = False
 
     mqtt_client.init_app(app)
