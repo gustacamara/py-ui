@@ -8,7 +8,7 @@ sensors_values = {
     1: {
         "id": 1,
         "sensor": "RFID",
-        "value": "3560"
+        "value": "0"
     },
     2: {
         "id": 2,
