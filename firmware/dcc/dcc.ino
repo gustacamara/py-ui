@@ -1,4 +1,4 @@
-#include <ESP8266WiFi.h> 
+#include <ESP8266WiFi.h>
 #include "PubSubClient.h"
 
 #define WIFI_SSID ""
@@ -9,7 +9,7 @@
 #define MQTT_PORT 1883
 #define MQTT_CLIENT_ID "pyui-dcc-A3Bbbclslk"
 
-#define ENABLE_DEBUG true
+// #define ENABLE_DEBUG true
 
 #ifdef ENABLE_DEBUG
 #define DEBUG_PRINT(...) Serial.printf(__VA_ARGS__)
@@ -24,7 +24,7 @@ void mqttMessageCallback(char* topic, byte* rawPayload, unsigned int length) {
   DEBUG_PRINT("[mqtt] Message arrived [");
   DEBUG_PRINT(topic);
   DEBUG_PRINT("] ");
-  
+
   String payload = "";
   for (int i = 0; i < length; i++) {
     payload += (char)rawPayload[i];
@@ -36,8 +36,9 @@ void mqttMessageCallback(char* topic, byte* rawPayload, unsigned int length) {
 void setup() {
   Serial.begin(115200);
   Serial.flush();
+  Serial.print("<t 1 3 0 0>");
 
-  WiFi.begin(WIFI_SSID, WIFI_PASSWORD); 
+  WiFi.begin(WIFI_SSID, WIFI_PASSWORD);
 
   DEBUG_PRINT("[wifi] Connecting...");
   while (WiFi.status() != WL_CONNECTED) {
@@ -48,19 +49,28 @@ void setup() {
   DEBUG_PRINT("[wifi] Connected\n");
 
   mqttClient.setServer(MQTT_SERVER, MQTT_PORT);
+  mqttClient.setSocketTimeout(30);
   mqttClient.setCallback(mqttMessageCallback);
 }
 
 void connectMqtt() {
   while (!mqttClient.connected()) {
-    DEBUG_PRINT("[mqtt] Connecting...");
+    Serial.print("<f 3 128>");
+    delay(250);
+    Serial.print("<f 3 145>");
+    delay(250);
+    Serial.print("<f 3 128>");
+    delay(250);
+    Serial.print("<f 3 145>");
+
+    DEBUG_PRINT("[mqtt] Connecting...\n");
     if (mqttClient.connect(MQTT_CLIENT_ID)) {
-      DEBUG_PRINT("[mqtt] Connected...");
+      DEBUG_PRINT("[mqtt] Connected...\n");
+      Serial.print("<f 3 128>");
       mqttClient.subscribe(MQTT_TOPIC);
     }
     else {
-      DEBUG_PRINT(".");
-      delay(1000);
+      DEBUG_PRINT("Error: %d\n", mqttClient.state());
     }
   }
 }
