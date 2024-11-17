@@ -130,9 +130,48 @@
 
 <!-- main content -->
     <div class="rail-road-model">
+      <h1>Maquete do Roberto</h1>
       <div class="rail-model-container">
-        <h1>Maquete do Roberto</h1>
-        <img src="{{ url_for('static', filename='./img/background.png') }}" alt="Maquete do Roberto">
+        <img class="background" src="{{ url_for('static', filename='./img/background.png') }}" alt="Maquete do Roberto">
+
+        <svg
+          class="outer js-outer-path"
+          width="151.59964mm"
+          height="81.599663mm"
+          viewBox="0 0 151.59964 81.599663"
+          version="1.1"
+          xml:space="preserve"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.857;stroke-dasharray:none;stroke-opacity:1">
+          <g transform="translate(-234.51975,-30.181998)">
+            <rect
+              width="79.742653"
+              height="149.74265"
+              x="31.110498"
+              y="-385.19089"
+              ry="39.871326"
+              transform="rotate(90)"
+            />
+          </g>
+        </svg>
+
+        <svg
+          class="inner js-inner-path"
+          width="108.19991mm"
+          height="81.535873mm"
+          viewBox="0 0 108.19991 81.535873"
+          version="1.1"
+          xml:space="preserve"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:svg="http://www.w3.org/2000/svg"
+          style="fill:#000000;fill-opacity:0;stroke:#000000;stroke-width:1.857;stroke-dasharray:none;stroke-opacity:1">
+          <g transform="translate(-233.07299,-129.41664)">
+            <path
+              d="m 340.34436,170.15304 c 0,-21.33433 -16.5895,-38.64996 -37.62458,-39.80791 h -28.84682 c -22.08869,0 -39.87147,17.78226 -39.87147,39.87095 0,21.33434 16.5895,38.64998 37.62458,39.80792 h 28.84682 c 22.08869,0 39.87147,-17.78226 39.87147,-39.87096 z"
+            />
+          </g>
+        </svg>
       </div>
     </div>
 
@@ -238,7 +277,7 @@
         </div>
       </div>
       <div id="real-time" class="sensor-control panel"></div>
-      
+
       <div class="detour-control panel">
         <div class="control-header">
           <h1>Lista de desvios</h1>
@@ -253,7 +292,7 @@
                 <i class="ph-fill ph-arrows-left-right"></i>
                 <h3>Desvios</h3>
               </div>
-          
+
             </div>
             <div class="detour-content">
               {% for turnout in turnouts %}
@@ -267,7 +306,7 @@
               {% endfor %}
             </div>
           </div>
-        </div>  
+        </div>
       </div>
     </div>
   </main>

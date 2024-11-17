@@ -75,15 +75,25 @@ def send_turnout_cmd():
 
     data = request.get_json()
 
-    turnoutValue = 0 if data["direction"] == "left" else 60
+    if data["path"] == "inner":
+      servo1Angle = 60
+      servo2Angle = 0
+    else:
+      servo1Angle = 0
+      servo2Angle = 60
 
-    cmd = {
-        "id": int(data["id"]),
+    publish_to_mqtt(topic_accessories, json.dumps({
+        "id": 1,
         "actuator": "SERVO",
-        "value": turnoutValue
-    }
+        "value": servo1Angle
+    }))
 
-    publish_to_mqtt(topic_accessories , json.dumps(cmd))
+    publish_to_mqtt(topic_accessories, json.dumps({
+        "id": 2,
+        "actuator": "SERVO",
+        "value": servo2Angle
+    }))
+
     return ""
 
 @client.route('/get_sensors_values', methods=['GET'])
