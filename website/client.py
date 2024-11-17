@@ -75,7 +75,7 @@ def send_turnout_cmd():
 
     data = request.get_json()
 
-    turnoutValue = 0 if data["direction"] == "left" else 128 # Ajust angles
+    turnoutValue = 0 if data["direction"] == "left" else 60
 
     cmd = {
         "id": int(data["id"]),
