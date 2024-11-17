@@ -112,7 +112,7 @@ def handle_connect(client, userdata, flags, rc):
         print('Bad connection. Code:', rc)
 
 @mqtt_client.on_disconnect()
-def handle_disconnect(client, userdata, rc):
+def handle_disconnect():
     print("Disconnected from broker")
 
 @mqtt_client.on_message()
