@@ -31,7 +31,7 @@ locomotiva passou por determinado ponto da maquete.
     - Desvios
     - Locomotivas
 
-    ![IMG_0006](https://github.com/user-attachments/assets/a1ca7108-349e-41b4-8d47-f06eb72025d0)
+    ![model_railroad_picture2](https://github.com/user-attachments/assets/2d227e9b-1094-40bf-ad2f-1b8b1e4c702f)
 
 ### Ferramentas
 Flask, Javascript, HTML, CSS, C
@@ -45,5 +45,6 @@ Protocolo de comunicação MQTT
 - LEDs emissores e receptores de infravermelho.
 - Decoder das locomotivas
 
-![IMG_0039](https://github.com/user-attachments/assets/13d39d3b-cf3a-4fc5-8bb5-f4decfd4f4ec)
+![model_railroad_picture1](https://github.com/user-attachments/assets/c1e7cfae-d057-4f1f-8dd3-772c989b520c)
+
 

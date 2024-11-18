@@ -33,11 +33,9 @@
 
   <br>
   <div class="img-container">
-    <img
-      src="https://github.com/user-attachments/assets/a1ca7108-349e-41b4-8d47-f06eb72025d0"
-      alt="Imagem de locomotiva"
-    >
+    <img src="{{ url_for('static', filename='img/model_railroad_picture2.jpg') }}" alt="Foto da maquete" title="model railroad picture">
   </div>
+  <br>
   <h3>
     Conteúdo
   </h3>
@@ -75,12 +73,10 @@
   </ul>
 
   <div class="img-container">
-    <img
-      src="https://github.com/user-attachments/assets/13d39d3b-cf3a-4fc5-8bb5-f4decfd4f4ec"
-      alt="Imagem de um dos setores da maquete"
-    >
+    <img src="{{ url_for('static', filename='img/model_railroad_picture1.jpg') }}" alt="Foto da maquete" title="model railroad picture">
   </div>
   <div>
+    <br>
     <a href="{{ url_for('home_page') }}">Voltar à página inicial.</a>
   </div>
 </div>
