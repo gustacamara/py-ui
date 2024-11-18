@@ -95,7 +95,7 @@ ul li {
 
   & .exit:hover{
     & a, i{
-      color: var(--red-600);  
+      color: var(--red-600);
       transition: 0.3s;
     }
   }
@@ -105,7 +105,6 @@ ul li {
       cursor: pointer;
     }
   }
-  
 }
 
 ul.dropdown {
@@ -240,28 +239,78 @@ ul li:hover ul.dropdown {
 
 /* Railmodel content */
 
-.rail-road-model{
+.rail-road-model {
+  padding-top: 10%;
   display: flex;
   width: 100%;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
 
-  & img{
-    max-width: 55rem;
+  & .outer {
+    position: absolute;
+    top: 19px;
+    right: 0;
+    left: 0;
+    margin: auto;
+    z-index: 50;
+    cursor: pointer;
+  }
+
+  & .inner {
+    position: absolute;
+    top: 19px;
+    left: 153px;
+    z-index: 50;
+    cursor: pointer;
+  }
+
+  & .background {
     border-radius: 4px;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    margin: auto;
+    z-index: 0;
+  }
+
+  & .active {
+    z-index: 100;
+    stroke: blue !important;
+  }
+
+  & .ir-sensor {
+    width: 20px;
+    height: 20px;
+    z-index: 100;
+    position: absolute;
+    background: rgb(66, 66, 66);
+    top: 295px;
+    right: 170px;
+  }
+
+  & .rfid-sensor {
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    z-index: 100;
+    position: absolute;
+    background: rgb(66, 66, 66);
+    top: 275px;
+    right: 330px;
   }
 }
 
 .rail-model-container{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-
-  background-color: var(--slate-600);
+  margin-botton: 10px;;
+  position: relative;
+  margin: 0 auto;
+  width: 55rem;
+  /* background-color: var(--slate-600);
   padding-inline: 0.5rem;
   padding-block: 0.5rem;
-  border-radius: 4px;
-
+  border-radius: 4px; */
 }
 
 /* control sidebar */
@@ -291,7 +340,7 @@ ul li:hover ul.dropdown {
   padding-block: 0.75rem;
 
   & input{
-    width: 10rem;
+    width: 8rem;
     height: 19px;
     color: var(--slate-600);
 
@@ -342,7 +391,7 @@ ul li:hover ul.dropdown {
   flex-direction: column;
   gap: 12px;
   padding: 0.5rem;
-  
+
   background-color: var(--slate-600);
   border-radius: 4px;
 }
@@ -353,7 +402,7 @@ ul li:hover ul.dropdown {
   gap: 0.5rem;
 }
 
-.slider-control{ 
+.slider-control{
 
   & input[type=number]{
     width: 42px;

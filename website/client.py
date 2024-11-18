@@ -8,7 +8,7 @@ sensors_values = {
     1: {
         "id": 1,
         "sensor": "RFID",
-        "value": "3560"
+        "value": "0"
     },
     2: {
         "id": 2,
@@ -17,18 +17,18 @@ sensors_values = {
     }
 }
 
-turnouts = [
-    {
+turnouts = {
+    1: {
         "id": 1,
         "actuator": "SERVO",
-        "value": 128
+        "value": 0
     },
-    {
+    2: {
         "id": 2,
         "actuator": "SERVO",
-        "value": 128
+        "value": 60
     }
-]
+}
 
 mqtt_client = Mqtt()
 
@@ -39,7 +39,7 @@ def init_mqtt(app):
     app.config['MQTT_BROKER_PORT'] = 1883
     app.config['MQTT_USERNAME'] = ''
     app.config['MQTT_PASSWORD'] = ''
-    app.config['MQTT_KEEPALIVE'] = 5000
+    app.config['MQTT_KEEPALIVE'] = 60
     app.config['MQTT_TLS_ENABLED'] = False
 
     mqtt_client.init_app(app)
@@ -75,22 +75,33 @@ def send_turnout_cmd():
 
     data = request.get_json()
 
-    turnoutValue = 0 if data["direction"] == "left" else 128 # Ajust angles
+    if data["path"] == "inner":
+      servo1Angle = 60
+      servo2Angle = 0
+    else:
+      servo1Angle = 0
+      servo2Angle = 60
 
-    cmd = {
-        "id": int(data["id"]),
+    publish_to_mqtt(topic_accessories, json.dumps({
+        "id": 1,
         "actuator": "SERVO",
-        "value": turnoutValue
-    }
+        "value": servo1Angle
+    }))
 
-    publish_to_mqtt(topic_accessories , json.dumps(cmd))
+    publish_to_mqtt(topic_accessories, json.dumps({
+        "id": 2,
+        "actuator": "SERVO",
+        "value": servo2Angle
+    }))
+
     return ""
 
 @client.route('/get_sensors_values', methods=['GET'])
 def get_sensors_values():
     global sensors_values
+    global turnouts
 
-    return render_template("real_time.html", sensors_values = sensors_values)
+    return render_template("real_time.html", sensors_values = sensors_values, actuator_values = turnouts)
 
 @mqtt_client.on_connect()
 def handle_connect(client, userdata, flags, rc):
@@ -101,7 +112,7 @@ def handle_connect(client, userdata, flags, rc):
         print('Bad connection. Code:', rc)
 
 @mqtt_client.on_disconnect()
-def handle_disconnect(client, userdata, rc):
+def handle_disconnect():
     print("Disconnected from broker")
 
 @mqtt_client.on_message()
@@ -113,7 +124,10 @@ def handle_mqtt_message(client, userdata, message):
         data = json.loads(message.payload.decode())
         if "sensor" in data:
             sensors_values[data["id"]] = data
-            print(sensors_values)
+
+        if "actuator" in data:
+            turnouts[data["id"]] = data
+
     except:
         pass
 

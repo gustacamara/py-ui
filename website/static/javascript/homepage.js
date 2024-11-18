@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const direction = document.getElementById("direction-switch")
     const frontLight = document.getElementById("front-light")
     const secondaryLight = document.getElementById("secondary-light")
-    const cabButton = document.getElementById("confirm-cab-id") 
+    const cabButton = document.getElementById("confirm-cab-id")
     //const honkButton = document.getElementById("honkButton")
 
     function sendData() {
@@ -15,9 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
         'frontLight': frontLight.checked,
         'secondaryLight': secondaryLight.checked
       }
-  
+
       console.log(data)
-  
+
       fetch('/send_dcc_cmd', {
         method: 'POST',
         headers: {
@@ -26,11 +26,11 @@ document.addEventListener("DOMContentLoaded", () => {
         body: JSON.stringify(data)
       })
     }
-  
+
     speed.addEventListener("input", (event) => {
       sendData()
     })
-  
+
     frontLight.addEventListener("input", (event) => {
       sendData()
     })
@@ -38,23 +38,23 @@ document.addEventListener("DOMContentLoaded", () => {
     secondaryLight.addEventListener("input", (event) => {
       sendData()
     })
-  
+
     direction.addEventListener("input", (event) => {
       sendData()
     })
-  
+
     cabButton.addEventListener("click", (event) => {
       sendData()
     })
-  
+
     // honkButton.addEventListener("mousedown", (event) => {
     //   console.log("down")
     // })
-  
+
     // honkButton.addEventListener("mouseup", (event) => {
     //   console.log("up")
     // })
-  
+
   function getSensorsValues() {
     fetch('/get_sensors_values')
       .then((response) => response.text())
@@ -65,25 +65,43 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setInterval(getSensorsValues, 1000)
 
-  function sendTurnoutCmd(event) {
-    const element = event.target
-
-    const cmd = { id: element.dataset.id, direction: element.value}
-    console.log(cmd)
-
+  function sendTurnoutCmd(path) {
     fetch('/send_turnout_cmd', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(cmd)
+      body: JSON.stringify({ path })
     })
   }
 
   document.querySelectorAll(".turnout-direction").forEach((select) => {
-    select.addEventListener("input",sendTurnoutCmd)
+    select.addEventListener("input", sendTurnoutCmd)
   })
-  
+
+  document.querySelector(".js-inner-path").addEventListener("click", (event) => {
+    const svg = event.srcElement.closest('svg')
+    svg.classList.add('active')
+    svg.style['pointerEvents'] = 'none'
+
+    const outerSvg = document.querySelector(".js-outer-path")
+    outerSvg.classList.remove('active')
+    outerSvg.style['pointerEvents'] = ''
+
+    sendTurnoutCmd('inner')
+  })
+
+  document.querySelector(".js-outer-path").addEventListener("click", () => {
+    const svg = event.srcElement.closest('svg')
+    svg.classList.add('active')
+    svg.style['pointerEvents'] = 'none'
+
+    const innerSvg = document.querySelector(".js-inner-path")
+    innerSvg.classList.remove('active')
+    innerSvg.style['pointerEvents'] = ''
+
+    sendTurnoutCmd('outer')
+  })
 })
 
 

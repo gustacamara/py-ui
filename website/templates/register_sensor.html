@@ -53,15 +53,15 @@
         <input type="text" name="name" id="name" placeholder="Sensor" value="{{data[1]}}">
       </div>
     </div>
-    
+
     <div class="credencial">
-      <p>Valor</p>
+      <p>Local</p>
       <div class="inputContent">
         <i class="ph ph-hash-straight"></i>
-        <input type="number" name="value" id="value" placeholder="Valor" value="{{data[2]}}">
+        <input type="text" name="location" id="location" placeholder="Local" value="{{data[2]}}">
       </div>
     </div>
-    
+
     <div class="credencial">
       <p>Tipo</p>
       <div class="inputContent">
@@ -72,7 +72,7 @@
         </select>
       </div>
     </div>
-    
+
     <div class="credencial">
       <button type="submit" id="sendNewUser" name="sendNewUser">
         {% if edit_id < 0 %}

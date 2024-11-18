@@ -1,5 +1,5 @@
   <div class="control-header">
-    <h1>Lista de sensores</h1>
+    <h1>Lista de acessórios</h1>
     <button class="icon-button">
       <i class="ph ph-caret-up"></i>
     </button>
@@ -10,15 +10,29 @@
         <div class="control-name">
           <i class="ph-fill ph-broadcast"></i>
           <h3>Dados dos sensores</h3>
-        </div> 
+        </div>
       </div>
-      
+
       {% for sensor in sensors_values %}
       <div class="handle-switch">
         <p>{{sensors_values[sensor].sensor}}:</p>
         <p>{{sensors_values[sensor].value}}</p>
       </div>
       {% endfor %}
-    
+
+      <div class="control-title">
+        <div class="control-name">
+          <i class="ph ph-arrows-left-right"></i>
+          <h3>Dados dos desvios</h3>
+        </div>
+      </div>
+
+      {% for actuator in actuator_values %}
+      <div class="handle-switch">
+        <p>{{actuator_values[actuator].actuator}} {{actuator_values[actuator].id}}:</p>
+        <p>{{actuator_values[actuator].value}}</p>
+      </div>
+      {% endfor %}
+
     </div>
   </div>
