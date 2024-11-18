@@ -7,13 +7,13 @@ client = Blueprint("client",__name__, template_folder="templates")
 sensors_values = {
     1: {
         "id": 0,
-        "location": "Restaurante 8bits",
+        "location": "restaurante 8bits",
         "type": "RFID",
         "value": 0
     },
     2: {
         "id": 1,
-        "location": "Parada das capivaras",
+        "location": "parada das capivaras",
         "type": 'Infravermelho',
         "value": 'false'
     }

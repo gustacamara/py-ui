@@ -15,14 +15,11 @@
 
     {% for sensor in sensors_values %}
     <div class="handle-switch">
-      <p>Local: {{sensors_values[sensor].location}}</p>
-    </div>
-    <div class="handle-switch">
-      <p>{{sensors_values[sensor].type}}:
+      <p>{{sensors_values[sensor].type}} {{sensors_values[sensor].id}}:
         {% if sensors_values[sensor].value == 0 or False %}
-        nada passando</p>
+        nada passando em {{sensors_values[sensor].location}}</p>
       {% else %}
-      trem passando!</p>
+      trem passando em {{sensors_values[sensor].location}}</p>
       {% endif %}
     </div>
     {% endfor %}
