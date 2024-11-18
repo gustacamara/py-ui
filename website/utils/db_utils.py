@@ -56,8 +56,8 @@ def create_db(recreate=False):
         start_query("INSERT INTO cabs (id, manufacturer, model) VALUES (1, 'Locomotiva', 'Modelo 1')") 
         start_query("INSERT INTO sensor (id, location, type) VALUES (1, 'RFID', 0)")
         start_query("INSERT INTO sensor (id, location, type) VALUES (2, 'Infravermelho', 1)")
-        start_query("INSERT INTO turnout (id, left_angle, right_angle) VALUES (1, 40, 40)")
-        start_query("INSERT INTO turnout (id, left_angle, right_angle) VALUES (2, 40, 40)")
+        start_query("INSERT INTO turnout (id, left_angle, right_angle) VALUES (1, 0, 60)")
+        start_query("INSERT INTO turnout (id, left_angle, right_angle) VALUES (2, 60, 0)")
         db.commit()
 
     cursor.close()
