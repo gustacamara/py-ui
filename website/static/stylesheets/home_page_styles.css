@@ -240,6 +240,7 @@ ul li:hover ul.dropdown {
 /* Railmodel content */
 
 .rail-road-model {
+  padding-top: 10%;
   display: flex;
   width: 100%;
   flex-direction: column;
@@ -302,6 +303,7 @@ ul li:hover ul.dropdown {
 }
 
 .rail-model-container{
+  margin-botton: 10px;;
   position: relative;
   margin: 0 auto;
   width: 55rem;
