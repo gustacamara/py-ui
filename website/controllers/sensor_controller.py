@@ -13,11 +13,13 @@ def try_register_sensor():
         return login_check
     if request.method == 'POST':
         sensor_id = request.form['id']
-        name = request.form['name']
-        value = request.form['value']
+        location = request.form['location']
+        sensor_type = request.form['type']
         data = start_query("SELECT * FROM sensor")
 
-        if name.strip() == "" or value.strip() == "" or not sensor_id.isnumeric() or sensor_id.strip() == "":
+        sensor_type = int(sensor_type)
+
+        if location.strip() == "" or location.strip() == "" or not sensor_id.isnumeric() or sensor_id.strip() == "":
             print("Sensor inválido!")
             return register_sensor(error=True)
 
@@ -26,7 +28,7 @@ def try_register_sensor():
                 print("Sensor já cadastrado!")
                 return register_sensor(error=True)
 
-        start_query(f"INSERT INTO sensor (id, sensor, value) VALUES ({sensor_id}, '{name}', {value})")
+        start_query(f"INSERT INTO sensor (id, location, type) VALUES ({sensor_id}, '{location}', {sensor_type})")
         return redirect(url_for('sensor_controller.list_sensor'))
 
 @sensor_controller.route('/try-edit-sensor', methods=['POST', 'GET'])
@@ -37,14 +39,16 @@ def try_edit_sensor():
     if request.method == 'POST':
         edit_id = int(request.form['edit_id'])
         id = request.form['id']
-        name = request.form['name']
-        value = request.form['value']
+        location = request.form['location']
+        sensor_type = request.form['type']
+
+        sensor_type = int(sensor_type)
 
         data = start_query("SELECT * FROM sensor")
 
-        if id.strip() == "" or name.strip() == "" or value.strip() == "" or not id.isnumeric():
+        if id.strip() == "" or location.strip() == "" or location.strip() == "" or not id.isnumeric():
             print("Sensor inválido!")
-            return register_sensor(error=True, data=[id, name, value], edit_id=edit_id)
+            return register_sensor(error=True, data=[id, location, sensor_type], edit_id=edit_id, selected=data[2])
 
         id = int(id)
 
@@ -52,11 +56,11 @@ def try_edit_sensor():
         for sensor in data:
             if index != edit_id and int(sensor[0]) == id:
                 print("Sensor já cadastrado!")
-                return register_sensor(error=True, data=[id, name, value], edit_id=edit_id)
+                return register_sensor(error=True, data=[id, location, sensor_type], edit_id=edit_id, selected=sensor_type)
             index += 1
 
-        start_query(f"DELETE FROM sensor WHERE id = {id}")
-        start_query(f"INSERT INTO sensor (id, sensor, value) VALUES ({id}, '{name}', {value})")
+        start_query(f"DELETE FROM sensor WHERE id = {data[edit_id][0]}")
+        start_query(f"INSERT INTO sensor (id, location, type) VALUES ({id}, '{location}', {sensor_type})")
         return redirect(url_for('sensor_controller.list_sensor'))
     else:
         print("Método inválido:", request.method)
@@ -77,11 +81,11 @@ def edit_sensor(error=False):
         return redirect(url_for('sensor_controller.register_sensor'))
 
 @sensor_controller.route('/register-sensor')
-def register_sensor(error=False, data=['', '', ''], edit_id=-1):
+def register_sensor(error=False, data=['', '', ''], edit_id=-1, selected = 0):
     login_check = check_for_login()
     if login_check != None:
         return login_check
-    return render_template("register_sensor.html", error=error, data=data, edit_id=edit_id)
+    return render_template("register_sensor.html", error=error, data=data, edit_id=edit_id, selected=selected)
 
 @sensor_controller.route('/remove-sensor')
 def remove_sensor():
