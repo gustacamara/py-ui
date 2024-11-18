@@ -11,12 +11,9 @@ def create_db(recreate=False):
     if recreate:
         drop_tables_sql = """
         DROP TABLE IF EXISTS cabs;
-        DROP TABLE IF EXISTS composition;
         DROP TABLE IF EXISTS sensor;
         DROP TABLE IF EXISTS turnout;
         DROP TABLE IF EXISTS users;
-        DROP TABLE IF EXISTS wagon;
-        DROP TABLE IF EXISTS credentials;
         """
         cursor.executescript(drop_tables_sql)
 
@@ -37,7 +34,6 @@ def create_db(recreate=False):
 
         CREATE TABLE IF NOT EXISTS turnout (
             id INTEGER UNIQUE,
-            actuator TEXT,
             left_angle INTEGER,
             right_angle INTEGER,
             PRIMARY KEY(id)

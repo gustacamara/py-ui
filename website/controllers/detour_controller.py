@@ -54,14 +54,14 @@ def try_edit_detour():
         #print("\n"*100, request.form)
         edit_id = int(request.form['edit_id'])
         id = request.form['id']
-        actuator = request.form['actuator']
-        value = request.form['value']
+        left_angle = request.form['left-angle']
+        right_angle = request.form['right-angle']
 
         data = start_query("SELECT * FROM turnout")
 
-        if id.strip('') == "" or actuator.strip('') == "" or value.strip('') == "" or not id.isnumeric() or not value.isnumeric():
+        if id.strip('') == "" or left_angle.strip('') == "" or right_angle.strip('') == "" or not id.isnumeric() or not left_angle.isnumeric():
             print("Sensor inválido!")
-            return register_detour(error=True, data=[id, actuator, value], edit_id=edit_id)
+            return register_detour(error=True, data=[id, left_angle, right_angle], edit_id=edit_id)
 
         id = int(id)
 
@@ -69,11 +69,11 @@ def try_edit_detour():
         for sensor in data:
             if index != edit_id and int(sensor[0]) == id:
                 print("Desvio já cadastrado!") 
-                return register_detour(error=True, data=[id, actuator, value], edit_id=edit_id)
+                return register_detour(error=True, data=[id, left_angle, right_angle], edit_id=edit_id)
             index += 1
             
-        start_query(f"DELETE FROM turnout WHERE id = {id}")
-        start_query(f"INSERT INTO turnout (id, actuator, value) VALUES ({id}, '{actuator}', '{value}')")
+        start_query(f"DELETE FROM turnout WHERE id = {data[edit_id][0]}")
+        start_query(f"INSERT INTO turnout (id, left_angle, right_angle) VALUES ({id}, '{left_angle}', '{right_angle}')")
         return redirect(url_for('detour_controller.list_detour')) # Redirect to list of locomotives later
     else:
         print("Método inválido:", request.method)
