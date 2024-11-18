@@ -340,7 +340,7 @@ ul li:hover ul.dropdown {
   padding-block: 0.75rem;
 
   & input{
-    width: 10rem;
+    width: 8rem;
     height: 19px;
     color: var(--slate-600);
 
