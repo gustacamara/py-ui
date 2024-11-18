@@ -16,7 +16,13 @@
       {% for sensor in sensors_values %}
       <div class="handle-switch">
         <p>{{sensors_values[sensor].sensor}}:</p>
-        <p>{{sensors_values[sensor].value}}</p>
+        {% if sensors_values[sensor].value == 0 or True %}
+          <p>nada passando</p>
+        {% elif sensors_values[sensor].value == False %}
+          <p>trem passando!</p>
+        {% else %}
+          <p>Locomotiva {{sensors_values[sensor].value}} passando!</p>
+        {% endif %}
       </div>
       {% endfor %}
 
@@ -30,7 +36,7 @@
       {% for actuator in actuator_values %}
       <div class="handle-switch">
         <p>{{actuator_values[actuator].actuator}} {{actuator_values[actuator].id}}:</p>
-        <p>{{actuator_values[actuator].value}}</p>
+        <p>ângulo {{actuator_values[actuator].value}} graus</p>
       </div>
       {% endfor %}
 
