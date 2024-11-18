@@ -27,12 +27,12 @@ def try_register_detour():
         return login_check
     if request.method == 'POST':
         detour_id = request.form['id']
-        actuator = request.form['actuator']
-        value = request.form['value']
+        left_angle = request.form['left-angle']
+        right_angle = request.form['right-angle']
         # data = utils.json_util.import_json(detour_controller.root_path + '/database/actuators.json')
         data = start_query("SELECT * FROM turnout")
 
-        if actuator.strip('') == "" or not detour_id.isnumeric() or not value.isnumeric():
+        if detour_id.strip('') == "" or not detour_id.isnumeric() or not left_angle.isnumeric() or not right_angle.isnumeric():
             print("Desvio inválido!")
             return register_detour(error=True)
 
@@ -42,7 +42,7 @@ def try_register_detour():
                 print("Desvio já cadastrado!")
                 return register_detour(error=True)
         
-        start_query(f"INSERT INTO turnout (id, actuator, value) VALUES ({detour_id}, '{actuator}', {value})")
+        start_query(f"INSERT INTO turnout (id, left_angle, right_angle) VALUES ({detour_id}, '{left_angle}', {right_angle})")
         return redirect(url_for('detour_controller.list_detour'))
 
 @detour_controller.route('/try-edit-detour', methods=['POST', 'GET'])
@@ -85,13 +85,11 @@ def list_detour():
     login_check = check_for_login()
     if login_check != None:
         return login_check
-    # data = utils.json_util.import_json(detour_controller.root_path + '/database/actuators.json')
     data = start_query("SELECT * FROM turnout")
     detours = {}
     index = 0
     for actuator in data:
-        detours.update({index: actuator[1]})
-        #print('\n\n\n\n\n\n\n\n\n\n\n\n\n', actuator, " -:- ", detours)
+        detours.update({index: actuator[0]})
         index += 1
     return render_template("list_detour.html", detours = detours)
 

@@ -50,7 +50,7 @@
       <p>Local</p>
       <div class="inputContent">
         <i class="ph ph-hash-straight"></i>
-        <input type="text" name="location" id="location" placeholder="Local" value="{{data[2]}}">
+        <input type="text" name="location" id="location" placeholder="Local" value="{{data[1]}}">
       </div>
     </div>
 
@@ -58,9 +58,17 @@
       <p>Tipo</p>
       <div class="inputContent">
         <i class="ph ph-link-simple"></i>
-        <select name="type" id="type">
-          <option value="RFID">RFID</option>
-          <option value="infrared">Infravermelho</option>
+        <select name="type" id="type" name="type" id="type"  value="{{data[2]}}">
+          <option value="0" 
+          {% if data[2] == 0 %}
+          selected
+          {% endif %}
+          >RFID</option>
+          <option value="1"
+          {% if data[2] == 1 %}
+          selected
+          {% endif %}
+          >Infravermelho</option>
         </select>
       </div>
     </div>
