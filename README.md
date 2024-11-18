@@ -22,6 +22,8 @@ locomotiva passou por determinado ponto da maquete.
 
 ### Conteúdo
 - Painel de controle de locomotivas
+- Controle de desvios
+- Monitoramento de sensores
 - Modo administrador
 - CRUDs:
     - Usuários
