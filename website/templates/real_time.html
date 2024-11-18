@@ -1,44 +1,51 @@
-  <div class="control-header">
-    <h1>Lista de acessórios</h1>
-    <button class="icon-button">
-      <i class="ph ph-caret-up"></i>
-    </button>
-  </div>
-  <div class="control-list-content">
-    <div class="sensor control-option">
-      <div class="control-title">
-        <div class="control-name">
-          <i class="ph-fill ph-broadcast"></i>
-          <h3>Dados dos sensores</h3>
-        </div>
+<div class="control-header">
+  <h1>Lista de acessórios</h1>
+  <button class="icon-button">
+    <i class="ph ph-caret-up"></i>
+  </button>
+</div>
+<div class="control-list-content">
+  <div class="sensor control-option">
+    <div class="control-title">
+      <div class="control-name">
+        <i class="ph-fill ph-broadcast"></i>
+        <h3>Dados dos sensores</h3>
       </div>
-
-      {% for sensor in sensors_values %}
-      <div class="handle-switch">
-        <p>{{sensors_values[sensor].sensor}}:</p>
-        {% if sensors_values[sensor].value == 0 or True %}
-          <p>nada passando</p>
-        {% elif sensors_values[sensor].value == False %}
-          <p>trem passando!</p>
-        {% else %}
-          <p>Locomotiva {{sensors_values[sensor].value}} passando!</p>
-        {% endif %}
-      </div>
-      {% endfor %}
-
-      <div class="control-title">
-        <div class="control-name">
-          <i class="ph ph-arrows-left-right"></i>
-          <h3>Dados dos desvios</h3>
-        </div>
-      </div>
-
-      {% for actuator in actuator_values %}
-      <div class="handle-switch">
-        <p>{{actuator_values[actuator].actuator}} {{actuator_values[actuator].id}}:</p>
-        <p>ângulo {{actuator_values[actuator].value}} graus</p>
-      </div>
-      {% endfor %}
-
     </div>
+
+    {% for sensor in sensors_values %}
+    <div class="handle-switch">
+      <p>Local: {{sensors_values[sensor].location}}</p>
+    </div>
+    <div class="handle-switch">
+      <p>{{sensors_values[sensor].type}}:
+        {% if sensors_values[sensor].value == 0 or False %}
+        nada passando</p>
+      {% else %}
+      trem passando!</p>
+      {% endif %}
+    </div>
+    {% endfor %}
   </div>
+</div>
+<div></div>
+
+<div class="control-list-content">
+  <div class="sensor control-option">
+    <div class="control-title">
+      <div class="control-name">
+        <i class="ph ph-arrows-left-right"></i>
+        <h3>Dados dos desvios</h3>
+      </div>
+    </div>
+
+    {% for actuator in actuator_values %}
+    <div class="handle-switch">
+      <p>Desvio {{actuator_values[actuator].id}}:</p>
+      <p>ângulos: esquerdo {{actuator_values[actuator].left}} | direito {{actuator_values[actuator].right}} </p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</div>
+</div>

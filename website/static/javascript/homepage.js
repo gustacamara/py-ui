@@ -47,14 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
       sendData()
     })
 
-    // honkButton.addEventListener("mousedown", (event) => {
-    //   console.log("down")
-    // })
-
-    // honkButton.addEventListener("mouseup", (event) => {
-    //   console.log("up")
-    // })
-
   function getSensorsValues() {
     fetch('/get_sensors_values')
       .then((response) => response.text())
