@@ -31,21 +31,11 @@ def init_realtime_values():
 
     sensors = start_query("SELECT * FROM sensor ORDER BY id")
     for sensor in sensors:
-        sensors_values[sensor[0]] = {
-            "id": sensor[0],
-            "location": sensor[1],
-            "type": sensor[2],
-            "value": 0
-        }
+        sensors_values[sensor[0]] = { "value": 0, "time": "" }
 
     turnouts = start_query("SELECT * FROM turnout ORDER BY id")
     for turnout in turnouts:
-        turnouts_values[turnout[0]] = {
-            "id": turnout[0],
-            "left": turnout[1],
-            "right": turnout[2],
-            "value": 0
-        }
+        turnouts_values[turnout[0]]= { "value": 0, "time": "" }
 
 topic_dcc = "pyui/dcc-K3xWvP4p4D"
 topic_accessories = "pyui/accessories-9P5nN15kdp"
@@ -105,7 +95,29 @@ def get_sensors_values():
     global sensors_values
     global turnouts_values
 
-    return render_template("real_time.html", sensors_values = sensors_values, turnouts_values = turnouts_values)
+    sensors_with_values = {}
+    sensors = start_query("SELECT * FROM sensor ORDER BY id")
+    for sensor in sensors:
+        sensors_with_values[sensor[0]] = {
+            "id": sensor[0],
+            "location": sensor[1],
+            "type": sensor[2],
+            "value": sensors_values.get(sensor[0], {}).get("value", False),
+            "time": sensors_values.get(sensor[0], {}).get("time", "")
+        }
+
+    turnouts_with_values = {}
+    turnouts = start_query("SELECT * FROM turnout ORDER BY id")
+    for turnout in turnouts:
+        turnouts_with_values[turnout[0]] = {
+            "id": turnout[0],
+            "left": turnout[1],
+            "right": turnout[2],
+            "value": turnouts_values.get(turnout[0], {}).get("value", 0),
+            "time": turnouts_values.get(turnout[0], {}).get("time", "")
+        }
+
+    return render_template("real_time.html", sensors_values = sensors_with_values, turnouts_values = turnouts_with_values)
 
 @mqtt_client.on_connect()
 def handle_connect(client, userdata, flags, rc):
@@ -131,11 +143,10 @@ def handle_mqtt_message(client, userdata, message):
         return
 
     if "sensor" in data:
-        sensors_values[data["id"]]['value'] = data['value']
-        sensors_values[data["id"]]['time'] = strftime("%H:%M:%S", localtime())
+        sensors_values[data["id"]] = { "value": data['value'], "time": strftime("%H:%M:%S", localtime()) }
 
     if "actuator" in data:
-        turnouts_values[data["id"]]['value'] = data['value']
+        turnouts_values[data["id"]] = { "value": data['value'], "time": strftime("%H:%M:%S", localtime()) }
 
     store_sensor_history(data)
 

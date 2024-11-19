@@ -61,8 +61,8 @@ def create_db(recreate=False):
         start_query("INSERT INTO users (username, password) VALUES ('admin', 'admin')") # Create admin user
         start_query("INSERT INTO users (username, password) VALUES ('user', 'user')") # Create admin user
         start_query("INSERT INTO cabs (id, manufacturer, model) VALUES (1, 'Frateschi', 'U20')")
-        start_query("INSERT INTO sensor (id, location, type) VALUES (1, 'Restaurante 8Bits', 'RFID')")
-        start_query("INSERT INTO sensor (id, location, type) VALUES (2, 'Poço das capivaras', 'Infravermelho')")
+        start_query("INSERT INTO sensor (id, location, type) VALUES (1, 'Restaurante 8Bits', 0)")
+        start_query("INSERT INTO sensor (id, location, type) VALUES (2, 'Poço das capivaras', 1)")
         start_query("INSERT INTO turnout (id, left_angle, right_angle) VALUES (1, 0, 60)")
         start_query("INSERT INTO turnout (id, left_angle, right_angle) VALUES (2, 60, 0)")
 

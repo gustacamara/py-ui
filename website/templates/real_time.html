@@ -14,13 +14,13 @@
     {% for sensor_id in sensors_values %}
     <div class="handle-switch">
       <p>
-        {{sensors_values[sensor_id].id}} - {{sensors_values[sensor_id].type}} :
+        {{sensors_values[sensor_id].id}} - {{'RFID' if sensors_values[sensor_id].type == 0 else 'Infravermelho'}}:
         {% if not sensors_values[sensor_id].value %}
           nada passando
         {% else %}
           trem
 
-          {% if sensors_values[sensor_id].type == "RFID" %}
+          {% if sensors_values[sensor_id].type == 0 %}
             {{ sensors_values[sensor_id].value }}
           {% endif %}
 
