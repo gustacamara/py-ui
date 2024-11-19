@@ -10,14 +10,23 @@
       </div>
     </div>
 
-    {% for sensor in sensors_values %}
+
+    {% for sensor_id in sensors_values %}
     <div class="handle-switch">
-      <p>{{sensors_values[sensor].type}} {{sensors_values[sensor].id}}:
-        {% if sensors_values[sensor].value == 0 or False %}
-        nada passando em {{sensors_values[sensor].location}}</p>
-      {% else %}
-      trem passando em {{sensors_values[sensor].location}}</p>
-      {% endif %}
+      <p>
+        {{sensors_values[sensor_id].id}} - {{sensors_values[sensor_id].type}} :
+        {% if not sensors_values[sensor_id].value %}
+          nada passando
+        {% else %}
+          trem
+
+          {% if sensors_values[sensor_id].type == "RFID" %}
+            {{ sensors_values[sensor_id].value }}
+          {% endif %}
+
+          passou em {{sensors_values[sensor_id].location}} às {{sensors_values[sensor_id].time}}
+        {% endif %}
+      </p>
     </div>
     {% endfor %}
   </div>
@@ -33,10 +42,10 @@
       </div>
     </div>
 
-    {% for actuator in actuator_values %}
+    {% for turnout_id in turnouts_values %}
     <div class="handle-switch">
-      <p>Desvio {{actuator_values[actuator].id}}:</p>
-      <p>ângulos: esquerdo {{actuator_values[actuator].left}} | direito {{actuator_values[actuator].right}} </p>
+      <p>Desvio {{turnouts_values[turnout_id].id}}:</p>
+      <p>ângulo {{turnouts_values[turnout_id].value}} graus</p>
     </div>
     {% endfor %}
   </div>

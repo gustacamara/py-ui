@@ -2,7 +2,7 @@ from flask import Flask, redirect, render_template, request, jsonify # pip insta
 from flask_mqtt import Mqtt
 import utils.json_util
 from utils.db_utils import create_db, start_query
-from client import client, turnouts, init_mqtt
+from client import client, init_mqtt
 from utils.flask_utils import check_for_login
 
 from .user_controller import user_controller
@@ -14,12 +14,12 @@ def create_app(path):
     template_path = path + "/templates"
     static_path = path + "/static"
     app = Flask(__name__, template_folder=template_path, static_folder=static_path)
-    
+
     db_conn = create_db(True)
 
     app.config['DEBUG_MODE'] = False  # Enable this to be able to view pages without logging in
     app.config['ADMIN_MODE'] = False
-    app.config['CURRENT_USER'] = ""  
+    app.config['CURRENT_USER'] = ""
 
     app.register_blueprint(client, url_prefix='')
     app.register_blueprint(user_controller, url_prefix='')
@@ -58,13 +58,13 @@ def create_app(path):
         if login_check != None:
             return login_check
         print("Current user:", app.config['CURRENT_USER'], "Admin mode:", app.config['ADMIN_MODE'])
-        return render_template("home_page.html", current_user = app.config['CURRENT_USER'],admin_mode=app.config['ADMIN_MODE'], turnouts = turnouts)
+        return render_template("home_page.html", current_user = app.config['CURRENT_USER'],admin_mode=app.config['ADMIN_MODE'])
+
     @app.route('/about')
-    
     def about_page():
         login_check = check_for_login()
         if login_check != None:
             return login_check
         return render_template("about_page.html", current_user = app.config['CURRENT_USER'],admin_mode=app.config['ADMIN_MODE'])
-    
+
     return app

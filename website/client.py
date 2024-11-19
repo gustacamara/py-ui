@@ -1,36 +1,13 @@
 from flask_mqtt import Mqtt #pip install flask-mqtt
+from time import localtime, strftime
+from utils.db_utils import start_query
 import json
 from lib.dccpp import generateDccThrottleCmd, generateDccFunctionCmd
 from flask import Blueprint, request, render_template
 client = Blueprint("client",__name__, template_folder="templates")
 
-sensors_values = {
-    1: {
-        "id": 0,
-        "location": "restaurante 8bits",
-        "type": "RFID",
-        "value": 0
-    },
-    2: {
-        "id": 1,
-        "location": "parada das capivaras",
-        "type": 'Infravermelho',
-        "value": 'false'
-    }
-}
-
-turnouts = {
-    1: {
-        "id": 1,
-        "left": 0,
-        "right": 60
-    },
-    2: {
-        "id": 2,
-        "left": 0,
-        "right": 60
-    }
-}
+sensors_values = {}
+turnouts_values = {}
 
 mqtt_client = Mqtt()
 
@@ -44,7 +21,31 @@ def init_mqtt(app):
     app.config['MQTT_KEEPALIVE'] = 60
     app.config['MQTT_TLS_ENABLED'] = False
 
+    init_realtime_values()
     mqtt_client.init_app(app)
+
+
+def init_realtime_values():
+    global sensors_values
+    global turnouts_values
+
+    sensors = start_query("SELECT * FROM sensor ORDER BY id")
+    for sensor in sensors:
+        sensors_values[sensor[0]] = {
+            "id": sensor[0],
+            "location": sensor[1],
+            "type": sensor[2],
+            "value": 0
+        }
+
+    turnouts = start_query("SELECT * FROM turnout ORDER BY id")
+    for turnout in turnouts:
+        turnouts_values[turnout[0]] = {
+            "id": turnout[0],
+            "left": turnout[1],
+            "right": turnout[2],
+            "value": 0
+        }
 
 topic_dcc = "pyui/dcc-K3xWvP4p4D"
 topic_accessories = "pyui/accessories-9P5nN15kdp"
@@ -76,13 +77,14 @@ def send_turnout_cmd():
     global topic_accessories
 
     data = request.get_json()
+    servos = start_query("SELECT * FROM turnout ORDER BY id")
 
     if data["path"] == "inner":
-      servo1Angle = 60
-      servo2Angle = 0
+      servo1Angle = servos[0][2]
+      servo2Angle = servos[1][2]
     else:
-      servo1Angle = 0
-      servo2Angle = 60
+      servo1Angle = servos[0][1]
+      servo2Angle = servos[1][1]
 
     publish_to_mqtt(topic_accessories, json.dumps({
         "id": 1,
@@ -101,9 +103,9 @@ def send_turnout_cmd():
 @client.route('/get_sensors_values', methods=['GET'])
 def get_sensors_values():
     global sensors_values
-    global turnouts
+    global turnouts_values
 
-    return render_template("real_time.html", sensors_values = sensors_values, actuator_values = turnouts)
+    return render_template("real_time.html", sensors_values = sensors_values, turnouts_values = turnouts_values)
 
 @mqtt_client.on_connect()
 def handle_connect(client, userdata, flags, rc):
@@ -120,16 +122,17 @@ def handle_disconnect():
 @mqtt_client.on_message()
 def handle_mqtt_message(client, userdata, message):
     global sensors_values
+    global turnouts_values
 
     try:
-        print(message.payload.decode())
         data = json.loads(message.payload.decode())
-        if "sensor" in data:
-            sensors_values[data["id"]] = data
-
-        if "actuator" in data:
-            turnouts[data["id"]] = data
-
+        print(data)
     except:
-        pass
+        return
 
+    if "sensor" in data:
+        sensors_values[data["id"]]['value'] = data['value']
+        sensors_values[data["id"]]['time'] = strftime("%H:%M:%S", localtime())
+
+    if "actuator" in data:
+        turnouts_values[data["id"]]['value'] = data['value']

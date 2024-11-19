@@ -109,13 +109,11 @@ def list_cab():
         return login_check
     data = start_query("SELECT * FROM cabs")
     # print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n',data)
-    cabs = {}
-    
-    index = 0
+    cabs = []
+
     for cab in data:
-        cabs.update({index: cab[0]})
-        index += 1
-    
+        cabs.append({ "id": cab[0], "manufacturer": cab[1], "model": cab[2] })
+
     return render_template("list_cab.html", cabs = cabs)
 
 @cab_controller.route('/try-remove-cab', methods=['POST', 'GET'])
