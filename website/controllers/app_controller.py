@@ -9,6 +9,7 @@ from .user_controller import user_controller
 from .cab_controller import cab_controller
 from .sensor_controller import sensor_controller
 from .detour_controller import detour_controller
+from .history_controller import history_controller
 
 def create_app(path):
     template_path = path + "/templates"
@@ -26,6 +27,7 @@ def create_app(path):
     app.register_blueprint(cab_controller, url_prefix='')
     app.register_blueprint(sensor_controller, url_prefix='')
     app.register_blueprint(detour_controller, url_prefix='')
+    app.register_blueprint(history_controller, url_prefix='')
     init_mqtt(app)
 
 
