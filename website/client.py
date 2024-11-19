@@ -136,3 +136,28 @@ def handle_mqtt_message(client, userdata, message):
 
     if "actuator" in data:
         turnouts_values[data["id"]]['value'] = data['value']
+
+    store_sensor_history(data)
+
+def store_sensor_history(data):
+    if 'sensor' in data:
+        sensor_id = data['id']
+        actuator_id = 'NULL'
+        type = 'SENSOR'
+        description = data['sensor']
+    else:
+        sensor_id = 'NULL'
+        actuator_id = data['id']
+        type = 'ATUADOR'
+        description = data['actuator']
+
+    queryStr = "INSERT INTO sensors_history(value, datetime, sensor_id, actuator_id, type, description) VALUES ('{}', '{}', {}, {}, '{}', '{}')"
+    query = queryStr.format(
+        str(data['value']),
+        strftime("%Y-%m-%d %H:%M:%S", localtime()),
+        sensor_id,
+        actuator_id,
+        type,
+        description)
+
+    start_query(query)
