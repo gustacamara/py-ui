@@ -4,21 +4,23 @@
     <thead>
       <tr>
         <th>Id<i class="ph ph-map-pin"></i></th>
+        <th>Data<i class="ph ph-calendar"></i></th>
         <th>Tipo<i class="ph ph-list"></i></th>
         <th>Valor<i class="ph ph-check-square"></i></th>
-        <th>Data<i class="ph ph-calendar"></i></th>
+        <th>Descrição<i class="ph ph-check-square"></i></th>
       </tr>
     </thead>
     <tbody>
-      <!-- for i in log -->
+      {% for data in history %}
       <tr>
-        <td>{id}</td>
-        <td>{tipo}</td>
-        <td>{valor}</td>
-        <td>2023-10-02 22h33min44ss</td>
+        <td>{{data[0]}}</td>
+        <td>{{data[2]}}</td>
+        <td>{{data[5]}}</td>
+        <td>{{data[1]}}</td>
+        <td>{{data[6]}}</td>
       </tr>
-      <!-- endfor -->
-      
+      {% endfor %}
+
     </tbody>
   </table>
   <a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
