@@ -14,6 +14,7 @@ def create_db(recreate=False):
         DROP TABLE IF EXISTS sensor;
         DROP TABLE IF EXISTS turnout;
         DROP TABLE IF EXISTS users;
+        DROP TABLE IF EXISTS sensors_history;
         """
         cursor.executescript(drop_tables_sql)
 
@@ -43,6 +44,16 @@ def create_db(recreate=False):
             username TEXT UNIQUE,
             password TEXT,
             PRIMARY KEY(username)
+        );
+
+        CREATE TABLE IF NOT EXISTS sensors_history (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            value TEXT,
+            datetime TEXT,
+            sensor_id INTEGER,
+            actuator_id INTEGER,
+            type TEXT,
+            description TEXT
         );
         """
 
