@@ -30,8 +30,6 @@ def create_app(path):
     app.register_blueprint(history_controller, url_prefix='')
     init_mqtt(app)
 
-
-
     # Handle login
     @app.route('/', methods=['POST', 'GET'])
     def login_page(error=False):
@@ -53,7 +51,6 @@ def create_app(path):
         return login_page(error=True)
 
     # Homepage
-
     @app.route('/homepage')
     def home_page():
         login_check = check_for_login()
