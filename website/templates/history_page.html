@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block history %}
+  <table>
+    <thead>
+      <tr>
+        <th>Id<i class="ph ph-map-pin"></i></th>
+        <th>Tipo<i class="ph ph-list"></i></th>
+        <th>Valor<i class="ph ph-check-square"></i></th>
+        <th>Data<i class="ph ph-calendar"></i></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- for i in log -->
+      <tr>
+        <td>{id}</td>
+        <td>{tipo}</td>
+        <td>{valor}</td>
+        <td>2023-10-02 22h33min44ss</td>
+      </tr>
+      <!-- endfor -->
+      
+    </tbody>
+  </table>
+  <a href="{{ url_for('home_page') }}">Voltar à página inicial</a>
+{% endblock %}
+
