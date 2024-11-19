@@ -19,20 +19,20 @@
       </article>
       {% endif %}
 
-      {% for id, cab in cabs.items() %}
+      {% for cab in cabs %}
       <article>
-        <p>{{cab}}</p>
+        <p>{{cab.id}} - {{cab.manufacturer}} - {{cab.model}}</p>
         <div class="tools">
           <form id="form" method="POST" action="{{ url_for('cab_controller.edit_cab') }}">
           <button class="edit-icon" id=""><!--  colocar id-->
             <i class="ph ph-pencil-line"></i>
           </button>
-          <input type="hidden" name="edit_id" id="edit_id" value="{{id}}">
+          <input type="hidden" name="edit_id" id="edit_id" value="{{loop.index0}}">
           </form>
           <form id="form" method="POST" action="{{ url_for('cab_controller.try_remove_cab') }}">
           <button class="trash-icon" id=""><!--  colocar id-->
             <i class="ph ph-trash"></i>
-            <input type="hidden" name="cab_id" id="cab_id" value="{{id}}">
+            <input type="hidden" name="cab_id" id="cab_id" value="{{loop.index0}}">
           </button>
           </form>
         </div>

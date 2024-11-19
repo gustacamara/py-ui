@@ -275,41 +275,9 @@
         </div>
       </div>
       <div id="real-time" class="sensor-control panel"></div>
-
-      <!-- <div class="detour-control panel">
-        <div class="control-header">
-          <h1>Lista de desvios</h1>
-          <button class="icon-button">
-            <i class="ph ph-caret-up"></i>
-          </button>
-        </div>
-        <div class="control-list-content">
-          <div class="detour control-option">
-            <div class="control-title">
-              <div class="control-name">
-                <i class="ph-fill ph-arrows-left-right"></i>
-                <h3>Desvios</h3>
-              </div>
-
-            </div>
-            <div class="detour-content">
-              {% for turnout in turnouts %}
-              <div class="handle-switch">
-                <p>{{turnout["id"]}}</p>
-                <select name="on-off" class="turnout-direction" data-id="{{turnout['id']}}">
-                  <option value="right">Direita</option>
-                  <option value="left">Esquerda</option>
-                </select>
-              </div>
-              {% endfor %}
-            </div>
-          </div>
-        </div>
-      </div> -->
     </div>
   </main>
   <script>
-    //Won't work if it's not coded directly into the html file :/
     document.addEventListener('DOMContentLoaded', function () {
       const speedSlider = document.getElementById('speed-slider-input');
       const speedInputField = document.getElementById('speed-number-input');
