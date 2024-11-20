@@ -1,5 +1,5 @@
 ## Py - UI
-O Py - UI foi desenvolvido na disciplina de Experiência Criativa, do terceiro período de Ciência da Computação, da PUCPR. Ele é uma aplicação web de controle de maquetes de ferreomodelismo. Ele possui uma interface que se comunica via wifi (protocolo MQTT) com placas eletrônicas que controlam e recebem dados de locomotivas, desvios e sensores na maquete.
+O Py - UI foi desenvolvido na disciplina de Experiência Criativa, do terceiro período de Ciência da Computação, da PUCPR. Neste trabalho foi desenvolvida tanto uma aplicação web de controle de maquetes de ferreomodelismo quanto uma maquete experimental. A aplicação web possui uma interface que se comunica via wifi (protocolo MQTT) com placas eletrônicas que controlam e recebem dados de locomotivas, desvios e sensores na maquete.
 <br><br>
 Pela interface web é possível controlar locomotivas, desvios e receber dados de sensores em uma determinada maquete. O funcionamento
 envolve duas placas eletrônicas, uma que enviará comandos para as locomotivas, que trabalham em um protocolo próprio,
@@ -16,7 +16,7 @@ Os sensores utilizados para a maquete experimental, desenvolvida para este traba
 saber se há algum trem passando na frente deles em determinado momento, e local da maquete e um RFID que vai ler tags RFID coladas nas locomotivas, sendo possível, desta forma, identificar qual locomotiva passou por determinado ponto da maquete.
 <br><br>
 
-### Conteúdo
+### Conteúdo da aplicação web
 - Painel de controle de locomotivas
 - Controle de desvios
 - Monitoramento de sensores
@@ -30,10 +30,21 @@ saber se há algum trem passando na frente deles em determinado momento, e local
 <br>
 Pela página principal (homepage) da aplicação, é possível visualizar a maquete, ao centro, e, na barra lateral direita, os controles das locomotivas, e dados dos sensores. Para controlar uma locomotiva, basta inserir a id dela no input indicado. Para escolher o trajeto da locomotiva nos trilhos, basta clicar no desenho da maquete para que os desvios sejam movidos de acordo. Os dados dos sensores infravermelho e
 RFID também estão localizados nesta parte da homepage, e tem os dados atualizados em tempo real. Para cadastrar e editar sensores, desvios, locomotivas e usuários, é necessário estar logado como administrador, e esses menus são acessados por um dropdown da navbar, ao se clicar em "Admin".<br><br>
-    ![pyui3](https://github.com/user-attachments/assets/36ea0cbf-b324-42f0-b351-507eb10e2a48)<br>
-    ![pyui2](https://github.com/user-attachments/assets/424a6618-3d88-4781-a937-171fef17d47b)<br>
-    ![pyui1](https://github.com/user-attachments/assets/095e504f-25ef-4d95-a725-a7a9a4327a18)<br>
-    ![pyui4](https://github.com/user-attachments/assets/d59f95c2-af8e-4950-b369-0964d9b7643f)<br>
+
+Foto da maquete experimental:<br>
+<img width="1000" src="https://github.com/gustacamara/py-ui/blob/main/to_readme/maquete.jpg?raw=true"><br>
+
+Tela principal:<br>
+<img width="700" src="https://github.com/gustacamara/py-ui/blob/main/to_readme/pyui3.png?raw=true"><br>
+
+Tela de login:<br>
+<img width="700" src="https://github.com/gustacamara/py-ui/blob/main/to_readme/pyui4.png?raw=true"><br>
+
+Tela de cadastro de sensor:<br>
+<img width="700" src="https://github.com/gustacamara/py-ui/blob/main/to_readme/pyui1.png?raw=true"><br>
+
+Tela de lista de locomotivas cadastradas:<br>
+<img width="700" src="https://github.com/gustacamara/py-ui/blob/main/to_readme/pyui2.png?raw=true"><br>
 
 ### Ferramentas
 Flask, Javascript, HTML, CSS, C, SQLite, protocolo de comunicação MQTT.
