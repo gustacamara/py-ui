@@ -31,9 +31,6 @@ saber se há algum trem passando na frente deles em determinado momento, e local
 Pela página principal (homepage) da aplicação, é possível visualizar a maquete, ao centro, e, na barra lateral direita, os controles das locomotivas, e dados dos sensores. Para controlar uma locomotiva, basta inserir a id dela no input indicado. Para escolher o trajeto da locomotiva nos trilhos, basta clicar no desenho da maquete para que os desvios sejam movidos de acordo. Os dados dos sensores infravermelho e
 RFID também estão localizados nesta parte da homepage, e tem os dados atualizados em tempo real. Para cadastrar e editar sensores, desvios, locomotivas e usuários, é necessário estar logado como administrador, e esses menus são acessados por um dropdown da navbar, ao se clicar em "Admin".<br><br>
 
-Foto da maquete experimental:<br>
-<img width="1000" src="https://github.com/gustacamara/py-ui/blob/main/to_readme/maquete.jpg?raw=true"><br>
-
 Tela principal:<br>
 <img width="700" src="https://github.com/gustacamara/py-ui/blob/main/to_readme/pyui3.png?raw=true"><br>
 
@@ -46,10 +43,8 @@ Tela de cadastro de sensor:<br>
 Tela de lista de locomotivas cadastradas:<br>
 <img width="700" src="https://github.com/gustacamara/py-ui/blob/main/to_readme/pyui2.png?raw=true"><br>
 
-### Ferramentas
-Flask, Javascript, HTML, CSS, C, SQLite, protocolo de comunicação MQTT.
-
-### Eletrônica
+### Conteúdo da maquete
+A maquete experimental é composta dos seguintes ítens:
 - Placa ESP32
 - Placa H-888 (Arduino + ESP8266)
 - Sensor RFID
@@ -57,4 +52,12 @@ Flask, Javascript, HTML, CSS, C, SQLite, protocolo de comunicação MQTT.
 - Servomotores (desvios automatizados)
 - LEDs emissores e receptores de infravermelho.
 - Decoder das locomotivas
+
+Foto da maquete experimental:<br>
+<img width="1000" src="https://github.com/gustacamara/py-ui/blob/main/to_readme/maquete.jpg?raw=true"><br>
+
+### Ferramentas
+Flask, Javascript, HTML, CSS, C, SQLite, protocolo de comunicação MQTT.
+
+
 
