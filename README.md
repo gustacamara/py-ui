@@ -1,50 +1,49 @@
 ## Py - UI
-
-O Py - UI é uma aplicação web de controle de maquetes de ferreomodelismo. Ele possui uma interface que
-se comunica via wifi (protocolo MQTT) com placas eletrônicas que controlarão locomotivas e desvios na maquete, e
-receberão dados de sensores.
-<br>
-Pela interface web é possível controlar locomotivas, desvios e receber dados de sensores em maquetes. O funcionamento
+O Py - UI foi desenvolvido na disciplina de Experiência Criativa, do terceiro período de Ciência da Computação, da PUCPR. Ele é uma aplicação web de controle de maquetes de ferreomodelismo. Ele possui uma interface que se comunica via wifi (protocolo MQTT) com placas eletrônicas que controlam e recebem dados de locomotivas, desvios e sensores na maquete.
+<br><br>
+Pela interface web é possível controlar locomotivas, desvios e receber dados de sensores em uma determinada maquete. O funcionamento
 envolve duas placas eletrônicas, uma que enviará comandos para as locomotivas, que trabalham em um protocolo próprio,
-chamado DCC, e outra placa que lida com os sensores e com os desvios. Ambas comunicam-se via wifi com o servidor.
-<br>
+chamado DCC, e outra placa que lida com os sensores e com os desvios (que são automatizados com servomotores). Ambas comunicam-se via wifi com o servidor.
+<br><br>
 Para controlar as locomotivas, comandos DCC são enviados via trilhos e decodificados por um chip dentro da locomotiva
 que é conhecido como decoder. A aplicação faz a conversão dos comandos enviados via web para o protocolo DCC. Essa parte
 é feita pela placa H-888 que nada mais é que um arduino mais uma ESP8266.
-<br>
-Os desvios e os sensores são conectados a uma placa ESP32, e ela envia e recebe comandos via protocolo MQTT. Na
-aplicação web é possível ver em tempo real os dados dos sensores, e comandar os desvios.
-<br>
-Os sensores utilizados são LEDs infravermelho, utilizados para saber se há algum trem passando na frente deles em determinado momento,
-e local da maquete. O outro sensor é um RFID que vai ler tags RFID coladas nas locomotivas, desta forma é possível identificar qual
-locomotiva passou por determinado ponto da maquete.
-<br>
+<br><br>
+Os desvios (servomotores) e os sensores são conectados a uma placa ESP32, que envia e recebe comandos via protocolo MQTT. Na
+aplicação web é possível ver em tempo real os dados dos sensores, e comandar e ver o estado dos desvios.
+<br><br>
+Os sensores utilizados para a maquete experimental, desenvolvida para este trabalho são LEDs infravermelho, utilizados para
+saber se há algum trem passando na frente deles em determinado momento, e local da maquete e um RFID que vai ler tags RFID coladas nas locomotivas, sendo possível, desta forma, identificar qual locomotiva passou por determinado ponto da maquete.
+<br><br>
 
 ### Conteúdo
 - Painel de controle de locomotivas
 - Controle de desvios
 - Monitoramento de sensores
-- Modo administrador
-- CRUDs:
+- Modo administrador (dono da maquete)
+    Contém opção de adicionar, editar e deletar:
     - Usuários
     - Sensores
     - Desvios
     - Locomotivas
 
-    ![model_railroad_picture2](https://github.com/user-attachments/assets/2d227e9b-1094-40bf-ad2f-1b8b1e4c702f)
+<br>
+Pela página principal (homepage) da aplicação, é possível visualizar a maquete, ao centro, e, na barra lateral direita, os controles das locomotivas, e dados dos sensores. Para controlar uma locomotiva, basta inserir a id dela no input indicado. Para escolher o trajeto da locomotiva nos trilhos, basta clicar no desenho da maquete para que os desvios sejam movidos de acordo. Os dados dos sensores infravermelho e
+RFID também estão localizados nesta parte da homepage, e tem os dados atualizados em tempo real. Para cadastrar e editar sensores, desvios, locomotivas e usuários, é necessário estar logado como administrador, e esses menus são acessados por um dropdown da navbar, ao se clicar em "Admin".<br><br>
+    ![pyui3](https://github.com/user-attachments/assets/36ea0cbf-b324-42f0-b351-507eb10e2a48)<br>
+    ![pyui2](https://github.com/user-attachments/assets/424a6618-3d88-4781-a937-171fef17d47b)<br>
+    ![pyui1](https://github.com/user-attachments/assets/095e504f-25ef-4d95-a725-a7a9a4327a18)<br>
+    ![pyui4](https://github.com/user-attachments/assets/d59f95c2-af8e-4950-b369-0964d9b7643f)<br>
 
 ### Ferramentas
-Flask, Javascript, HTML, CSS, C
-Protocolo de comunicação MQTT
+Flask, Javascript, HTML, CSS, C, SQLite, protocolo de comunicação MQTT.
 
 ### Eletrônica
 - Placa ESP32
 - Placa H-888 (Arduino + ESP8266)
 - Sensor RFID
 - Tags RFID
+- Servomotores (desvios automatizados)
 - LEDs emissores e receptores de infravermelho.
 - Decoder das locomotivas
-
-![model_railroad_picture1](https://github.com/user-attachments/assets/c1e7cfae-d057-4f1f-8dd3-772c989b520c)
-
 
