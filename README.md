@@ -15,6 +15,7 @@ aplicação web é possível ver em tempo real os dados dos sensores, e comandar
 Os sensores utilizados para a maquete experimental, desenvolvida para este trabalho são LEDs infravermelho, utilizados para
 saber se há algum trem passando na frente deles em determinado momento, e local da maquete e um RFID que vai ler tags RFID coladas nas locomotivas, sendo possível, desta forma, identificar qual locomotiva passou por determinado ponto da maquete.
 <br><br>
+[Documentário do Py - UI no youtube](https://www.youtube.com/watch?v=oOwtDmphA4U)
 
 ### Conteúdo da aplicação web
 - Painel de controle de locomotivas
